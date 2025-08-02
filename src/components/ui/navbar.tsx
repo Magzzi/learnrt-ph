@@ -46,7 +46,7 @@ export default function Navbar() {
         {/* Right: Logo */}
         <div className="absolute right-4">
           <Image
-            src="/LearnRT-Logo.png"
+            src="https://i.postimg.cc/3rLf6Z7n/Learn-RT-Logo.png"
             alt="Logo"
             width={64}
             height={48}

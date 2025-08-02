@@ -20,7 +20,7 @@ export default function RootLayout({
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>LearnRT</title>
-        <link rel="icon" href="/learnrt-weblogo.png" />
+        <link rel="icon" href="https://i.postimg.cc/0jLYvjV2/Learn-RT-Web-Logo.png" />
       </head>
       <body className={`${roboto.variable} font-roboto`} >
         <Navbar />
