@@ -1,103 +1,93 @@
+"use client";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { ArrowRight } from "lucide-react";
+import TrainList from "@/components/ui/trainlist";
+import LightbulbIcon from "@mui/icons-material/Lightbulb";
+import Link from "next/link";
+
+const images = ["/mrt3-train.jpg", "/lrt1-train.png", "/lrt2-train.jpg"];
 
 export default function Home() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 10000); // Change image every 3 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    <div className="relative min-h-screen px-6 py-10 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 -z-10">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="https://images.unsplash.com/photo-1555557356-51c5d7a8f4c2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Faint Railway Background"
+          fill
+          className="object-cover opacity-40"
           priority
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+      </div>
+      {/* Hero Section */}
+      <div className="flex flex-col md:flex-row items-center mt-12 ml-8 mr-8 gap-10">
+        {/* Text Left */}
+        <div className="flex-1 text-center md:text-left">
+          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-4 text-center md:text-left text-[#101010]">
+            Discover & Navigate the <br />
+            <span className="text-sky-700 ">Philippine Railway System</span>
+          </h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <p className="flex items-center whitespace-nowrap text-gray-800 mb-6 font-light text-sm sm:text-base bg-white/70 rounded-lg px-4 py-2 shadow-sm border border-gray-200 max-w-full overflow-hidden">
+            <LightbulbIcon className="text-yellow-400 mr-2" fontSize="small" />
+            <span>
+              <span className="font-semibold text-yellow-600">LearnRT</span>{" "}
+              helps you explore train routes, stations, and landmarks — all in
+              one place.
+            </span>
+          </p>
+
+          <Link href="/explore"
+          className="bg-sky-400 w-fit hover:bg-sky-500 cursor-pointer transition-colors duration-200 text-white font-semibold px-6 py-3 rounded-full flex items-center gap-2 mx-auto md:mx-0 shadow-md">
+            Get Started <ArrowRight size={18} />
+          </Link>
+          {/* Railway List */}
+          <TrainList />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Image Right */}
+        <div className="flex-1 w-full px-4">
+          <div className="bg-white/70 p-4 rounded-xl shadow-md w-full max-w-[90%] sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto">
+            {/* Image container */}
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[1170/780] rounded-xl overflow-hidden">
+              <Image
+                src={images[currentIndex]}
+                alt={`Train UI ${currentIndex + 1}`}
+                fill
+                className="object-cover transition-all duration-500 ease-in-out"
+                priority
+              />
+            </div>
+
+            {/* Dots */}
+            <div className="flex justify-center mt-3 gap-2 flex-wrap">
+                {images.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`w-3 h-3 rounded-full border ${
+                  idx === currentIndex
+                    ? "bg-sky-500 border-sky-700/50"
+                    : "bg-white border-gray-500/50"
+                  }`}
+                />
+                ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* overview section */}
     </div>
   );
 }
