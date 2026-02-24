@@ -2,7 +2,7 @@
 import { MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 
-export default function page() {
+export default function StationsPage() {
   return (
     <div className="min-h-screen bg-[#0a1a1a]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
