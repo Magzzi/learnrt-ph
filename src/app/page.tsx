@@ -117,19 +117,19 @@ export default function Home() {
             </div>
 
             {/* Stats overlay at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 p-4">
-              <div className="flex gap-3">
-                <div className="flex-1 bg-[#1a2e2e]/90 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/10">
+            <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                <div className="bg-[#1a2e2e]/90 backdrop-blur-sm rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 border border-white/10">
                   <p className="text-gray-400 text-xs">Active routes</p>
-                  <p className="text-white text-xl font-bold">3</p>
+                  <p className="text-white text-lg sm:text-xl font-bold">3</p>
                 </div>
-                <div className="flex-1 bg-[#1a2e2e]/90 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/10">
+                <div className="bg-[#1a2e2e]/90 backdrop-blur-sm rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 border border-white/10">
                   <p className="text-gray-400 text-xs">Stations</p>
-                  <p className="text-white text-xl font-bold">67</p>
+                  <p className="text-white text-lg sm:text-xl font-bold">67</p>
                 </div>
-                <div className="flex-1 bg-[#1a2e2e]/90 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/10">
+                <div className="col-span-2 sm:col-span-1 bg-[#1a2e2e]/90 backdrop-blur-sm rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 border border-white/10">
                   <p className="text-gray-400 text-xs">Rail lines</p>
-                  <p className="text-white text-xl font-bold">LRT &amp; MRT</p>
+                  <p className="text-white text-lg sm:text-xl font-bold">LRT &amp; MRT</p>
                 </div>
               </div>
             </div>

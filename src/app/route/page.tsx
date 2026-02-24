@@ -27,9 +27,9 @@ export default function Page() {
       }
     };
     return (
-      <div className="flex flex-col md:flex-row h-screen max-h-screen overflow-hidden inset-0 bg-[#0a1a1a]">
+      <div className="flex flex-col md:flex-row min-h-screen md:h-screen md:max-h-screen md:overflow-hidden bg-[#0a1a1a]">
         {/* Left side */}
-        <div className="md:w-1/3 w-full flex flex-col items-center justify-start p-6 bg-[#0d2222] border-r border-white/10 space-y-6">
+        <div className="md:w-1/3 w-full flex flex-col items-center justify-start p-4 sm:p-6 bg-[#0d2222] md:border-r border-b md:border-b-0 border-white/10 space-y-6 md:overflow-y-auto">
           {/* Form Section */}
           <motion.form
             onSubmit={handleSubmit}
@@ -90,7 +90,7 @@ export default function Page() {
         </div>
 
         {/* Right side */}
-        <div className="md:w-2/3 w-full bg-[#0a1a1a] flex flex-col items-center justify-center">
+        <div className="md:w-2/3 w-full bg-[#0a1a1a] flex flex-col items-center justify-center min-h-[300px] md:min-h-0">
           <Map location={location} />
         </div>
       </div>
