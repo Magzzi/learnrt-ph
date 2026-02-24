@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import DirectionsRailwayIcon from "@mui/icons-material/DirectionsRailway";
-import MapIcon from "@mui/icons-material/Map";
+import { Search, Train, Navigation } from "lucide-react";
+import { motion } from "framer-motion";
 import StationItem from "@/components/ui/stationitem";
 import Map from "@/components/ui/map";
 import { findNearestStations, getCoordinates } from "@/app/route/findnearest";
@@ -28,22 +27,25 @@ export default function Page() {
       }
     };
     return (
-      <div className="flex flex-col md:flex-row h-screen max-h-screen overflow-hidden inset-0">
+      <div className="flex flex-col md:flex-row h-screen max-h-screen overflow-hidden inset-0 bg-[#0a1a1a]">
         {/* Left side */}
-        <div className="md:w-1/3 w-full flex flex-col items-center justify-start p-6 bg-gray-50 space-y-6">
+        <div className="md:w-1/3 w-full flex flex-col items-center justify-start p-6 bg-[#0d2222] border-r border-white/10 space-y-6">
           {/* Form Section */}
-          <form
+          <motion.form
             onSubmit={handleSubmit}
-            className="flex flex-col items-center w-full max-w-sm bg-white shadow-lg rounded-xl p-6 space-y-4 mt-12"
+            className="flex flex-col items-center w-full max-w-sm bg-[#1a2e2e] border border-white/10 shadow-lg rounded-xl p-6 space-y-4 mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <h1 className="text-2xl font-bold text-sky-700">
-              Find Route <MapIcon fontSize="medium" />
+            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+              Find Route <Navigation size={20} className="text-emerald-400" />
             </h1>
 
             <div className="w-full">
               <label
                 htmlFor="location"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-400 mb-1"
               >
                 Location
               </label>
@@ -51,25 +53,30 @@ export default function Page() {
                 id="location"
                 name="location"
                 type="text"
-                className="block w-full rounded-md border border-gray-300 px-4 py-2 text-gray-900 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="block w-full rounded-lg border border-white/10 bg-[#0a1a1a] px-4 py-2.5 text-white shadow-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
                 placeholder="Enter location (use exact location)"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 bg-sky-400 hover:bg-sky-500 cursor-pointer transition-colors duration-200 py-2 px-4 rounded-md text-white"
+              className="w-full flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 cursor-pointer transition-colors duration-200 py-2.5 px-4 rounded-lg text-white font-medium"
             >
               Search
-              <SearchIcon fontSize="small" />
+              <Search size={16} />
             </button>
-          </form>
+          </motion.form>
 
-          <hr className="w-full max-w-sm border-t border-gray-300 my-4" />
-          <div className="w-full max-w-sm items-center text-center">
-            <ul className="flex flex-col items-center w-full max-w-sm bg-white shadow-lg rounded-xl p-6 space-y-4">
-              <h1 className="text-xl font-bold text-sky-700 mb-4">
-                Nearest Station <DirectionsRailwayIcon fontSize="medium" />
+          <hr className="w-full max-w-sm border-t border-white/10 my-4" />
+          <motion.div
+            className="w-full max-w-sm items-center text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <ul className="flex flex-col items-center w-full max-w-sm bg-[#1a2e2e] border border-white/10 shadow-lg rounded-xl p-6 space-y-4">
+              <h1 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                Nearest Station <Train size={20} className="text-emerald-400" />
               </h1>
               {nearest.map((station, index) => (
                 <StationItem
@@ -79,11 +86,11 @@ export default function Page() {
                 />
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
 
         {/* Right side */}
-        <div className="md:w-2/3 w-full bg-white flex flex-col items-center justify-center">
+        <div className="md:w-2/3 w-full bg-[#0a1a1a] flex flex-col items-center justify-center">
           <Map location={location} />
         </div>
       </div>

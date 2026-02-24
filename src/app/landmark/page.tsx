@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { ChevronDown, ChevronUp, Landmark, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
 
 const landmarkData = [
   {
@@ -183,49 +185,72 @@ export default function LandmarksPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-2 py-10 min-h-screen flex flex-col">
-      <h1 className="text-3xl font-bold text-sky-700 mb-8">
-        Notable Landmarks Near Stations
-      </h1>
-      <div className="space-y-6">
-        {landmarkData.map((line) => (
-          <div
-            key={line.name}
-            className="border rounded-xl shadow hover:shadow-lg transition-shadow bg-white overflow-hidden"
-          >
-            <button
-              onClick={() => toggleLine(line.name)}
-              className="w-full text-left px-6 py-8 flex justify-between items-center bg-sky-100 hover:bg-sky-200 transition-colors"
-              
-            >
-              <h2 className="text-xl font-semibold">{line.name}</h2>
-                
-              <span className="text-xl">
-                {openLine === line.name ? "−" : "+"}
-              </span>
-            </button>
-            {openLine === line.name && (
-              <div className="px-6 py-4 bg-white border-t rounded-b-none">
-                <div className="space-y-4">
-                  {Object.entries(line.stations).map(
-                    ([stationName, landmarks]) => (
-                      <div key={stationName}>
-                        <h3 className="text-lg font-medium text-gray-700">
-                          {stationName}
-                        </h3>
-                        <ul className="list-disc pl-5 text-gray-600">
-                          {(landmarks as string[]).map((landmark: string, i: number) => (
-                            <li key={i}>{landmark}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-            )}
+    <div className="min-h-screen bg-[#0a1a1a]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+        {/* Page Header */}
+        <motion.div
+          className="mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="inline-flex items-center gap-2 bg-[#1a2e2e] border border-[#2a4a3a] rounded-full px-4 py-2 mb-4">
+            <Landmark size={14} className="text-emerald-400" />
+            <span className="text-emerald-400 text-sm font-medium">Points of Interest</span>
           </div>
-        ))}
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+            Notable Landmarks Near Stations
+          </h1>
+          <p className="text-gray-400 text-base">Discover places, malls, schools, and attractions near every rail station.</p>
+        </motion.div>
+
+        {/* Landmark Cards */}
+        <div className="space-y-4">
+          {landmarkData.map((line, index) => (
+            <motion.div
+              key={line.name}
+              className="border border-white/10 rounded-xl bg-[#0d2222] overflow-hidden transition-all duration-200 hover:border-emerald-500/30"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+            >
+              <button
+                onClick={() => toggleLine(line.name)}
+                className="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-white/5 transition-colors"
+              >
+                <h2 className="text-xl font-semibold text-white">{line.name}</h2>
+                <span className="text-gray-400 ml-4 shrink-0">
+                  {openLine === line.name ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                </span>
+              </button>
+
+              {openLine === line.name && (
+                <div className="px-6 py-5 border-t border-white/10">
+                  <div className="space-y-5">
+                    {Object.entries(line.stations).map(
+                      ([stationName, landmarks]) => (
+                        <div key={stationName}>
+                          <h3 className="text-base font-medium text-emerald-400 flex items-center gap-2 mb-2">
+                            <MapPin size={14} />
+                            {stationName}
+                          </h3>
+                          <ul className="space-y-1 pl-6">
+                            {(landmarks as string[]).map((landmark: string, i: number) => (
+                              <li key={i} className="text-gray-400 text-sm flex items-start gap-2">
+                                <span className="text-gray-600 mt-1.5 shrink-0">•</span>
+                                {landmark}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

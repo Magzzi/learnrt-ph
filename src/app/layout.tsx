@@ -22,7 +22,7 @@ export default function RootLayout({
         <title>LearnRT</title>
         <link rel="icon" href="https://i.postimg.cc/0jLYvjV2/Learn-RT-Web-Logo.png" />
       </head>
-      <body className={`${roboto.variable} font-roboto`} >
+      <body className={`${roboto.variable} font-roboto bg-[#0a1a1a]`} >
         <Navbar />
         <main className="flex-grow">
           {children}

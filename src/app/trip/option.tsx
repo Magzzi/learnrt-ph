@@ -92,7 +92,7 @@ export default function TrainOption({
         <select
           id="station"
           name="station"
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="mt-1 block w-full rounded-lg border border-white/10 bg-[#0a1a1a] px-3 py-2.5 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:text-sm"
         >
           <option value="">Select a station</option>
         </select>
@@ -105,7 +105,7 @@ export default function TrainOption({
         name="station"
         value={value} // bind selected value
         onChange={onChange} // handle changes
-        className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="mt-1 block w-full rounded-lg border border-white/10 bg-[#0a1a1a] px-3 py-2.5 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:text-sm"
     >
         <option value="">Select a station</option>
         {options
