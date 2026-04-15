@@ -21,7 +21,7 @@ export default function RootLayout({
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>LearnRT</title>
-        <link rel="icon" href="https://i.postimg.cc/0jLYvjV2/Learn-RT-Web-Logo.png" />
+        <link rel="icon" href="/LearnRT-WebLogo.png" />
         {/* Anti-flicker: apply saved theme before React hydrates */}
         <script dangerouslySetInnerHTML={{
           __html: `try{var t=localStorage.getItem('learnrt-theme');if(t==='light')document.documentElement.classList.add('light');}catch(e){}`
