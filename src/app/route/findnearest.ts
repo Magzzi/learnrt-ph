@@ -117,18 +117,24 @@ function getDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
 }
 
 
-export const findNearestStations = (userLat: number, userLng: number) => {
-  const nearest = stations
+export interface NearestStation {
+  name: string;
+  distance: number;
+  lat: number;
+  lng: number;
+}
+
+export const findNearestStations = (
+  userLat: number,
+  userLng: number
+): NearestStation[] => {
+  return stations
     .map((station) => ({
-      ...station,
+      name: station.name,
+      lat: station.lat,
+      lng: station.lng,
       distance: getDistance(userLat, userLng, station.lat, station.lng),
     }))
     .sort((a, b) => a.distance - b.distance)
-    .slice(0, 3)
-    .map(station => ({
-      name: station.distance <= 100 ? station.name : " ",
-      distance: station.distance <= 100 ? station.distance : 0,
-    }));
-
-  return nearest;
+    .slice(0, 3);
 };

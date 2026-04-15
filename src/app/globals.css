@@ -120,3 +120,94 @@
     font-family: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
   }
 }
+
+/* ============================================================
+   LIGHT MODE  —  White + Blue + Yellow
+   Applied when <html> has class="light"
+============================================================ */
+
+/* --- Page backgrounds --- */
+html.light .bg-\[\#0a1a1a\]     { background-color: #ffffff !important; }
+html.light .bg-\[\#0d2222\]     { background-color: #f8fafc !important; }
+html.light .bg-\[\#1a2e2e\]     { background-color: #f1f5f9 !important; }
+html.light .bg-\[\#0f2a2a\]     { background-color: #f1f5f9 !important; }
+html.light .bg-\[\#1a2e2e\]\/90 { background-color: rgba(241,245,249,0.92) !important; }
+html.light .bg-\[\#0d2222\]\/90 { background-color: rgba(248,250,252,0.92) !important; }
+
+/* Body background (set by layout inline class) */
+html.light body { background-color: #ffffff !important; }
+
+/* --- Hero gradient (decorative only — fade to white) --- */
+html.light .from-\[\#0a1a1a\] { --tw-gradient-from: #f8fafc !important; }
+html.light .via-\[\#0d2626\]   { --tw-gradient-via:  #f1f5f9 !important; }
+html.light .to-\[\#0a1a1a\]   { --tw-gradient-to:   #f8fafc !important; }
+html.light .from-emerald-500\/20 { --tw-gradient-from: rgba(37,99,235,0.06) !important; }
+html.light .via-teal-500\/10     { --tw-gradient-via:  rgba(37,99,235,0.03) !important; }
+
+/* --- Text --- */
+html.light .text-white   { color: #0f172a !important; }
+html.light .text-gray-300 { color: #374151 !important; }
+html.light .text-gray-400 { color: #64748b !important; }
+html.light .text-gray-500 { color: #94a3b8 !important; }
+html.light .text-gray-600 { color: #4b5563 !important; }
+html.light .text-yellow-400 { color: #b45309 !important; }  /* amber for contrast on white */
+
+/* --- Emerald → Blue (primary accent) --- */
+html.light .text-emerald-400 { color: #2563eb !important; }
+html.light .text-emerald-500 { color: #2563eb !important; }
+
+html.light .bg-emerald-500              { background-color: #2563eb !important; }
+html.light .hover\:bg-emerald-600:hover { background-color: #1d4ed8 !important; }
+html.light .bg-emerald-500\/10          { background-color: rgba(37,99,235,0.08) !important; }
+html.light .bg-emerald-500\/15          { background-color: rgba(37,99,235,0.12) !important; }
+html.light .bg-emerald-500\/20          { background-color: rgba(37,99,235,0.15) !important; }
+html.light .hover\:bg-emerald-500\/10:hover { background-color: rgba(37,99,235,0.08) !important; }
+
+/* Operational / status badge: emerald-600 → darker blue */
+html.light .bg-emerald-600 { background-color: #1d4ed8 !important; }
+
+/* Keep text white on solid blue backgrounds (buttons, active nav, badges) */
+html.light .bg-emerald-500,
+html.light .bg-emerald-600 { color: #ffffff !important; }
+
+html.light .border-emerald-500\/20 { border-color: rgba(37,99,235,0.20) !important; }
+html.light .border-emerald-500\/30 { border-color: rgba(37,99,235,0.30) !important; }
+html.light .border-emerald-500\/50 { border-color: rgba(37,99,235,0.50) !important; }
+html.light .hover\:border-emerald-500\/30:hover { border-color: rgba(37,99,235,0.30) !important; }
+
+html.light .shadow-emerald-500\/25 { --tw-shadow-color: rgba(37,99,235,0.25) !important; }
+html.light .focus\:ring-2.focus\:ring-emerald-500:focus { --tw-ring-color: #2563eb !important; }
+
+/* --- Borders --- */
+html.light .border-white\/10  { border-color: #e2e8f0 !important; }
+html.light .border-white\/5   { border-color: #f1f5f9 !important; }
+html.light .border-white\/20  { border-color: #cbd5e1 !important; }
+html.light .border-\[\#2a4a3a\] { border-color: #e2e8f0 !important; }
+html.light .border-gray-600   { border-color: #94a3b8 !important; }
+html.light .border-gray-700   { border-color: #cbd5e1 !important; }
+
+/* --- Hover + interactive states --- */
+html.light .hover\:bg-white\/5:hover   { background-color: rgba(0,0,0,0.04) !important; }
+html.light .hover\:border-gray-400:hover { border-color: #94a3b8 !important; }
+html.light .hover\:border-gray-500:hover { border-color: #64748b !important; }
+html.light .hover\:text-white:hover    { color: #0f172a !important; }
+
+/* --- Form inputs / selects --- */
+html.light input[type="text"],
+html.light select {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+html.light input[type="text"]::placeholder { color: #94a3b8 !important; }
+html.light option { background-color: #ffffff !important; color: #0f172a !important; }
+
+/* --- Misc --- */
+html.light .bg-gray-600        { background-color: #e2e8f0 !important; }
+html.light .hover\:bg-gray-500:hover { background-color: #cbd5e1 !important; }
+html.light .shadow-black\/50   { --tw-shadow-color: rgba(0,0,0,0.08) !important; }
+html.light .backdrop-blur-sm   { background-color: rgba(255,255,255,0.88) !important; border-color: rgba(0,0,0,0.06) !important; }
+
+/* --- Map tile toggle button (leaflet overlay) --- */
+html.light .leaflet-toggle-inactive { background-color: rgba(255,255,255,0.92) !important; color: #374151 !important; }
+html.light .leaflet-toggle-inactive:hover { background-color: rgba(241,245,249,0.95) !important; }

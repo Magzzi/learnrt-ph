@@ -2,7 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Train, Map, Calculator, MapPin, Route, Menu, X } from "lucide-react";
+import { Train, Map, Calculator, MapPin, Route, Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 const links = [
   { name: "Home", href: "/", icon: <Train size={16} /> },
@@ -15,6 +16,7 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggle } = useTheme();
 
   return (
     <nav className="bg-[#0a1a1a] border-b border-white/10 sticky top-0 z-50">
@@ -54,14 +56,16 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Right: Get Started + Mobile toggle */}
+        {/* Right: Get Started + Theme toggle + Mobile toggle */}
         <div className="flex items-center gap-3">
-          <Link
-            href="/explore"
-            className="hidden sm:inline-flex bg-yellow-500 hover:bg-yellow-400 text-black font-semibold text-sm px-5 py-2 rounded-full transition-all duration-200"
+          
+          <button
+            onClick={toggle}
+            className="flex items-center justify-center w-9 h-9 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition-all duration-200"
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
           >
-            Get Started
-          </Link>
+            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden text-gray-400 hover:text-white transition-colors p-1"

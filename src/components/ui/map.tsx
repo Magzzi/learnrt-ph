@@ -1,21 +1,23 @@
 "use client";
+import dynamic from "next/dynamic";
 
 interface MapProps {
-  location?: string;
+  userLat?: number;
+  userLng?: number;
+  stationLat?: number;
+  stationLng?: number;
+  stationName?: string;
 }
 
-export default function Map({ location }: MapProps) {
-  const query = location ? encodeURIComponent(location) : "Philippines";
-  const iframeSrc = `https://www.google.com/maps?q=${query}&output=embed`;
+const LeafletMap = dynamic(() => import("./leaflet-map"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center bg-[#0a1a1a]">
+      <p className="text-gray-500 text-sm">Loading map...</p>
+    </div>
+  ),
+});
 
-  return (
-    <iframe
-      width="100%"
-      height="100%"
-      loading="lazy"
-      style={{ border: 0 }}
-      src={iframeSrc}
-      allowFullScreen
-    ></iframe>
-  );
+export default function Map(props: MapProps) {
+  return <LeafletMap {...props} />;
 }
