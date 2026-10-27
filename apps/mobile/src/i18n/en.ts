@@ -10,6 +10,14 @@ export const en = {
     label: "Unverified",
     a11y: "Unverified data",
   },
+  map: {
+    stationA11y: "{{station}}, {{line}}",
+    comingSoon: "Coming Soon",
+    hint: "Pinch to zoom. Tap a Station.",
+  },
+  station: {
+    notFound: "Station not found",
+  },
   placeholder: {
     counts: "{{lines}} Lines · {{stations}} Stations",
   },

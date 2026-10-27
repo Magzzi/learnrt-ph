@@ -14,6 +14,14 @@ export const fil: FilipinoStrings = {
     label: { text: "Hindi pa beripikado", review: "needs review" },
     a11y: { text: "Datos na hindi pa beripikado", review: "needs review" },
   },
+  map: {
+    stationA11y: { text: "{{station}}, {{line}}", review: "needs review" },
+    comingSoon: { text: "Paparating", review: "needs review" },
+    hint: { text: "Ipitin para mag-zoom. Pindutin ang isang istasyon.", review: "needs review" },
+  },
+  station: {
+    notFound: { text: "Hindi makita ang istasyon", review: "needs review" },
+  },
   placeholder: {
     counts: { text: "{{lines}} linya · {{stations}} istasyon", review: "needs review" },
   },
