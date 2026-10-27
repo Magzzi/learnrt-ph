@@ -1,6 +1,6 @@
-# Station name proposal (data-todo D6)
+# Station names (data-todo D6)
 
-Status: **proposal, awaiting owner approval. Not applied.**
+Status: **approved by the owner on 2026-10-28, with plain hyphens instead of en dashes and sponsor names kept.** Applied in M1 (ticket M1-11). Sponsor names still need checking against the operators' official pages (data-todo D16).
 
 Rule proposed: use the OpenStreetMap `name` tag as it stood on 2026-10-28 (Overpass query, © OpenStreetMap contributors, ODbL), because OSM is the approved source for Station locations. Ids never change, only display names. Rows marked ✱ are where the proposal differs from today's name. Rows marked † use a sponsor or naming-rights name; say if you would rather drop the sponsor.
 
@@ -11,7 +11,7 @@ Rule proposed: use the OpenStreetMap `name` tag as it stood on 2026-10-28 (Overp
 | lrt1-ninoy-aquino-avenue | Ninoy Aquino Avenue | Ninoy Aquino | Ninoy Aquino Avenue | Ninoy Aquino Avenue |
 | lrt1-pitx | PITX | | PITX | PITX |
 | lrt1-mia-road | MIA Road | MIA (NAIA) | MIA Road | MIA Road |
-| lrt1-redemptorist-aseana | Redemptorist-Aseana | Redemptorist | Redemptorist–Aseana | ✱ Redemptorist–Aseana (en dash) |
+| lrt1-redemptorist-aseana | Redemptorist-Aseana | Redemptorist | Redemptorist–Aseana | Redemptorist-Aseana |
 | lrt1-baclaran | Baclaran | | Baclaran | Baclaran |
 | lrt1-edsa | EDSA | | EDSA | EDSA |
 | lrt1-libertad | Libertad | | Libertad | Libertad |
@@ -43,11 +43,11 @@ Rule proposed: use the OpenStreetMap `name` tag as it stood on 2026-10-28 (Overp
 | lrt2-j-ruiz | J. Ruiz | | J. Ruiz | J. Ruiz |
 | lrt2-gilmore | Gilmore | | Gilmore | Gilmore |
 | lrt2-betty-go-belmonte | Betty Go-Belmonte | | Betty Go-Belmonte | Betty Go-Belmonte |
-| lrt2-cubao | Cubao | | Araneta Center - Cubao | ✱† Araneta Center–Cubao |
+| lrt2-cubao | Cubao | | Araneta Center - Cubao | ✱† Araneta Center-Cubao |
 | lrt2-anonas | Anonas | | Anonas | Anonas |
 | lrt2-katipunan | Katipunan | | Katipunan | Katipunan |
 | lrt2-santolan | Santolan | | Santolan | Santolan |
-| lrt2-marikina | Marikina | Marikina - Pasig | Marikina-Pasig | ✱ Marikina–Pasig |
+| lrt2-marikina | Marikina | Marikina - Pasig | Marikina-Pasig | ✱ Marikina-Pasig |
 | lrt2-antipolo | Antipolo | | Antipolo | Antipolo |
 
 ## MRT-3
@@ -57,7 +57,7 @@ Rule proposed: use the OpenStreetMap `name` tag as it stood on 2026-10-28 (Overp
 | mrt3-quezon-ave | Quezon Ave | Quezon Avenue | Quezon Avenue | ✱ Quezon Avenue |
 | mrt3-gma-kamuning | GMA-Kamuning | Kamuning | GMA Kamuning | ✱† GMA Kamuning |
 | mrt3-cubao | Cubao | | Cubao | Cubao |
-| mrt3-santolan | Santolan | | Santolan-Annapolis | ✱ Santolan–Annapolis |
+| mrt3-santolan | Santolan | | Santolan-Annapolis | ✱ Santolan-Annapolis |
 | mrt3-ortigas | Ortigas | | Ortigas | Ortigas |
 | mrt3-shaw-blvd | Shaw Blvd | Shaw Boulevard | Shaw Boulevard | ✱ Shaw Boulevard |
 | mrt3-boni | Boni | | Boni | Boni |
@@ -68,6 +68,6 @@ Rule proposed: use the OpenStreetMap `name` tag as it stood on 2026-10-28 (Overp
 | mrt3-taft-ave | Taft Ave | Taft Avenue | Taft Avenue | ✱ Taft Avenue |
 
 ## Notes
-- OSM mixes hyphens, spaced hyphens and an en dash for compound names. The proposal uses an en dash (–) for every compound place name, for consistency. Say if you prefer plain hyphens.
+- OSM mixes hyphens, spaced hyphens and an en dash for compound names. Approved: a plain hyphen with no spaces in every compound name.
 - MRT-7 names are left out: the Line is Coming Soon and the two lists in the repo disagree (D13).
 - Approving this does not change ids or Fares. The fare converter currently matches Stations by the fare matrices' spellings, so applying it also means giving the converter a matrix-name → id mapping.

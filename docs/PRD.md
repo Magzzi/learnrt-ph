@@ -140,6 +140,7 @@ Riders arrive as learners and stay as commuters.
 - Visible "unofficial, not affiliated with LRMC, LRTA or DOTr" disclaimer; no operator logos.
 - Apple Developer ($99/year) and Google Play ($25 one-time) accounts.
 - OSM attribution in the app and on the site.
+- Filipino strings reviewed by the owner and a native speaker (every string is marked "needs review" until then).
 
 ## 12. Milestones
 
@@ -149,7 +150,7 @@ Each is a vertical slice that can be demoed.
 |---|---|---|
 | M0 | Restructure | Monorepo; distance and fare logic extracted into `packages/core` with tests; Station graph and Transfers modelled |
 | M1 | Offline core app | Expo app with schematic map, Station detail, fares, Nearest Station, learn cards, English and Filipino |
-| M2 | Guided Ride | Cross-Line route planning, step screens, background geofences, notifications, manual fallback |
+| M2 | Guided Ride | Cross-Line route planning, step screens, background geofences, notifications, manual fallback; street-level map (F1) as the last, cuttable ticket |
 | M3 | Live layer | Supabase schema and RLS, Auth, Rider Reports with Realtime and expiry, offline queue, SQLite sync |
 | M4 | Admin and Advisories | In-app admin, Advisory publishing with push to followers, moderation, data editor, OSM import |
 | M4b | Marketing site | `apps/web` reduced to the pages in section 10 |
