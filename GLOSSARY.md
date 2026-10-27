@@ -20,7 +20,29 @@ _Avoid_: Interchange, connection
 Whether a Line is operational, coming soon, or suspended.
 _Avoid_: Availability, open/closed
 
+## Fares
+
+**Fare**:
+The amount in pesos a rider pays for one ride on one Line, from an origin Station to a destination Station.
+_Avoid_: Price, cost, toll
+
+**Single Journey Ticket**:
+A ticket bought for one ride on one Line.
+_Avoid_: SJT (in rider-facing text), single ticket
+
+**Stored Value Ticket**:
+A reloadable ticket whose balance pays Fares across rides.
+_Avoid_: SVF, SVT (in rider-facing text), load card
+
+**Discounted Fare**:
+The lower Fare paid by eligible riders, such as students, senior citizens and persons with disabilities.
+_Avoid_: Promo fare, concession
+
 ## Riding
+
+**Nearest Station**:
+The Station on an operational Line closest in straight-line distance to a rider's location.
+_Avoid_: Closest stop, nearby station
 
 **Guided Ride**:
 An active, step-by-step trip a rider follows from an origin Station to a destination Station, including any Transfers.
