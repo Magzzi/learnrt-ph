@@ -12,18 +12,21 @@ The project is moving from this website to an Expo (React Native) Android/iOS ap
 
 ## Commands
 
+pnpm monorepo (`apps/web`, `packages/*`). Run from the repo root:
+
 ```bash
-npm run dev       # Start development server at http://localhost:3000
-npm run build     # Build for production
-npm run start     # Run production build
-npm run lint      # Lint with Next.js ESLint config
+pnpm install          # Install all workspace dependencies
+pnpm dev:web          # Website dev server at http://localhost:3000
+pnpm build:web        # Production build of the website
+pnpm test             # Run every package's tests
+pnpm typecheck        # Type-check every package
 ```
 
-There is no test suite configured for this project.
+`pnpm --filter web lint` runs `next lint`, which Next 16 removed; it fails and there is no ESLint config yet.
 
 ## Architecture Overview
 
-**LearnRT** is a Next.js 15 (App Router) web app for navigating the Philippine rail network (LRT-1, LRT-2, MRT-3, and upcoming lines). All pages are client components (`"use client"`).
+**LearnRT** is a Next.js 16 (App Router) web app in `apps/web` for navigating the Philippine rail network (LRT-1, LRT-2, MRT-3, and upcoming lines). All pages are client components (`"use client"`). Paths below are relative to `apps/web`.
 
 ### Pages and their purpose
 
@@ -38,11 +41,11 @@ There is no test suite configured for this project.
 
 ### Key utilities
 
-- **`src/app/route/findnearest.ts`** — Contains the complete hardcoded station coordinate dataset for all lines (LRT-1 including Cavite extension, LRT-2, MRT-3, MRT-7). Exports `findNearestStations(lat, lng)` (Haversine, returns top 3 within 100 km) and `getCoordinates(location)` (Nominatim/OpenStreetMap geocoding).
+- **`src/app/route/findnearest.ts`** — Contains the complete hardcoded station coordinate dataset for all lines (LRT-1 including Cavite extension, LRT-2, MRT-3, MRT-7). Exports `findNearestStations(lat, lng)` (Haversine, returns the top 3 with no distance cut-off) and `getCoordinates(location)` (Nominatim/OpenStreetMap geocoding).
 
 - **`src/utils/FareMatrix.ts`** — Reads fare from `.xlsx` files in `public/` using the `xlsx` library. File naming convention: `{RAILWAY}-{type}-matrix.xlsx` for LRT-1/LRT-2 (type = `sjt` or `svf`), `MRT3-matrix.xlsx` / `MRT3-discounted-matrix.xlsx` for MRT-3. Discounted SJT for non-MRT3 lines applies 50% multiplier at runtime.
 
-### Fare matrix files (in `public/`)
+### Fare matrix files (in `apps/web/public/`)
 
 - `LRT1-sjt-matrix.xlsx`, `LRT1-svf-matrix.xlsx`
 - `LRT2-sjt-matrix.xlsx`, `LRT2-svf-matrix.xlsx`
