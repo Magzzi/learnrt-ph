@@ -14,3 +14,4 @@ export {
 export { findNearestStations, type NearestStation, type NearestStationOptions } from "./nearest";
 export { fareData, getFare, type FareQuery, type FareTable, type TicketType } from "./fares";
 export { neighbours, transfers, transfersFrom, type Transfer } from "./graph";
+export { landmarkData, landmarksAt } from "./landmarks";
