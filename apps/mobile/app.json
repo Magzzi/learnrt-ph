@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "LearnRT",
+    "slug": "learnrt",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0a1a1a",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-localization",
+      "expo-font"
+    ],
+    "scheme": "learnrt",
+    "backgroundColor": "#0a1a1a",
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
