@@ -11,3 +11,4 @@ export {
   type LineStatus,
   type Station,
 } from "./network";
+export { findNearestStations, type NearestStation, type NearestStationOptions } from "./nearest";
