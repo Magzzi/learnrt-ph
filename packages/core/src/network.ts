@@ -1,4 +1,5 @@
 import type { LatLng } from "./distance";
+import extract from "../data-sources/osm-stations.json";
 import { STATIONS } from "./data/stations";
 
 export type LineId = "LRT1" | "LRT2" | "MRT3" | "MRT7";
@@ -15,12 +16,17 @@ export interface Station {
   id: string;
   name: string;
   lineId: LineId;
+  /** OpenStreetMap element the position comes from, e.g. "way/112644274"; null if OSM lacks the Station. */
+  osmId: string | null;
   location: LatLng;
 }
 
 /** Where the network data came from, and when it was last checked against an official source. */
 export const networkData = {
-  source: "LearnRT website (fare matrix headers and findnearest.ts)",
+  source: "Station order from the LearnRT fare matrices; positions from OpenStreetMap",
+  attribution: "© OpenStreetMap contributors, ODbL",
+  /** When the OSM data was extracted. */
+  osmBase: extract.osmBase,
   lastVerified: null as string | null,
 };
 

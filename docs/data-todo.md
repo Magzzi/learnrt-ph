@@ -10,8 +10,8 @@ Data the app uses that has not been verified against a source the owner has appr
 | D4 | Discount rules | `src/utils/FareMatrix.ts` | LRT-1/2 discounted SJT = ceil(50%); discounted SVF = no discount on all Lines; MRT-3 SVF uses the SJT table | Official discount rules (PRD §9) |
 | D5 | SVF same-Station fare | LRT-1 SVF diagonal 16, LRT-2 SVF diagonal 13 | Unclear whether this is a real fare (entry and exit at the same Station) | Confirm |
 | D6 | Station display names | matrices vs `findnearest.ts` vs `explore` page | Three spellings per Station (e.g. "North Ave" / "North Avenue", "UN Avenue" / "United Nations", "Marikina" / "Marikina - Pasig", "Fernando Poe Jr." / "Roosevelt") | Resolved 2026-10-28: OSM names approved ([station-names-proposal.md](station-names-proposal.md)), applied in M1. Sponsor names: see D16 |
-| D7 | LRT-2 Santolan coordinates | `findnearest.ts` (14.60808, 121.05641) | Almost identical to MRT-3 Santolan; the LRT-2 Station of that name is a different place | Source approved: OSM. Fix scheduled in M1 (OSM: 14.622108, 121.085964) |
-| D8 | All Station coordinates | `findnearest.ts` | Unknown source | Source approved: OSM, with attribution. Replaced in M1 |
+| D7 | LRT-2 Santolan coordinates | `findnearest.ts` (14.60808, 121.05641) | Almost identical to MRT-3 Santolan; the LRT-2 Station of that name is a different place | Resolved 2026-10-28 (M1-01): OSM `way/30411347`, 14.622108, 121.085964, moved 3.5 km |
+| D8 | All Station coordinates | `findnearest.ts` | Unknown source | Resolved 2026-10-28 (M1-01): all 51 operational Stations and 11 of 14 MRT-7 Stations from OSM (extract `packages/core/data-sources/osm-stations.json`); other moves were under 150 m |
 | D9 | Cavite extension Stations open | Fares exist for all five | PRD §9 says to verify which are open | Official status per Station |
 | D10 | Transfer walking details | none | No walking time, distance or route for Doroteo Jose–Recto, EDSA–Taft Ave, Cubao–Cubao | Curated walkthroughs (PRD §9) |
 | D11 | Operating hours | `explore` page: LRT-1 4:30–22:30, MRT-3 4:30–21:30, LRT-2 5:00–21:30 | Weekends and holidays unknown; source unknown | Official hours |

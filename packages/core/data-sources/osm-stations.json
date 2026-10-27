@@ -1,0 +1,639 @@
+{
+  "attribution": "© OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)",
+  "osmBase": "2026-10-27T17:34:02Z",
+  "query": "[out:json][timeout:90];\n(nwr[\"railway\"=\"station\"][\"station\"~\"light_rail|subway|monorail\"](14.40,120.90,14.80,121.20);\n nwr[\"public_transport\"=\"station\"][\"light_rail\"=\"yes\"](14.40,120.90,14.80,121.20);\n nwr[\"railway\"=\"station\"][\"network\"~\"LRT|MRT|Light Rail|Metro Rail\",i](14.40,120.90,14.80,121.20););\nout center tags;",
+  "elements": [
+    {
+      "osmId": "node/11329697351",
+      "name": "Cubao",
+      "network": null,
+      "station": "light_rail",
+      "lat": 14.6194837,
+      "lng": 121.0510726
+    },
+    {
+      "osmId": "node/11329697352",
+      "name": "Shaw Boulevard",
+      "network": null,
+      "station": "light_rail",
+      "lat": 14.5810649,
+      "lng": 121.0534794
+    },
+    {
+      "osmId": "node/12752311664",
+      "name": "NAIA Terminal 3",
+      "network": null,
+      "station": "subway",
+      "lat": 14.520373,
+      "lng": 121.015031
+    },
+    {
+      "osmId": "node/13478815689",
+      "name": "East Avenue",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.6369562,
+      "lng": 121.0496995
+    },
+    {
+      "osmId": "node/13478815690",
+      "name": "Anonas",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.6266989,
+      "lng": 121.0644826
+    },
+    {
+      "osmId": "node/13564626500",
+      "name": "Kalayaan Avenue",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.5579934,
+      "lng": 121.0556675
+    },
+    {
+      "osmId": "node/13564639203",
+      "name": "Lawton Avenue",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.5366417,
+      "lng": 121.0401852
+    },
+    {
+      "osmId": "node/13564783062",
+      "name": "Ortigas",
+      "network": null,
+      "station": "subway",
+      "lat": 14.5853472,
+      "lng": 121.064108
+    },
+    {
+      "osmId": "node/13564783063",
+      "name": "Shaw Boulevard",
+      "network": null,
+      "station": "subway",
+      "lat": 14.5762711,
+      "lng": 121.0622495
+    },
+    {
+      "osmId": "node/13565942041",
+      "name": "Quirino Highway",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.6893878,
+      "lng": 121.0285777
+    },
+    {
+      "osmId": "node/13565942044",
+      "name": "North Avenue",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.6576297,
+      "lng": 121.0362911
+    },
+    {
+      "osmId": "node/13565942045",
+      "name": "Quezon Avenue",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.6458965,
+      "lng": 121.0369547
+    },
+    {
+      "osmId": "node/13571995040",
+      "name": "University Avenue",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.6550681,
+      "lng": 121.0549904
+    },
+    {
+      "osmId": "node/13571995042",
+      "name": "Tandang Sora",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.6633536,
+      "lng": 121.0674956
+    },
+    {
+      "osmId": "node/13571995044",
+      "name": "Don Antonio",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.6770384,
+      "lng": 121.0826781
+    },
+    {
+      "osmId": "node/13571995050",
+      "name": "Batasan",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.6851193,
+      "lng": 121.086309
+    },
+    {
+      "osmId": "node/13571995052",
+      "name": "Manggahan",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.6975244,
+      "lng": 121.0873555
+    },
+    {
+      "osmId": "node/13571995054",
+      "name": "Doña Carmen",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.705132,
+      "lng": 121.07842
+    },
+    {
+      "osmId": "node/13571995056",
+      "name": "Regalado Avenue",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.7065083,
+      "lng": 121.0679243
+    },
+    {
+      "osmId": "node/13571995058",
+      "name": "Mindanao Avenue",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.7330687,
+      "lng": 121.0612189
+    },
+    {
+      "osmId": "node/13571995062",
+      "name": "Quirino",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.7354581,
+      "lng": 121.0665824
+    },
+    {
+      "osmId": "node/13686694948",
+      "name": "East Valenzuela",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.7083566,
+      "lng": 121.0137932
+    },
+    {
+      "osmId": "node/5285111766",
+      "name": "Tandang Sora",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.6747123,
+      "lng": 121.0321987
+    },
+    {
+      "osmId": "node/5377269277",
+      "name": "Katipunan",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6310644,
+      "lng": 121.0727741
+    },
+    {
+      "osmId": "node/5525578965",
+      "name": "Sacred Heart",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.7502152,
+      "lng": 121.0838525
+    },
+    {
+      "osmId": "node/5728168799",
+      "name": "Bonifacio Global City",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.5494477,
+      "lng": 121.0545952
+    },
+    {
+      "osmId": "node/6313750523",
+      "name": "Camp Aguinaldo",
+      "network": "Metro Manila Subway",
+      "station": "subway",
+      "lat": 14.6129634,
+      "lng": 121.0695129
+    },
+    {
+      "osmId": "relation/12480558",
+      "name": "V. Mapa",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6040903,
+      "lng": 121.0171136
+    },
+    {
+      "osmId": "relation/14288640",
+      "name": "United Nations",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5825264,
+      "lng": 120.9846244
+    },
+    {
+      "osmId": "relation/21066683",
+      "name": "Sacred Heart",
+      "network": "Manila MRT",
+      "station": "subway",
+      "lat": 14.7503322,
+      "lng": 121.0841162
+    },
+    {
+      "osmId": "way/1109949377",
+      "name": null,
+      "network": null,
+      "station": "light_rail",
+      "lat": 14.4880018,
+      "lng": 121.048779
+    },
+    {
+      "osmId": "way/112320439",
+      "name": "Buendia",
+      "network": "MRT Line 3",
+      "station": "light_rail",
+      "lat": 14.5543705,
+      "lng": 121.0342223
+    },
+    {
+      "osmId": "way/112644274",
+      "name": "Doroteo Jose",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.6052943,
+      "lng": 120.9820514
+    },
+    {
+      "osmId": "way/113358959",
+      "name": "Betty Go-Belmonte",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6185972,
+      "lng": 121.042706
+    },
+    {
+      "osmId": "way/128196488",
+      "name": "Quezon Avenue",
+      "network": "Manila MRT",
+      "station": "light_rail",
+      "lat": 14.642555,
+      "lng": 121.0385751
+    },
+    {
+      "osmId": "way/179240108",
+      "name": "Recto",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6035073,
+      "lng": 120.9833708
+    },
+    {
+      "osmId": "way/179251377",
+      "name": "Central Terminal",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5927962,
+      "lng": 120.9816199
+    },
+    {
+      "osmId": "way/184582280",
+      "name": "Araneta Center - Cubao",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6228614,
+      "lng": 121.0531248
+    },
+    {
+      "osmId": "way/187134601",
+      "name": "Bambang",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.6111147,
+      "lng": 120.9824669
+    },
+    {
+      "osmId": "way/188168853",
+      "name": "J. Ruiz",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6105686,
+      "lng": 121.0260986
+    },
+    {
+      "osmId": "way/188168854",
+      "name": "Pureza",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6016769,
+      "lng": 121.0050939
+    },
+    {
+      "osmId": "way/188169761",
+      "name": "Gilmore",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6135362,
+      "lng": 121.0341458
+    },
+    {
+      "osmId": "way/188169786",
+      "name": "Anonas",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6279862,
+      "lng": 121.0647231
+    },
+    {
+      "osmId": "way/222628889",
+      "name": "Taft Avenue",
+      "network": "MRT Line 3",
+      "station": "light_rail",
+      "lat": 14.5375644,
+      "lng": 121.0018185
+    },
+    {
+      "osmId": "way/222628890",
+      "name": "Magallanes",
+      "network": "MRT Line 3",
+      "station": "light_rail",
+      "lat": 14.5419448,
+      "lng": 121.0193919
+    },
+    {
+      "osmId": "way/222628891",
+      "name": "EDSA",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5388434,
+      "lng": 121.0006192
+    },
+    {
+      "osmId": "way/222628892",
+      "name": "North Avenue",
+      "network": "MRT Line 3",
+      "station": "light_rail",
+      "lat": 14.6521693,
+      "lng": 121.0323313
+    },
+    {
+      "osmId": "way/27663063",
+      "name": "Ayala",
+      "network": "MRT-3",
+      "station": "light_rail",
+      "lat": 14.549194,
+      "lng": 121.027919
+    },
+    {
+      "osmId": "way/28788659",
+      "name": "Legarda",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.600877,
+      "lng": 120.9925686
+    },
+    {
+      "osmId": "way/288010747",
+      "name": "Tayuman",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.6166999,
+      "lng": 120.9827228
+    },
+    {
+      "osmId": "way/288085179",
+      "name": "Blumentritt",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.6227714,
+      "lng": 120.9828989
+    },
+    {
+      "osmId": "way/288085512",
+      "name": "Abad Santos",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.6306063,
+      "lng": 120.9814053
+    },
+    {
+      "osmId": "way/288086563",
+      "name": "5th Avenue",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.6444062,
+      "lng": 120.9835359
+    },
+    {
+      "osmId": "way/288086841",
+      "name": "Yamaha Monumento",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.6543118,
+      "lng": 120.9838745
+    },
+    {
+      "osmId": "way/288087278",
+      "name": "R. Papa",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.6360145,
+      "lng": 120.9822793
+    },
+    {
+      "osmId": "way/288089644",
+      "name": "Carriedo",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5991704,
+      "lng": 120.9813635
+    },
+    {
+      "osmId": "way/288126517",
+      "name": "Quirino",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5702879,
+      "lng": 120.9915257
+    },
+    {
+      "osmId": "way/288126518",
+      "name": "Vito Cruz",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5634699,
+      "lng": 120.9947509
+    },
+    {
+      "osmId": "way/288126519",
+      "name": "Pedro Gil",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5765754,
+      "lng": 120.9880197
+    },
+    {
+      "osmId": "way/288127159",
+      "name": "Gil Puyat",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5541814,
+      "lng": 120.9971661
+    },
+    {
+      "osmId": "way/290088413",
+      "name": "Libertad",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5477514,
+      "lng": 120.9986373
+    },
+    {
+      "osmId": "way/290189159",
+      "name": "Baclaran",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5342877,
+      "lng": 120.998398
+    },
+    {
+      "osmId": "way/30262758",
+      "name": "GMA Kamuning",
+      "network": "MRT Line 3",
+      "station": "light_rail",
+      "lat": 14.6353465,
+      "lng": 121.0432937
+    },
+    {
+      "osmId": "way/30411347",
+      "name": "Santolan",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6221076,
+      "lng": 121.0859641
+    },
+    {
+      "osmId": "way/402882917",
+      "name": "Balintawak",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.6574243,
+      "lng": 121.0038959
+    },
+    {
+      "osmId": "way/402882918",
+      "name": "Fernando Poe Jr.",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.657559,
+      "lng": 121.0211373
+    },
+    {
+      "osmId": "way/402888750",
+      "name": "Katipunan",
+      "network": "LRT Line 2",
+      "station": "subway",
+      "lat": 14.6310833,
+      "lng": 121.0729164
+    },
+    {
+      "osmId": "way/513224845",
+      "name": "Marikina-Pasig",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6204412,
+      "lng": 121.1006479
+    },
+    {
+      "osmId": "way/564479403",
+      "name": "North Triangle Common Station",
+      "network": "Manila LRT and Manila MRT",
+      "station": "subway",
+      "lat": 14.6550049,
+      "lng": 121.0311051
+    },
+    {
+      "osmId": "way/576938325",
+      "name": "Antipolo",
+      "network": "Manila LRT",
+      "station": "subway",
+      "lat": 14.6247704,
+      "lng": 121.121309
+    },
+    {
+      "osmId": "way/586033800",
+      "name": "PITX",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5083101,
+      "lng": 120.9912791
+    },
+    {
+      "osmId": "way/60194145",
+      "name": "Ortigas",
+      "network": null,
+      "station": "light_rail",
+      "lat": 14.587862,
+      "lng": 121.0567162
+    },
+    {
+      "osmId": "way/60198083",
+      "name": "Boni",
+      "network": "MRT Line 3",
+      "station": "light_rail",
+      "lat": 14.5737744,
+      "lng": 121.0481887
+    },
+    {
+      "osmId": "way/60618740",
+      "name": "Guadalupe",
+      "network": "MRT Line 3",
+      "station": "light_rail",
+      "lat": 14.567114,
+      "lng": 121.0455357
+    },
+    {
+      "osmId": "way/797744977",
+      "name": "MIA Road",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5184318,
+      "lng": 120.9929872
+    },
+    {
+      "osmId": "way/798212098",
+      "name": "Ninoy Aquino Avenue",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.4988903,
+      "lng": 120.9943732
+    },
+    {
+      "osmId": "way/900558095",
+      "name": "Redemptorist–Aseana",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.5302786,
+      "lng": 120.9929379
+    },
+    {
+      "osmId": "way/923624587",
+      "name": "Dr. Santos",
+      "network": "Manila LRT",
+      "station": "light_rail",
+      "lat": 14.4852337,
+      "lng": 120.9895723
+    },
+    {
+      "osmId": "way/95496202",
+      "name": "Santolan-Annapolis",
+      "network": "MRT Line 3",
+      "station": "light_rail",
+      "lat": 14.6078561,
+      "lng": 121.056524
+    }
+  ]
+}
