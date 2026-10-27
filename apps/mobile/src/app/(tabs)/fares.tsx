@@ -1,5 +1,7 @@
+import { useTranslation } from "react-i18next";
 import { Placeholder } from "@/components/Placeholder";
 
 export default function FaresScreen() {
-  return <Placeholder title="Fares" />;
+  const { t } = useTranslation();
+  return <Placeholder title={t("tabs.fares")} />;
 }

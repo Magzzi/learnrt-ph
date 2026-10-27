@@ -1,5 +1,6 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
+import { useTranslation } from "react-i18next";
 import type { ComponentProps } from "react";
 import type { ColorValue } from "react-native";
 import colors from "@/theme/colors";
@@ -14,6 +15,7 @@ const icon =
   );
 
 export default function TabsLayout() {
+  const { t } = useTranslation();
   return (
     <Tabs
       screenOptions={{
@@ -25,10 +27,10 @@ export default function TabsLayout() {
         sceneStyle: { backgroundColor: colors.base },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: "Map", tabBarIcon: icon("map-outline") }} />
-      <Tabs.Screen name="fares" options={{ title: "Fares", tabBarIcon: icon("cash-outline") }} />
-      <Tabs.Screen name="nearest" options={{ title: "Nearest", tabBarIcon: icon("locate-outline") }} />
-      <Tabs.Screen name="learn" options={{ title: "Learn", tabBarIcon: icon("book-outline") }} />
+      <Tabs.Screen name="index" options={{ title: t("tabs.map"), tabBarIcon: icon("map-outline") }} />
+      <Tabs.Screen name="fares" options={{ title: t("tabs.fares"), tabBarIcon: icon("cash-outline") }} />
+      <Tabs.Screen name="nearest" options={{ title: t("tabs.nearest"), tabBarIcon: icon("locate-outline") }} />
+      <Tabs.Screen name="learn" options={{ title: t("tabs.learn"), tabBarIcon: icon("book-outline") }} />
     </Tabs>
   );
 }
