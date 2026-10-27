@@ -12,3 +12,4 @@ export {
   type Station,
 } from "./network";
 export { findNearestStations, type NearestStation, type NearestStationOptions } from "./nearest";
+export { fareData, getFare, type FareQuery, type FareTable, type TicketType } from "./fares";
