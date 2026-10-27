@@ -21,6 +21,23 @@ export const fil: FilipinoStrings = {
   },
   station: {
     notFound: { text: "Hindi makita ang istasyon", review: "needs review" },
+    onThisLine: { text: "Sa linyang ito", review: "needs review" },
+    transfer: { text: "Lipat-linya", review: "needs review" },
+    transferTo: { text: "Lumakad papuntang {{station}} ({{line}})", review: "needs review" },
+    walkingNotAvailable: { text: "Wala pang direksyon sa paglalakad", review: "needs review" },
+    nearby: { text: "Malapit dito", review: "needs review" },
+    noLandmarks: { text: "Wala pang nakalistang palatandaan", review: "needs review" },
+    facilities: { text: "Mga pasilidad ng istasyon", review: "needs review" },
+    entrances: { text: "Mga pasukan at labasan", review: "needs review" },
+    platforms: { text: "Mga plataporma", review: "needs review" },
+    elevators: { text: "Mga elevator", review: "needs review" },
+    notAvailable: { text: "Wala pa", review: "needs review" },
+    faresFromHere: { text: "Pamasahe mula rito", review: "needs review" },
+  },
+  lineStatus: {
+    operational: { text: "Tumatakbo", review: "needs review" },
+    comingSoon: { text: "Paparating", review: "needs review" },
+    suspended: { text: "Suspendido", review: "needs review" },
   },
   placeholder: {
     counts: { text: "{{lines}} linya · {{stations}} istasyon", review: "needs review" },
