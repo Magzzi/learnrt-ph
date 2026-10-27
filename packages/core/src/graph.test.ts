@@ -50,7 +50,7 @@ describe("Transfers", () => {
   });
 
   it("has no walking details yet (data-todo D10)", () => {
-    for (const t of transfers) expect(t.walk).toEqual({ minutes: null, metres: null });
+    for (const t of transfers) expect(t.walk).toEqual({ minutes: null, metres: null, directions: null });
   });
 
   it("returns nothing for a Station without a Transfer", () => {

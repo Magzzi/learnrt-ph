@@ -22,6 +22,8 @@ export interface FareTable {
   fares: readonly (readonly (number | null)[])[];
 }
 
+export type FareTableKey = "LRT1-sjt" | "LRT1-svf" | "LRT2-sjt" | "LRT2-svf" | "MRT3-regular" | "MRT3-discounted-sjt";
+
 export const fareData = {
   source: "LearnRT website fare matrices (apps/web/public/*-matrix.xlsx)",
   lastVerified: null as string | null,
@@ -32,7 +34,7 @@ function tableFor({ line, ticket, discounted }: FareQuery): FareTable | undefine
   switch (line) {
     case "LRT1":
     case "LRT2":
-      return FARE_TABLES[ticket === "single-journey" ? `${line}-sjt` : `${line}-svf`];
+      return FARE_TABLES[ticket === "single-journey" ? (`${line}-sjt` as const) : (`${line}-svf` as const)];
     case "MRT3":
       return FARE_TABLES[ticket === "single-journey" && discounted ? "MRT3-discounted-sjt" : "MRT3-regular"];
     default:
@@ -45,6 +47,7 @@ export function getFare(query: FareQuery): number | null {
   const table = tableFor(query);
   if (!table) return null;
   if (getStation(query.from)?.lineId !== query.line || getStation(query.to)?.lineId !== query.line) return null;
+  if (query.ticket === "single-journey" && query.from === query.to) return null;
 
   const origin = table.stationIds.indexOf(query.from);
   const destination = table.stationIds.indexOf(query.to);

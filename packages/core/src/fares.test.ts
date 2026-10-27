@@ -17,6 +17,7 @@ describe("fare tables", () => {
     const names = rows[0]!.slice(1);
 
     expect(table!.stationIds.map((id) => getStation(id)?.name)).toEqual(names);
+    expect(rows.slice(1, names.length + 1).map((row) => row[0])).toEqual(names);
     names.forEach((_, r) =>
       names.forEach((_, c) => {
         const cell = rows[r + 1]?.[c + 1];

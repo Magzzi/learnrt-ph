@@ -4,10 +4,10 @@ import { getStation, stationsOnLine, type Station } from "./network";
 export interface Transfer {
   from: string;
   to: string;
-  walk: { minutes: number | null; metres: number | null };
+  walk: { minutes: number | null; metres: number | null; directions: string | null };
 }
 
-const UNKNOWN_WALK = { minutes: null, metres: null };
+const UNKNOWN_WALK = { minutes: null, metres: null, directions: null };
 
 // Named in PRD §9 and in the website's landmark data.
 export const transfers: readonly Transfer[] = [
