@@ -1,10 +1,10 @@
 import { comingSoonLines, learnData, lineAreas, lines, stationsOnLine } from "@learnrt/core";
 import { router } from "expo-router";
+import { openStation } from "@/navigation";
 import { useTranslation } from "react-i18next";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { LineCard } from "@/components/LineCard";
 import { Section } from "@/components/Section";
-import { UnverifiedBadge } from "@/components/UnverifiedBadge";
 import { LINE_COLORS } from "@/map/lineColors";
 import colors from "@/theme/colors";
 
@@ -26,16 +26,14 @@ export default function LearnScreen() {
             key={line.id}
             title={line.name}
             color={LINE_COLORS[line.id]}
+            unverified={unverified}
             stations={stationsOnLine(line.id).map((s) => ({
               key: s.id,
               name: s.name,
-              onPress: () => router.push({ pathname: "/station/[id]", params: { id: s.id } }),
+              onPress: () => openStation(s.id),
             }))}
           >
-            <View className="flex-row flex-wrap items-center gap-2">
-              <Text className="text-muted">{t("learn.areas", { areas: lineAreas(line.id).join(", ") })}</Text>
-              {unverified && <UnverifiedBadge />}
-            </View>
+            <Text className="text-muted">{t("learn.areas", { areas: lineAreas(line.id).join(", ") })}</Text>
           </LineCard>
         ))}
 
@@ -47,7 +45,8 @@ export default function LearnScreen() {
         <LineCard
           key={line.name}
           title={line.name}
-          color={line.name === "MRT-7" ? LINE_COLORS.MRT7 : colors.muted}
+          color={line.lineId ? LINE_COLORS[line.lineId] : colors.muted}
+          unverified={unverified}
           stations={line.stationNames.map((name, i) => ({ key: `${i}-${name}`, name }))}
         />
       ))}

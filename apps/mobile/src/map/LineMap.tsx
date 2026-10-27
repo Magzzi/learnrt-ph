@@ -48,11 +48,14 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
     if (width > 0) translateY.value = -(OPERATIONAL_TOP - 40) * pointsPerUnit;
   }, [width, pointsPerUnit, translateY]);
 
+  // Both gestures continue from wherever the map was when they began.
+  const rememberStart = () => {
+    "worklet";
+    start.value = { scale: scale.value, x: translateX.value, y: translateY.value };
+  };
+
   const pinch = usePinchGesture({
-    onBegin: () => {
-      "worklet";
-      start.value = { scale: scale.value, x: translateX.value, y: translateY.value };
-    },
+    onBegin: rememberStart,
     onUpdate: (e) => {
       "worklet";
       const next = clamp(start.value.scale * e.scale, MIN_SCALE, MAX_SCALE);
@@ -66,10 +69,7 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
 
   const pan = usePanGesture({
     minDistance: 8,
-    onBegin: () => {
-      "worklet";
-      start.value = { scale: scale.value, x: translateX.value, y: translateY.value };
-    },
+    onBegin: rememberStart,
     onUpdate: (e) => {
       "worklet";
       translateX.value = start.value.x + e.translationX;
@@ -105,7 +105,7 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
         // LRT-2 runs east-west, so its labels sit above the line at an angle to avoid overlapping.
         const left = LABELS_LEFT.has(s.id);
         const angled = s.lineId === "LRT2" && !left;
-        return { ...s, name: station.name, angled, left };
+        return { ...s, name: station.name, angled, left, operational: getLine(s.lineId)?.status === "operational" };
       }),
     [],
   );
@@ -132,7 +132,7 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
                     y1={tr.from.y}
                     x2={tr.to.x}
                     y2={tr.to.y}
-                    stroke="#ffffff"
+                    stroke={colors.text}
                     strokeWidth={10}
                     strokeLinecap="round"
                   />
@@ -163,7 +163,7 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
                       textAnchor={s.left ? "end" : "start"}
                       y={s.angled ? s.y - 10 : s.y + LABEL_SIZE / 3}
                       fontSize={LABEL_SIZE}
-                      fill={getLine(s.lineId)?.status === "operational" ? "#e5e7eb" : colors.muted}
+                      fill={s.operational ? colors.label : colors.muted}
                       transform={s.angled ? `rotate(-40 ${s.x + 4} ${s.y - 10})` : undefined}
                     >
                       {s.name}

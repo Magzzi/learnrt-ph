@@ -46,9 +46,9 @@ export const en = {
     discounted: "Discounted Fare",
     discountedHint: "For students, senior citizens and persons with disabilities",
     fare: "Fare",
-    noFare: "No fare for this trip",
+    noFare: "No Fare for this ride",
     incomplete: "Choose where you board and where you get off",
-    oneLine: "Fares are for a ride on one Line. Trips across Lines come with Guided Ride.",
+    oneLine: "Fares are for a ride on one Line. Rides across Lines come with Guided Ride.",
     close: "Close",
   },
   nearest: {
@@ -60,7 +60,7 @@ export const en = {
     openSettings: "Open Settings",
     tryAgain: "Try again",
     openMap: "Open map",
-    closest: "Closest Stations",
+    closest: "Nearest Stations",
     away: "{{distance}} away",
   },
   learn: {

@@ -22,3 +22,12 @@ Run on 2026-10-28 by Claude on the local Android emulator (AVD `learnrt_api36`, 
 - At the default zoom some map labels overlap where Stations are very close (Doroteo Jose/Recto/Legarda, EDSA/Taft Avenue, around North Avenue). They separate when zoomed in.
 - Map labels are SVG text and do not follow the system font size; the rest of the app does.
 - Panning the map is not bounded, so it can be dragged off screen.
+
+## Re-run after code review (2026-10-28)
+| # | Step | Result |
+|---|---|---|
+| R1 | Map shows an Unverified badge in the legend | Pass |
+| R2 | Map → Araneta Center-Cubao (LRT-2) → "Walk to Cubao (MRT-3)" → Cubao · MRT-3 (the M1-06 demo hop) | Pass |
+| R3 | Cubao (MRT-3) → Fares from here → change From to Boni → back to Cubao → Fares from here again → From = Cubao | Pass (was a bug: the second tap did nothing) |
+| R4 | Nearest online → no Google "Location Accuracy" prompt; "Nearest Stations" with Unverified badge; 40 m / 280 m / 610 m | Pass (the prompt appeared before the fix) |
+| R5 | Learn → every Line card and every Coming Soon card has an Unverified badge | Pass |

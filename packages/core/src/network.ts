@@ -1,6 +1,5 @@
 import type { LatLng } from "./distance";
-import extract from "../data-sources/osm-stations.json";
-import { STATIONS } from "./data/stations";
+import { OSM_BASE, STATIONS } from "./data/stations";
 
 export type LineId = "LRT1" | "LRT2" | "MRT3" | "MRT7";
 
@@ -26,7 +25,7 @@ export const networkData = {
   source: "Station order from the LearnRT fare matrices; positions from OpenStreetMap",
   attribution: "© OpenStreetMap contributors, ODbL",
   /** When the OSM data was extracted. */
-  osmBase: extract.osmBase,
+  osmBase: OSM_BASE,
   lastVerified: null as string | null,
 };
 

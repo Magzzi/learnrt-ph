@@ -6,13 +6,16 @@ import { readFileSync, writeFileSync } from "node:fs";
 const EXTRACT = new URL("../data-sources/osm-stations.json", import.meta.url);
 const STATIONS = new URL("../src/data/stations.ts", import.meta.url);
 
-const { elements } = JSON.parse(readFileSync(EXTRACT, "utf8")) as {
+const { osmBase, elements } = JSON.parse(readFileSync(EXTRACT, "utf8")) as {
+  osmBase: string;
   elements: { osmId: string; lat: number; lng: number }[];
 };
 const byOsmId = new Map(elements.map((e) => [e.osmId, e]));
 
 let updated = 0;
-const source = readFileSync(STATIONS, "utf8").replace(
+const source = readFileSync(STATIONS, "utf8")
+  .replace(/export const OSM_BASE = "[^"]*";/, `export const OSM_BASE = "${osmBase}";`)
+  .replace(
   /osmId: "([^"]+)", location: \{ lat: [\d.]+, lng: [\d.]+ \}/g,
   (_, osmId: string) => {
     const element = byOsmId.get(osmId);

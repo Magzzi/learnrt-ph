@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { neighbours, transfers, transfersFrom } from "./graph";
+import { neighbours, transferData, transfers, transfersFrom } from "./graph";
 import { getLine, stations } from "./network";
 
 const ids = (list: { id: string }[]) => list.map((s) => s.id);
@@ -51,6 +51,10 @@ describe("Transfers", () => {
 
   it("has no walking details yet (data-todo D10)", () => {
     for (const t of transfers) expect(t.walk).toEqual({ minutes: null, metres: null, directions: null });
+  });
+
+  it("marks Transfers as not yet verified", () => {
+    expect(transferData.lastVerified).toBeNull();
   });
 
   it("returns nothing for a Station without a Transfer", () => {

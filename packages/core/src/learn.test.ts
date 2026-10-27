@@ -21,6 +21,7 @@ describe("learn content", () => {
   it("uses core's MRT-7 Stations, and the website's lists for NSCR and PNR", () => {
     const byName = Object.fromEntries(comingSoonLines.map((l) => [l.name, l]));
     expect(byName["MRT-7"]!.stationNames).toHaveLength(14);
+    expect(byName["MRT-7"]!.lineId).toBe("MRT7");
     expect(byName["NSCR"]!.stationNames).toEqual(fromWebsite("NSCR").stations);
     expect(byName["PNR"]!.stationNames).toEqual(fromWebsite("PNR").stations);
   });

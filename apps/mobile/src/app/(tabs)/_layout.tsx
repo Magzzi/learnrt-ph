@@ -20,7 +20,7 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerStyle: { backgroundColor: colors.panel },
-        headerTintColor: "#fff",
+        headerTintColor: colors.text,
         tabBarStyle: { backgroundColor: colors.panel, borderTopColor: colors.raised },
         tabBarActiveTintColor: colors.accent,
         tabBarInactiveTintColor: colors.muted,

@@ -5,6 +5,7 @@ import {
   landmarksAt,
   neighbours,
   networkData,
+  transferData,
   transfersFrom,
   type Line,
 } from "@learnrt/core";
@@ -53,8 +54,7 @@ export function stationDetail(stationId: string): StationDetail | undefined {
     landmarks: landmarksAt(station.id),
     unverified: {
       station: networkData.lastVerified === null,
-      // Transfers are part of the network data.
-      transfers: networkData.lastVerified === null,
+      transfers: transferData.lastVerified === null,
       landmarks: landmarkData.lastVerified === null,
     },
   };

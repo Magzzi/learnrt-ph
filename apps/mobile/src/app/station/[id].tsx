@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { Section } from "@/components/Section";
 import { LINE_COLORS } from "@/map/lineColors";
+import { openStation } from "@/navigation";
 import { stationDetail } from "@/station/detail";
 
 const STATUS_KEYS = {
@@ -12,7 +13,6 @@ const STATUS_KEYS = {
   suspended: "lineStatus.suspended",
 } as const satisfies Record<LineStatus, string>;
 
-const openStation = (id: string) => router.push({ pathname: "/station/[id]", params: { id } });
 
 export default function StationScreen() {
   const { t } = useTranslation();
@@ -94,7 +94,7 @@ export default function StationScreen() {
 
       {detail.line.status === "operational" && (
         <Pressable
-          onPress={() => router.navigate({ pathname: "/fares", params: { line: detail.line.id, from: detail.id } })}
+          onPress={() => router.navigate({ pathname: "/fares", params: { line: detail.line.id, from: detail.id, at: String(Date.now()) } })}
           accessibilityRole="button"
           className="items-center rounded-xl bg-primary p-4"
         >

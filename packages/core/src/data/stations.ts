@@ -5,6 +5,9 @@
 // Unverified: see docs/data-todo.md.
 import type { Station } from "../network";
 
+/** When the OSM positions below were extracted (Overpass `timestamp_osm_base`). */
+export const OSM_BASE = "2026-10-27T17:34:02Z";
+
 export const STATIONS: readonly Station[] = [
   { id: "lrt1-dr-santos", name: "Dr. Santos", lineId: "LRT1", osmId: "way/923624587", location: { lat: 14.4852337, lng: 120.9895723 } },
   { id: "lrt1-ninoy-aquino-avenue", name: "Ninoy Aquino Avenue", lineId: "LRT1", osmId: "way/798212098", location: { lat: 14.4988903, lng: 120.9943732 } },

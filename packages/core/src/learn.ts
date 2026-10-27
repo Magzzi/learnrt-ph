@@ -9,12 +9,14 @@ export const learnData = {
 /** A Line LearnRT does not cover yet, shown as a Coming Soon card (PRD §6). */
 export interface ComingSoonLine {
   name: string;
+  /** Set when core models the Line (MRT-7), so it is never matched by name. */
+  lineId?: LineId;
   /** Station names in Line order, or empty when there is no list. */
   stationNames: readonly string[];
 }
 
 export const comingSoonLines: readonly ComingSoonLine[] = [
-  { name: "MRT-7", stationNames: stationsOnLine("MRT7").map((s) => s.name) },
+  { name: "MRT-7", lineId: "MRT7", stationNames: stationsOnLine("MRT7").map((s) => s.name) },
   { name: "Metro Manila Subway", stationNames: [] },
   { name: "NSCR", stationNames: NSCR_STATIONS },
   { name: "PNR", stationNames: PNR_STATIONS },

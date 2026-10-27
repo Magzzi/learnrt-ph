@@ -1,6 +1,7 @@
-import { lines } from "@learnrt/core";
+import { lines, networkData } from "@learnrt/core";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
+import { UnverifiedBadge } from "@/components/UnverifiedBadge";
 import { LINE_COLORS } from "./lineColors";
 
 export function MapLegend() {
@@ -19,6 +20,7 @@ export function MapLegend() {
           </Text>
         </View>
       ))}
+      {networkData.lastVerified === null && <UnverifiedBadge />}
     </View>
   );
 }

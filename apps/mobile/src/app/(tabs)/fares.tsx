@@ -11,17 +11,17 @@ import colors from "@/theme/colors";
 
 export default function FaresScreen() {
   const { t } = useTranslation();
-  const params = useLocalSearchParams<{ line?: string; from?: string }>();
+  const params = useLocalSearchParams<{ line?: string; from?: string; at?: string }>();
   const [state, dispatch] = useReducer(faresReducer, params, initialFaresState);
 
-  // "Fares from here" can open this tab again with a different Station.
+  // "Fares from here" re-opens this tab; `at` changes on every tap, so the origin is applied each time.
   useEffect(() => {
     const next = initialFaresState(params);
     if (params.from && next.from) {
       dispatch({ type: "line", line: next.line });
       dispatch({ type: "from", stationId: next.from });
     }
-  }, [params.line, params.from]);
+  }, [params.line, params.from, params.at]);
 
   const result = quote(state);
 

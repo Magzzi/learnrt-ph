@@ -9,4 +9,6 @@ module.exports = {
   primary: "#eab308", // yellow-500, primary buttons
   muted: "#9ca3af", // gray-400
   warning: "#f59e0b", // amber-500, the Unverified badge
+  text: "#ffffff",
+  label: "#e5e7eb", // gray-200, map labels
 };

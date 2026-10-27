@@ -7,6 +7,11 @@ export interface Transfer {
   walk: { minutes: number | null; metres: number | null; directions: string | null };
 }
 
+export const transferData = {
+  source: "PRD §9 and the LearnRT website landmark page",
+  lastVerified: null as string | null,
+};
+
 const UNKNOWN_WALK = { minutes: null, metres: null, directions: null };
 
 // Named in PRD §9 and in the website's landmark data.

@@ -1,34 +1,26 @@
-import { findNearestStations, getLine, type NearestStation } from "@learnrt/core";
+import { findNearestStations, getLine, networkData, type NearestStation } from "@learnrt/core";
 import * as Location from "expo-location";
 import { router } from "expo-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, Linking, Pressable, ScrollView, Text, View } from "react-native";
 import { LINE_COLORS } from "@/map/lineColors";
+import { currentPosition } from "@/nearest/currentPosition";
 import { formatDistance } from "@/nearest/formatDistance";
+import { openStation } from "@/navigation";
+import { UnverifiedBadge } from "@/components/UnverifiedBadge";
 import colors from "@/theme/colors";
 
-type Status =
+type SearchState =
   | { kind: "idle" }
   | { kind: "finding" }
   | { kind: "denied"; canAskAgain: boolean }
   | { kind: "unavailable" }
   | { kind: "found"; results: NearestStation[] };
 
-/** The phone's position, or null. Falls back to the last known fix, e.g. underground. */
-async function currentPosition() {
-  try {
-    // High accuracy uses GPS, which keeps working in airplane mode; Balanced relies on the network on Android.
-    const fix = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
-    return fix.coords;
-  } catch {
-    return (await Location.getLastKnownPositionAsync().catch(() => null))?.coords ?? null;
-  }
-}
-
 export default function NearestScreen() {
   const { t } = useTranslation();
-  const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const [status, setStatus] = useState<SearchState>({ kind: "idle" });
 
   const find = async () => {
     setStatus({ kind: "finding" });
@@ -87,15 +79,18 @@ export default function NearestScreen() {
 
       {status.kind === "found" && (
         <View className="gap-2" accessibilityLiveRegion="polite">
-          <Text className="text-base font-semibold text-white" accessibilityRole="header">
-            {t("nearest.closest")}
-          </Text>
+          <View className="flex-row items-center justify-between">
+            <Text className="text-base font-semibold text-white" accessibilityRole="header">
+              {t("nearest.closest")}
+            </Text>
+            {networkData.lastVerified === null && <UnverifiedBadge />}
+          </View>
           {status.results.map(({ station, distanceKm }) => {
             const line = getLine(station.lineId)!;
             return (
               <Pressable
                 key={station.id}
-                onPress={() => router.push({ pathname: "/station/[id]", params: { id: station.id } })}
+                onPress={() => openStation(station.id)}
                 accessibilityRole="link"
                 className="flex-row items-center justify-between rounded-xl border border-raised bg-panel p-4"
               >
