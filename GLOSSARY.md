@@ -16,6 +16,14 @@ _Avoid_: Stop, terminal (unless it is a Line's end)
 A walk between two Stations that lets a rider change from one Line to another, such as Doroteo Jose to Recto.
 _Avoid_: Interchange, connection
 
+**Landmark**:
+A well-known place near a Station that helps riders find their way, such as a church, mall or university.
+_Avoid_: Point of interest, POI, attraction
+
+**Unverified**:
+Data that has not yet been checked against an official source, and is labelled so wherever riders see it.
+_Avoid_: Unconfirmed (that describes a Rider Report), estimated
+
 **Line Status**:
 Whether a Line is operational, coming soon, or suspended.
 _Avoid_: Availability, open/closed
