@@ -7,7 +7,7 @@ export const fil: FilipinoStrings = {
   tabs: {
     map: { text: "Mapa", review: "needs review" },
     fares: { text: "Pamasahe", review: "needs review" },
-    nearest: { text: "Pinakamalapit", review: "needs review" },
+    nearest: { text: "Malapit", review: "needs review" },
     learn: { text: "Matuto", review: "needs review" },
   },
   unverified: {
