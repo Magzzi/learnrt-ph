@@ -1,0 +1,3 @@
+# Move fully to mobile; the website is marketing only and admin lives in the app
+
+Riders use only the Android/iOS app, so the rider-facing web pages (explore, trip, route, landmark, stations) are retired. The Next.js site stays only for download links, about the project, a gallery or showreel, and the privacy policy and attribution pages the stores require. Admin tasks (publishing Advisories, moderating reports, editing station data) are role-gated screens inside the app, with the Supabase dashboard as the fallback for bulk edits. The cost is that admin work requires the app or the dashboard rather than a web console.

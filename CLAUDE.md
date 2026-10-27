@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Direction: mobile app (planned)
+
+The project is moving from this website to an Expo (React Native) Android/iOS app. Nothing below has been built yet; the sections after this one describe the current website, which will become a marketing-only site.
+
+- Product spec: `docs/PRD.md`
+- Domain vocabulary: `GLOSSARY.md` (use these terms in code, docs and tickets)
+- Architecture decisions: `docs/adr/`
+
 ## Commands
 
 ```bash
