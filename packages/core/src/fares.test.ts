@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { FARE_TABLES } from "./data/fares";
 import { fareData, getFare, type FareQuery } from "./fares";
-import { getStation } from "./network";
-import { FARE_MATRIX_FILES, readFareMatrix } from "./test-support/fareMatrixFiles";
+import { stations } from "./network";
+import { FARE_MATRIX_FILES, matrixStationId, readFareMatrix } from "./test-support/fareMatrixFiles";
 
 // Expected fares are literals read from the original .xlsx files, using the
 // website's lookup (origin column, destination row).
@@ -16,7 +16,7 @@ describe("fare tables", () => {
     const rows = readFareMatrix(file);
     const names = rows[0]!.slice(1);
 
-    expect(table!.stationIds.map((id) => getStation(id)?.name)).toEqual(names);
+    expect(table!.stationIds).toEqual(names.map((name) => matrixStationId(table!.lineId, name as string, stations)));
     expect(rows.slice(1, names.length + 1).map((row) => row[0])).toEqual(names);
     names.forEach((_, r) =>
       names.forEach((_, c) => {

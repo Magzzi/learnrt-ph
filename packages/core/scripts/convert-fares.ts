@@ -4,7 +4,7 @@ import { writeFileSync } from "node:fs";
 import { STATIONS } from "../src/data/stations.ts";
 import type { FareTableKey } from "../src/fares.ts";
 import type { LineId } from "../src/network.ts";
-import { readFareMatrix, type FareMatrixFile } from "../src/test-support/fareMatrixFiles.ts";
+import { matrixStationId, readFareMatrix, type FareMatrixFile } from "../src/test-support/fareMatrixFiles.ts";
 
 const OUT = new URL("../src/data/fares.ts", import.meta.url);
 
@@ -18,9 +18,9 @@ const TABLES: Record<FareTableKey, { lineId: LineId; file: FareMatrixFile }> = {
 };
 
 function stationId(lineId: LineId, name: string): string {
-  const station = STATIONS.find((s) => s.lineId === lineId && s.name === name);
-  if (!station) throw new Error(`No ${lineId} Station named "${name}"`);
-  return station.id;
+  const id = matrixStationId(lineId, name, STATIONS);
+  if (!id) throw new Error(`No ${lineId} Station named "${name}"`);
+  return id;
 }
 
 const entries = Object.entries(TABLES).map(([key, { lineId, file }]) => {

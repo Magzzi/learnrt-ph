@@ -27,3 +27,26 @@ export function readFareMatrix(file: FareMatrixFile): unknown[][] {
 export function readMatrixStationNames(file: FareMatrixFile): string[] {
   return readFareMatrix(file)[0]!.slice(1) as string[];
 }
+
+// The fare matrices still use older spellings for Stations renamed in docs/station-names-proposal.md.
+const RENAMED_IN_MATRICES: Record<string, string> = {
+  "LRT1:UN Avenue": "lrt1-un-avenue",
+  "LRT1:Monumento": "lrt1-monumento",
+  "LRT2:Cubao": "lrt2-cubao",
+  "LRT2:Marikina": "lrt2-marikina",
+  "MRT3:North Ave": "mrt3-north-ave",
+  "MRT3:Quezon Ave": "mrt3-quezon-ave",
+  "MRT3:GMA-Kamuning": "mrt3-gma-kamuning",
+  "MRT3:Santolan": "mrt3-santolan",
+  "MRT3:Shaw Blvd": "mrt3-shaw-blvd",
+  "MRT3:Taft Ave": "mrt3-taft-ave",
+};
+
+/** The Station id a fare matrix means by `name`, or undefined if it names no Station on that Line. */
+export function matrixStationId(
+  lineId: string,
+  name: string,
+  stations: readonly { id: string; name: string; lineId: string }[],
+): string | undefined {
+  return RENAMED_IN_MATRICES[`${lineId}:${name}`] ?? stations.find((s) => s.lineId === lineId && s.name === name)?.id;
+}
