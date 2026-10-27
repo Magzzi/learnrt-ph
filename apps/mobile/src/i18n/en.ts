@@ -63,8 +63,35 @@ export const en = {
     closest: "Closest Stations",
     away: "{{distance}} away",
   },
-  placeholder: {
-    counts: "{{lines}} Lines · {{stations}} Stations",
+  learn: {
+    lines: "Lines",
+    areas: "Areas: {{areas}}",
+    showStations: "Show {{count}} Stations",
+    hideStations: "Hide Stations",
+    comingSoon: "Coming Soon",
+    comingSoonIntro: "Lines LearnRT doesn't cover yet.",
+    noStationList: "No Station list yet",
+    tipsTitle: "First time riding?",
+    about: "About LearnRT",
+  },
+  tips: {
+    buy: "Buy a Single Journey Ticket at the station, or use a Stored Value Ticket if you ride often.",
+    security: "Expect a bag check at the station entrance.",
+    gates: "Tap your ticket at the gate to get in, and again to get out. The exit gate keeps a Single Journey Ticket.",
+    direction: "Before going up to the platform, check which direction you need: some Stations have a separate entrance for each direction.",
+    platform: "Wait behind the line at the platform edge, and let passengers get off before you board.",
+    transfer: "To change Lines, get off at a Transfer Station and walk to the other Line's Station. The Map shows where Lines meet.",
+  },
+  about: {
+    title: "About LearnRT",
+    unofficialTitle: "Unofficial app",
+    unofficial: "LearnRT is an unofficial app. It is not affiliated with LRMC, LRTA or DOTr.",
+    dataTitle: "Map data",
+    osm: "Station positions © OpenStreetMap contributors, available under the Open Database License (ODbL).",
+    osmLink: "openstreetmap.org/copyright",
+    unverifiedTitle: "What “Unverified” means",
+    unverified: "This information comes from LearnRT's own records and has not yet been checked against an official source. Fares, Transfers, landmarks and Station details may be out of date.",
+    language: "Language",
   },
 };
 

@@ -15,3 +15,4 @@ export { findNearestStations, type NearestStation, type NearestStationOptions } 
 export { fareData, getFare, type FareQuery, type FareTable, type TicketType } from "./fares";
 export { neighbours, transfers, transfersFrom, type Transfer } from "./graph";
 export { landmarkData, landmarksAt } from "./landmarks";
+export { comingSoonLines, learnData, lineAreas, type ComingSoonLine } from "./learn";
