@@ -55,6 +55,18 @@ export const fil: FilipinoStrings = {
     oneLine: { text: "Ang pamasahe ay para sa isang linya lang. Ang biyaheng tatawid ng linya ay kasama sa Guided Ride.", review: "needs review" },
     close: { text: "Isara", review: "needs review" },
   },
+  nearest: {
+    explain: { text: "Ginagamit ng LearnRT ang iyong lokasyon nang isang beses, dito lang sa telepono, para mahanap ang pinakamalapit na istasyon. Hindi ito ipinapadala kahit saan.", review: "needs review" },
+    find: { text: "Hanapin ang pinakamalapit na istasyon", review: "needs review" },
+    finding: { text: "Hinahanap ang iyong lokasyon…", review: "needs review" },
+    denied: { text: "Naka-off ang lokasyon para sa LearnRT. I-on ito sa Settings, o maghanap ng istasyon sa mapa.", review: "needs review" },
+    unavailable: { text: "Hindi makuha ang iyong lokasyon. Subukang muli, o maghanap ng istasyon sa mapa.", review: "needs review" },
+    openSettings: { text: "Buksan ang Settings", review: "needs review" },
+    tryAgain: { text: "Subukang muli", review: "needs review" },
+    openMap: { text: "Buksan ang mapa", review: "needs review" },
+    closest: { text: "Pinakamalapit na mga istasyon", review: "needs review" },
+    away: { text: "{{distance}} ang layo", review: "needs review" },
+  },
   placeholder: {
     counts: { text: "{{lines}} linya · {{stations}} istasyon", review: "needs review" },
   },

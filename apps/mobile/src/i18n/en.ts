@@ -51,6 +51,18 @@ export const en = {
     oneLine: "Fares are for a ride on one Line. Trips across Lines come with Guided Ride.",
     close: "Close",
   },
+  nearest: {
+    explain: "LearnRT uses your location once, on this phone, to find the closest Stations. It is not sent anywhere.",
+    find: "Find nearest Stations",
+    finding: "Finding your location…",
+    denied: "Location is off for LearnRT. Turn it on in Settings, or find a Station on the map.",
+    unavailable: "Couldn't get your location. Try again, or find a Station on the map.",
+    openSettings: "Open Settings",
+    tryAgain: "Try again",
+    openMap: "Open map",
+    closest: "Closest Stations",
+    away: "{{distance}} away",
+  },
   placeholder: {
     counts: "{{lines}} Lines · {{stations}} Stations",
   },
