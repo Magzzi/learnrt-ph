@@ -43,7 +43,14 @@ export function MapLegend() {
           {line.status === "coming-soon" && <Chip label={t("map.comingSoon")} maxFontSizeMultiplier={1} />}
         </View>
       ))}
-      {networkData.lastVerified === null && <UnverifiedBadge />}
+      {networkData.lastVerified === null && (
+        <View className="flex-row items-center gap-2">
+          <UnverifiedBadge />
+          <Text className="text-sm text-ink" maxFontSizeMultiplier={1}>
+            {t("unverified.label")}
+          </Text>
+        </View>
+      )}
     </Pressable>
   );
 }
