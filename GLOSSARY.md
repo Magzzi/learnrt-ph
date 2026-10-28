@@ -25,7 +25,7 @@ A well-known place near a Station that helps riders find their way, such as a ch
 _Avoid_: Point of interest, POI, attraction
 
 **Unverified**:
-Data that has not yet been checked against an official source, and is labelled so wherever riders see it.
+Data that has not yet been checked against an official source, and is marked with a yellow warning icon wherever riders see it (tapping the icon says what it means).
 _Avoid_: Unconfirmed (that describes a Rider Report), estimated
 
 **Line Status**:

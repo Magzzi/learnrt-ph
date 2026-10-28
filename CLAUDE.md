@@ -21,7 +21,7 @@ Platform-free shared logic, tested with Vitest (`pnpm test`). No React, Next, No
 - `landmarks.ts`, `learn.ts`: Landmarks and Learn content moved from the website
 - `entrances.ts`: Station Entrances from OpenStreetMap, linked only through OSM stop areas (never by distance); `pnpm --filter @learnrt/core fetch-osm-entrances` refreshes the extract and regenerates `src/data/entrances.ts`
 - Station positions come from OpenStreetMap: `pnpm --filter @learnrt/core fetch-osm-stations` refreshes `data-sources/osm-stations.json`, then `apply-osm-coordinates` writes them into `src/data/stations.ts`
-- Every dataset exposes `lastVerified`; while it is `null` the app shows an Unverified label
+- Every dataset exposes `lastVerified`; while it is `null` the app shows the yellow warning icon (`UnverifiedBadge`; tap for the explanation)
 - `src/test-support/` re-reads the website's `.xlsx` files and pages to prove the migrated data is unchanged; when M4b deletes those pages, those tests and their sources must move together
 
 ### `apps/mobile`

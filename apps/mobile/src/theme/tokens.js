@@ -3,7 +3,7 @@
 // Checked by tokens.test.ts against WCAG AA and for colour-blind riders.
 // Line colours are LearnRT's own, not the operators' brand colours (PRD §11, data-todo D22).
 
-/** @typedef {{ page: string, card: string, edge: string, sunken: string, ink: string, muted: string, accent: string, onAccent: string, accentInk: string, accentSoft: string, warn: string, warnSoft: string, mapBg: string, mapLabel: string, lines: { LRT1: string, LRT2: string, MRT3: string, MRT7: string } }} Theme */
+/** @typedef {{ page: string, card: string, edge: string, sunken: string, ink: string, muted: string, accent: string, onAccent: string, accentInk: string, accentSoft: string, warn: string, warnSoft: string, caution: string, onCaution: string, mapBg: string, mapLabel: string, lines: { LRT1: string, LRT2: string, MRT3: string, MRT7: string } }} Theme */
 
 /** @type {{ light: Theme, dark: Theme }} */
 const THEMES = {
@@ -20,6 +20,8 @@ const THEMES = {
     accentSoft: "#FDEBE3",
     warn: "#92400E",
     warnSoft: "#FEF3C7",
+    caution: "#FCD34D", // the yellow warning icon
+    onCaution: "#422006",
     mapBg: "#F5F0EA",
     mapLabel: "#44403C",
     lines: { LRT1: "#059669", LRT2: "#A855F7", MRT3: "#1E3A8A", MRT7: "#4A2C17" },
@@ -37,6 +39,8 @@ const THEMES = {
     accentSoft: "#3A221A",
     warn: "#FCD34D",
     warnSoft: "#3B2A0A",
+    caution: "#FCD34D",
+    onCaution: "#1C1917",
     mapBg: "#1C1714",
     mapLabel: "#D6D3D1",
     lines: { LRT1: "#86EFAC", LRT2: "#C084FC", MRT3: "#2563EB", MRT7: "#C4956A" },

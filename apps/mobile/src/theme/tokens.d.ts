@@ -11,6 +11,8 @@ interface Theme {
   accentSoft: string;
   warn: string;
   warnSoft: string;
+  caution: string;
+  onCaution: string;
   mapBg: string;
   mapLabel: string;
   lines: { LRT1: string; LRT2: string; MRT3: string; MRT7: string };

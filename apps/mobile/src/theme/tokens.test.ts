@@ -24,6 +24,7 @@ const textPairs = [
   ["muted", "accentSoft"], // welcome card body
   ["muted", "mapBg"], // labels of Stations on Lines that are not running
   ["warn", "card"],
+  ["onCaution", "caution"], // the warning icon on its yellow circle
 ] as const;
 
 const graphicPairs = [

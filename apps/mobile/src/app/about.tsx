@@ -30,7 +30,7 @@ export default function AboutScreen() {
           <Text className="text-accentInk underline">{t("about.osmLink")}</Text>
         </Pressable>
       </Section>
-      <Section title={t("about.unverifiedTitle")}>
+      <Section title={t("about.unverifiedTitle")} unverified>
         <Text className="text-ink">{t("about.unverified")}</Text>
       </Section>
       {/* SIL OFL 1.1: the bundled font ships with its copyright notice and licence. */}
