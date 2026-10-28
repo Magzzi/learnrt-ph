@@ -79,3 +79,11 @@ The mockups were drafted quickly and contain mistakes; the app keeps its real da
 2. A test that every colour role pair used for text meets WCAG AA in both themes.
 3. On the emulator, light and dark: every screen screenshotted; 360 dp at 1.3× font in English and Filipino; the M2 Guided Ride playback still passes (one locked-screen run across a Transfer).
 4. A new preview PNG for the owner, light and dark side by side.
+
+## As built (differences found in review, 2026-10-28)
+- Dark Line shades differ from the old dark colours for LRT-1 and MRT-3 (and light LRT-2 equals the old shade): the colour-blind distinction test required it. Hues are unchanged.
+- The Line leg badge is a round train icon; "Start Guided Ride" uses the `navigate` arrow icon.
+- Chips are `UnverifiedBadge` and plain legend text for "Coming Soon"; there is no generic `Chip` component yet.
+- `WelcomeArt` colours are artwork and exempt from colour roles.
+- At enlarged text (font scale above 1.15) the Map tab's welcome card shrinks to its title and the tip bar is hidden, so the map keeps room; tab labels keep a fixed size because the bar has a fixed height.
+- Two small changes beyond the spec: a "you are here" dot for "show me", and the Nearest tab icon.

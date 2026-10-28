@@ -20,10 +20,15 @@ Run on 2026-10-28 by Claude on the local Android emulator (AVD `learnrt_api36`, 
 | 14 | Airplane mode, app restarted: Guided Ride screen renders with Fraunces headings and Filipino text. Fraunces and the illustration are bundled (font in the export's assets, illustration is inline SVG); Metro still served the JavaScript over `adb reverse`, so a fully standalone offline start is only proven for assets, not for the dev bundle | Pass, with that limit |
 | 15 | Locked-screen Guided Ride across a Transfer, Filipino (Pedro Gil → Magallanes, `gps-playback.ts` at 25 s per hop, screen asleep throughout). Alerts seen in the notification list, in order: "Bumaba sa susunod na istasyon / Susunod: EDSA", "Bumaba na: EDSA", "Susunod: Magallanes", "Bumaba na: Magallanes"; the ongoing notification counted down from "6 hinto pa bago Magallanes" to "1 hinto". Same behaviour as M2 step 6; only the restyle changed | Pass |
 
+| 16 | Preview PNG for the owner, light and dark side by side (Map and Ride planner, 2 × 2), sent with the milestone report | Done |
+
+Dark theme was screenshotted for the Map and Ride planner only; the other screens use the same roles and components (checked by the contrast test and the raw-colour grep), but were not screenshotted in dark. 360 dp at 1.3× was checked in light only.
+
 ## Found and fixed
 
 - At 1.3× font the Map tab had no room for the map (welcome card took half the screen), the tab labels were clipped, and in Filipino the map card title wrapped letter by letter beside the search button. Now: the welcome card and tip bar shrink to a title at enlarged text, the card header stacks, and tab labels keep a fixed size.
 - `Card` ignored overriding `bg-` and `gap-` classes (NativeWind does not resolve clashes), so the highlighted ride card stayed white; `Card` now lets a passed class replace its default.
+- Review: the contrast test lacked three pairs the UI uses (`muted` on `accentSoft` and on `mapBg`, `warn` on `card`); added. A font load failure left a blank screen; it now carries on with the system font. The Line leg icon was a rounded square; now round. `app.json` background is tied to the theme by a test.
 - Lint: map controls were a render-time helper reading a ref; now a component.
 
 ## Not verified

@@ -9,7 +9,7 @@ export function LegIcon({ lineId }: { lineId: LineId }) {
   const color = theme.lines[lineId];
   return (
     <View className="items-center" style={{ width: 36 }}>
-      <View className="h-9 w-9 items-center justify-center rounded-xl" style={{ backgroundColor: color }}>
+      <View className="h-9 w-9 items-center justify-center rounded-full" style={{ backgroundColor: color }}>
         <Ionicons name="train" size={20} color={theme.card} />
       </View>
       <View className="w-1.5 flex-1 rounded-b-full" style={{ backgroundColor: color, minHeight: 10 }} />

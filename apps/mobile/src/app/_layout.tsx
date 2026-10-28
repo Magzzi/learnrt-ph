@@ -23,8 +23,9 @@ export default function RootLayout() {
 
   // The heading font is bundled; until it is ready the screen stays the page colour, so no other
   // font flashes up first.
-  const [fontsLoaded] = useFonts({ Fraunces_700Bold });
-  if (!fontsLoaded) return <View style={{ flex: 1, backgroundColor: theme.page }} />;
+  // If the font fails to load, carry on with the system serif rather than a blank screen.
+  const [fontsLoaded, fontError] = useFonts({ Fraunces_700Bold });
+  if (!fontsLoaded && !fontError) return <View style={{ flex: 1, backgroundColor: theme.page }} />;
 
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: theme.page }}>

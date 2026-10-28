@@ -3,6 +3,7 @@ import { useThemeName } from "@/theme";
 
 // An original flat illustration for the Map tab's welcome card (UI1): a sun, a city skyline, hills and
 // an elevated train on a viaduct. Drawn for LearnRT; decorative, so it is hidden from screen readers.
+// Its colours are the one exemption from "colour roles only": they are artwork, not text or controls.
 const PALETTES = {
   light: { sun: "#F6A98A", far: "#C9DCE6", near: "#9FBFCF", hill: "#A9CDA0", hillDark: "#7FB07A", deck: "#56707D", pier: "#6D8794", train: "#FFFFFF", trainLine: "#2E3A40", stripe: "#E4572E", window: "#5D7884" },
   dark: { sun: "#B8492A", far: "#2E3B44", near: "#3C4D57", hill: "#2F4630", hillDark: "#263A27", deck: "#5B6E77", pier: "#4B5C64", train: "#E8E2DC", trainLine: "#1C1917", stripe: "#E4572E", window: "#41545E" },

@@ -21,6 +21,9 @@ const textPairs = [
   ["onAccent", "accent"],
   ["warn", "warnSoft"],
   ["mapLabel", "mapBg"],
+  ["muted", "accentSoft"], // welcome card body
+  ["muted", "mapBg"], // labels of Stations on Lines that are not running
+  ["warn", "card"],
 ] as const;
 
 const graphicPairs = [
@@ -62,5 +65,15 @@ describe("contrastRatio", () => {
     expect(contrastRatio("#FFFFFF", "#FFFFFF")).toBeCloseTo(1, 5);
     // #767676 on white is the classic 4.54:1 grey.
     expect(contrastRatio("#767676", "#FFFFFF")).toBeCloseTo(4.54, 2);
+  });
+});
+
+describe("app.json", () => {
+  it("uses the light page colour as its background (static config cannot read the theme)", async () => {
+    const { readFileSync } = await import("node:fs");
+    const config = readFileSync(new URL("../../app.json", import.meta.url), "utf8");
+    const backgrounds = [...config.matchAll(/"backgroundColor":\s*"(#[0-9A-Fa-f]{6})"/g)].map((m) => m[1]!.toUpperCase());
+    expect(backgrounds.length).toBeGreaterThan(0);
+    for (const colour of backgrounds) expect(colour).toBe(THEMES.light.page.toUpperCase());
   });
 });
