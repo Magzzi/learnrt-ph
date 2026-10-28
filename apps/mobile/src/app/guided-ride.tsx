@@ -1,14 +1,30 @@
 import { advanceStep, getStation, imAt, rideStations, rideStatus, rideSteps } from "@learnrt/core";
 import { router, Stack } from "expo-router";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { AppState, Linking, Pressable, ScrollView, Text, View } from "react-native";
 import { StationPicker } from "@/components/StationPicker";
 import { finishRide, updateRide, useActiveRide } from "@/ride/activeRide";
+import { alertsEnabled, enableAlerts, geofencingAvailable, turnOnLocationAccuracy } from "@/ride/background";
 import { stepText } from "@/ride/stepText";
 
 export default function GuidedRideScreen() {
   const { t } = useTranslation();
   const ride = useActiveRide();
+  // null: not checked yet; "ask": never asked on this screen; "accuracy": permissions given, but
+  // Location Accuracy is off so the phone will not watch the Stations.
+  const [alerts, setAlerts] = useState<"ask" | "on" | "off" | "accuracy" | null>(null);
+
+  useEffect(() => {
+    const check = async () => {
+      const on = await alertsEnabled();
+      const accurate = await geofencingAvailable();
+      setAlerts((prev) => (on ? (accurate ? "on" : "accuracy") : prev === "off" ? "off" : "ask"));
+    };
+    void check();
+    const sub = AppState.addEventListener("change", (s) => s === "active" && void check());
+    return () => sub.remove();
+  }, []);
 
   const end = async () => {
     await finishRide();
@@ -87,6 +103,38 @@ export default function GuidedRideScreen() {
           </Text>
         );
       })}
+
+      {!status.completed && alerts === "on" && <Text className="text-sm text-accent">{t("alerts.on")}</Text>}
+      {!status.completed && alerts === "accuracy" && (
+        <View className="gap-2 rounded-xl border border-warning bg-panel p-4">
+          <Text className="text-base font-semibold text-white">{t("alerts.explainTitle")}</Text>
+          <Text className="text-muted">{t("alerts.accuracyOff")}</Text>
+          <Pressable
+            onPress={async () => setAlerts((await turnOnLocationAccuracy(ride)) ? "on" : "accuracy")}
+            accessibilityRole="button"
+            className="items-center rounded-xl border border-accent p-3"
+          >
+            <Text className="font-semibold text-accent">{t("alerts.turnOnAccuracy")}</Text>
+          </Pressable>
+        </View>
+      )}
+      {!status.completed && (alerts === "ask" || alerts === "off") && (
+        <View className="gap-2 rounded-xl border border-raised bg-panel p-4">
+          <Text className="text-base font-semibold text-white">{t("alerts.explainTitle")}</Text>
+          <Text className="text-muted">{t(alerts === "ask" ? "alerts.explain" : "alerts.off")}</Text>
+          <Pressable
+            onPress={async () => {
+              if (alerts === "off") return void Linking.openSettings();
+              if (!(await enableAlerts(ride))) return setAlerts("off");
+              setAlerts((await geofencingAvailable()) ? "on" : "accuracy");
+            }}
+            accessibilityRole="button"
+            className="items-center rounded-xl border border-accent p-3"
+          >
+            <Text className="font-semibold text-accent">{t(alerts === "ask" ? "alerts.enable" : "alerts.openSettings")}</Text>
+          </Pressable>
+        </View>
+      )}
 
       {!status.completed && (
         <>

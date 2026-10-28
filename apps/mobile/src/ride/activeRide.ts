@@ -29,6 +29,8 @@ export async function loadRide(): Promise<RideState | null> {
   }
   current = state && !state.ended ? state : null;
   listeners.forEach((l) => l());
+  // Re-registers geofences and the ongoing notification, which the system may have dropped.
+  if (current) alertHandlers.forEach((h) => h([], current!));
   return current;
 }
 
