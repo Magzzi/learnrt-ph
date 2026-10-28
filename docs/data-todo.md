@@ -24,5 +24,6 @@ Data the app uses that has not been verified against a source the owner has appr
 | D18 | Status of Lines LearnRT does not cover | website `explore` page: PNR "Limited Operations", NSCR "Under Construction"; Metro Manila Subway absent | The app states no status for them. The Learn tab lists them under "Not in LearnRT yet" (owner, 2026-10-28): PNR runs today, so "coming soon" would be wrong for it | Official status per Line before showing one |
 | D19 | First-timer tip: the exit gate keeps a Single Journey Ticket | removed from the app (owner, 2026-10-28) | Not checked against an operator source | Confirm per Line with LRMC, LRTA and MRT-3, then restore the sentence in the gates tip |
 | D20 | First-timer tip: some Stations have a separate entrance for each direction | removed from the app (owner, 2026-10-28) | Not checked against an operator source; which Stations is unknown (see D15) | Confirm with the operators, then restore as a tip |
+| D21 | Direction names | Guided Ride says "towards <last Station>" from core's Line order (M2) | The operators' own platform and direction wording (e.g. "Northbound", "To Baclaran") is unknown | Operator signage wording per Line |
 
 D9–D13: not blocking M1 (owner, 2026-10-28).
