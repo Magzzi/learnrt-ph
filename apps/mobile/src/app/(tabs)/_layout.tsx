@@ -4,7 +4,7 @@ import { router, Tabs, useRootNavigationState } from "expo-router";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import type { ComponentProps } from "react";
-import type { ColorValue } from "react-native";
+import { View, type ColorValue } from "react-native";
 import { ScreenHeader } from "@/components/ScreenHeader";
 import { loadRide } from "@/ride/activeRide";
 import { useTheme } from "@/theme";
@@ -12,9 +12,16 @@ import { useTheme } from "@/theme";
 type IconProps = ComponentProps<typeof Ionicons>;
 
 const icon = (name: IconProps["name"]) =>
-  function TabIcon({ color, size }: { color: ColorValue; size: number }) {
+  function TabIcon({ color, size, focused }: { color: ColorValue; size: number; focused: boolean }) {
     // Tab tints are plain colour strings; anything else falls back to the icon's default.
-    return <Ionicons name={name} color={typeof color === "string" ? color : undefined} size={size} />;
+    const tint = typeof color === "string" ? color : undefined;
+    return (
+      <View className="items-center">
+        {/* The active tab gets a short bar along the top edge of the tab bar, as in the design. */}
+        <View className="absolute -top-2.5 h-1 w-9 rounded-full" style={{ backgroundColor: focused ? tint : "transparent" }} />
+        <Ionicons name={name} color={tint} size={size + 2} />
+      </View>
+    );
   };
 
 export default function TabsLayout() {
@@ -33,7 +40,8 @@ export default function TabsLayout() {
       screenOptions={{
         headerStyle: { backgroundColor: theme.page },
         headerTintColor: theme.ink,
-        tabBarStyle: { backgroundColor: theme.card, borderTopColor: theme.edge },
+        tabBarStyle: { backgroundColor: theme.card, borderTopColor: theme.edge, paddingTop: 6 },
+        tabBarLabelStyle: { fontSize: 13 },
         tabBarActiveTintColor: theme.accent,
         tabBarInactiveTintColor: theme.muted,
         sceneStyle: { backgroundColor: theme.page },
@@ -71,7 +79,7 @@ export default function TabsLayout() {
         options={{
           title: t("tabs.nearest"),
           tabBarAccessibilityLabel: t("tabs.nearest"),
-          tabBarIcon: icon("locate-outline"),
+          tabBarIcon: icon("location-outline"),
           header: () => <ScreenHeader title={t("headers.nearestTitle")} subtitle={t("headers.nearestSubtitle")} />,
         }}
       />
