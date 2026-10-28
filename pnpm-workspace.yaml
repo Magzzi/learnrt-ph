@@ -4,6 +4,12 @@ packages:
 allowBuilds:
   '@tailwindcss/oxide': true
   sharp: true
+# pnpm normally refuses package versions published less than 24 hours ago
+# (minimumReleaseAge, default 1440 minutes). `npx expo install` (M1) needed these
+# Expo SDK 58 releases, published by the expo/expo GitHub Actions workflow on
+# 2026-10-27 (last one at 16:12 UTC). Exact versions only, no wildcards.
+# Remove this whole list on or after 2026-10-29, once the 24 hours have passed
+# (docs/maintenance-todo.md, M1).
 minimumReleaseAgeExclude:
   - "@expo/cli@58.1.16"
   - "@expo/fingerprint@0.21.7"
