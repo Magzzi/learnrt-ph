@@ -15,7 +15,7 @@ export function MapLegend() {
             className="h-1.5 w-8 rounded-full"
             style={{ backgroundColor: theme.lines[line.id], opacity: line.status === "operational" ? 1 : 0.6 }}
           />
-          <Text className="text-sm text-ink">
+          <Text className="text-sm text-ink" maxFontSizeMultiplier={1}>
             {line.name}
             {line.status === "coming-soon" ? ` · ${t("map.comingSoon")}` : ""}
           </Text>

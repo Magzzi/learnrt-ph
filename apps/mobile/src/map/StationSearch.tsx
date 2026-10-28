@@ -24,7 +24,7 @@ export function StationSearch({ onSelect }: { onSelect: (stationId: string) => v
       <Pressable
         onPress={() => setOpen(true)}
         accessibilityRole="search"
-        className="flex-row items-center gap-2 rounded-2xl border border-edge bg-page px-3 py-2"
+        className="self-start flex-row items-center gap-2 rounded-2xl border border-edge bg-page px-3 py-2"
       >
         <Ionicons name="search" size={18} color={theme.ink} />
         <Text className="text-base text-ink">{t("map.findStation")}</Text>

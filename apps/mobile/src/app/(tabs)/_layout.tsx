@@ -42,6 +42,8 @@ export default function TabsLayout() {
         headerTintColor: theme.ink,
         tabBarStyle: { backgroundColor: theme.card, borderTopColor: theme.edge, paddingTop: 6 },
         tabBarLabelStyle: { fontSize: 13 },
+        // The bar has a fixed height, so its labels stay put when the phone's text is enlarged.
+        tabBarAllowFontScaling: false,
         tabBarActiveTintColor: theme.accent,
         tabBarInactiveTintColor: theme.muted,
         sceneStyle: { backgroundColor: theme.page },

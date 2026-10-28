@@ -31,7 +31,7 @@ export function ToggleRow({
         value={value}
         onValueChange={onChange}
         importantForAccessibility="no-hide-descendants"
-        trackColor={{ true: theme.accent, false: theme.sunken }}
+        trackColor={{ true: theme.accent, false: theme.muted }}
         thumbColor={theme.card}
       />
     </Pressable>

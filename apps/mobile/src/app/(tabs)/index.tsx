@@ -2,7 +2,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Location from "expo-location";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, Pressable, Text, View } from "react-native";
+import { Alert, Pressable, Text, useWindowDimensions, View } from "react-native";
 import { LineMap, type LineMapHandle } from "@/map/LineMap";
 import { MapLegend } from "@/map/MapLegend";
 import { StationSearch } from "@/map/StationSearch";
@@ -36,22 +36,27 @@ export default function MapScreen() {
     ]);
   };
 
+  // With enlarged text the welcome card would leave the map no room, so it shrinks to its title.
+  const compact = useWindowDimensions().fontScale > 1.15;
+
   return (
     <View className="flex-1 gap-3 bg-page px-4 pb-3">
       <View className="flex-row overflow-hidden rounded-2xl bg-accentSoft">
         <View className="flex-1 gap-1 p-4">
           <Text className="text-xs font-bold uppercase tracking-widest text-accentInk">{t("map.eyebrow")}</Text>
           <Text className="font-serif text-2xl text-ink">{t("map.welcomeTitle")}</Text>
-          <Text className="text-sm text-muted">{t("map.welcomeBody")}</Text>
+          {!compact && <Text className="text-sm text-muted">{t("map.welcomeBody")}</Text>}
         </View>
-        <View className="justify-end">
-          <WelcomeArt width={150} height={90} />
-        </View>
+        {!compact && (
+          <View className="justify-end">
+            <WelcomeArt width={150} height={90} />
+          </View>
+        )}
       </View>
 
       <View className="flex-1 overflow-hidden rounded-2xl border border-edge bg-card">
-        <View className="flex-row items-center gap-3 p-3">
-          <View className="flex-1">
+        <View className={compact ? "gap-2 p-3" : "flex-row items-center gap-3 p-3"}>
+          <View className={compact ? undefined : "flex-1"}>
             <Text className="font-serif text-xl text-ink" accessibilityRole="header">
               {t("map.cardTitle")}
             </Text>
@@ -70,10 +75,12 @@ export default function MapScreen() {
         </View>
       </View>
 
-      <View className="flex-row items-center gap-3 rounded-2xl border border-edge bg-card px-4 py-3">
-        <Ionicons name="location" size={22} color={theme.accent} />
-        <Text className="flex-1 text-sm text-ink">{t("map.tip")}</Text>
-      </View>
+      {!compact && (
+        <View className="flex-row items-center gap-3 rounded-2xl border border-edge bg-card px-4 py-3">
+          <Ionicons name="location" size={22} color={theme.accent} />
+          <Text className="flex-1 text-sm text-ink">{t("map.tip")}</Text>
+        </View>
+      )}
     </View>
   );
 }
