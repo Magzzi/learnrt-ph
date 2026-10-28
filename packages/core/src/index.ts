@@ -34,3 +34,4 @@ export {
   type RideStatus,
   type RideUpdate,
 } from "./rideProgress";
+export { entranceData, entrancesAt, type Entrance } from "./entrances";

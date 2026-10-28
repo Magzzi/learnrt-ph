@@ -14,7 +14,8 @@
     "typecheck": "tsc --noEmit",
     "convert-fares": "node scripts/convert-fares.ts",
     "fetch-osm-stations": "node scripts/fetch-osm-stations.ts",
-    "apply-osm-coordinates": "node scripts/apply-osm-coordinates.ts"
+    "apply-osm-coordinates": "node scripts/apply-osm-coordinates.ts",
+    "fetch-osm-entrances": "node scripts/fetch-osm-entrances.ts"
   },
   "devDependencies": {
     "@types/node": "^20.19.9",
