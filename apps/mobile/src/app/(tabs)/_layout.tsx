@@ -1,6 +1,6 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { rideStatus } from "@learnrt/core";
-import { router, Tabs } from "expo-router";
+import { router, Tabs, useRootNavigationState } from "expo-router";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import type { ComponentProps } from "react";
@@ -20,10 +20,12 @@ const icon =
 export default function TabsLayout() {
   const { t } = useTranslation();
 
-  // A ride in progress comes back on launch. This runs inside the navigator, so navigating is safe.
+  // A ride in progress comes back on launch, once the root navigator is ready to navigate.
+  const navigationReady = Boolean(useRootNavigationState()?.key);
   useEffect(() => {
+    if (!navigationReady) return;
     void loadRide().then((ride) => ride && !rideStatus(ride).completed && router.push("/guided-ride"));
-  }, []);
+  }, [navigationReady]);
 
   return (
     <Tabs

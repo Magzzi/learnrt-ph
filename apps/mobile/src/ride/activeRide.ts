@@ -9,7 +9,19 @@ const STORAGE_KEY = "learnrt.activeRide";
 
 let current: RideState | null = null;
 const listeners = new Set<() => void>();
-const alertHandlers = new Set<(alerts: RideAlert[], state: RideState) => void>();
+type AlertHandler = (alerts: RideAlert[], state: RideState) => void | Promise<void>;
+const alertHandlers = new Set<AlertHandler>();
+
+// Changes run one at a time: geofence events can arrive close together, and each must see the
+// previous one's result. Callers (notably the background task) wait for the handlers to finish, so
+// the system does not freeze the app halfway through posting a notification.
+let queue: Promise<unknown> = Promise.resolve();
+function serially<T>(work: () => Promise<T>): Promise<T> {
+  const next = queue.then(work, work);
+  queue = next.catch(() => {});
+  return next;
+}
+const notify = (alerts: RideAlert[], state: RideState) => Promise.all([...alertHandlers].map((h) => h(alerts, state)));
 
 async function save(state: RideState | null) {
   current = state;
@@ -18,8 +30,19 @@ async function save(state: RideState | null) {
   else await AsyncStorage.removeItem(STORAGE_KEY).catch(() => {});
 }
 
-/** Reads the saved ride, e.g. at launch or when the app comes back to the foreground. */
-export async function loadRide(): Promise<RideState | null> {
+/**
+ * Reads the saved ride, e.g. at launch or when the app comes back to the foreground, and re-registers
+ * geofences and the ongoing notification, which the system may have dropped.
+ */
+export function loadRide(): Promise<RideState | null> {
+  return serially(async () => {
+    const state = await readSaved();
+    if (state) await notify([], state);
+    return state;
+  });
+}
+
+async function readSaved(): Promise<RideState | null> {
   const saved = await AsyncStorage.getItem(STORAGE_KEY).catch(() => null);
   let state: RideState | null = null;
   try {
@@ -29,8 +52,6 @@ export async function loadRide(): Promise<RideState | null> {
   }
   current = state && !state.ended ? state : null;
   listeners.forEach((l) => l());
-  // Re-registers geofences and the ongoing notification, which the system may have dropped.
-  if (current) alertHandlers.forEach((h) => h([], current!));
   return current;
 }
 
@@ -42,7 +63,7 @@ export function useActiveRide(): RideState | null {
 }
 
 /** Lets the notification layer hear about alerts that become due. */
-export function onRideAlerts(handler: (alerts: RideAlert[], state: RideState) => void) {
+export function onRideAlerts(handler: AlertHandler) {
   alertHandlers.add(handler);
   return () => alertHandlers.delete(handler);
 }
@@ -50,21 +71,29 @@ export function onRideAlerts(handler: (alerts: RideAlert[], state: RideState) =>
 export async function beginRide(route: Route, ticket: TicketType, discounted: boolean) {
   const state = startRide(route, ticket, discounted);
   await save(state);
-  alertHandlers.forEach((h) => h([], state));
   router.push("/guided-ride");
+  await serially(() => notify([], state));
 }
 
-/** Applies a change to the ride in progress: a step done, "I'm at ___", or a geofence arrival. */
-export async function updateRide(change: (state: RideState) => RideUpdate | RideState) {
-  if (!current) return;
-  const result = change(current);
-  const update = "state" in result ? result : { state: result, alerts: [] };
-  await save(update.state);
-  alertHandlers.forEach((h) => h(update.alerts, update.state));
+/**
+ * Applies a change to the ride in progress: a step done, "I'm at ___", or a geofence arrival.
+ * `fromSaved` reads the saved ride first, for the background task, where nothing is in memory.
+ */
+export function updateRide(change: (state: RideState) => RideUpdate | RideState, { fromSaved = false } = {}) {
+  return serially(async () => {
+    if (fromSaved) await readSaved();
+    if (!current) return;
+    const result = change(current);
+    const update = "state" in result ? result : { state: result, alerts: [] };
+    await save(update.state);
+    await notify(update.alerts, update.state);
+  });
 }
 
-export async function finishRide() {
-  const last = current;
-  await save(null);
-  if (last) alertHandlers.forEach((h) => h([], { ...last, ended: true }));
+export function finishRide() {
+  return serially(async () => {
+    const last = current;
+    await save(null);
+    if (last) await notify([], { ...last, ended: true });
+  });
 }

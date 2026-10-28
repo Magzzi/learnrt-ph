@@ -4,7 +4,7 @@ import * as Notifications from "expo-notifications";
 import * as TaskManager from "expo-task-manager";
 import { Platform } from "react-native";
 import { i18n } from "@/i18n";
-import { loadRide, onRideAlerts, updateRide } from "./activeRide";
+import { onRideAlerts, updateRide } from "./activeRide";
 import { alertText, ongoingText } from "./alertText";
 
 const GEOFENCE_TASK = "learnrt-guided-ride-geofence";
@@ -26,8 +26,7 @@ TaskManager.defineTask<{ eventType: Location.GeofencingEventType; region: Locati
     if (error || data.eventType !== Location.GeofencingEventType.Enter || !data.region.identifier) return;
     const stationId = data.region.identifier;
     // Running in the background, the saved ride is the only state there is.
-    await loadRide();
-    await updateRide((state) => arrivedAt(state, stationId));
+    await updateRide((state) => arrivedAt(state, stationId), { fromSaved: true });
   },
 );
 
