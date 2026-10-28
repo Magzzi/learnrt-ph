@@ -7,6 +7,21 @@ export const en = {
     ride: "Ride",
     learn: "Learn",
   },
+  common: {
+    settings: "Settings",
+  },
+  headers: {
+    mapTitle: "LearnRT",
+    mapSubtitle: "Metro Manila's trains, made simple",
+    faresTitle: "Fares",
+    faresSubtitle: "What a ride costs, Line by Line",
+    rideTitle: "Ride planner",
+    rideSubtitle: "Plan your ride around Metro Manila",
+    nearestTitle: "Nearest Station",
+    nearestSubtitle: "The closest Stations to where you are",
+    learnTitle: "Learn",
+    learnSubtitle: "The Lines, and tips for your first ride",
+  },
   unverified: {
     label: "Unverified",
     a11y: "Unverified data",
@@ -172,6 +187,10 @@ export const en = {
     unverifiedTitle: "What “Unverified” means",
     unverified: "This information comes from LearnRT's own records and has not yet been checked against an official source. Fares, Transfers, landmarks and Station details may be out of date.",
     language: "Language",
+    fontTitle: "Fonts",
+    fontCredit: "Headings use Fraunces, © The Fraunces Project Authors, under the SIL Open Font License 1.1.",
+    showLicense: "Show the font licence",
+    hideLicense: "Hide the font licence",
   },
 };
 

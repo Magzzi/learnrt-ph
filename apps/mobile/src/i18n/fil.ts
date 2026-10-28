@@ -11,6 +11,21 @@ export const fil: FilipinoStrings = {
     ride: { text: "Sakay", review: "needs review" },
     learn: { text: "Matuto", review: "needs review" },
   },
+  common: {
+    settings: { text: "Mga setting", review: "needs review" },
+  },
+  headers: {
+    mapTitle: { text: "LearnRT", review: "needs review" },
+    mapSubtitle: { text: "Ang mga tren ng Metro Manila, pinadali", review: "needs review" },
+    faresTitle: { text: "Pamasahe", review: "needs review" },
+    faresSubtitle: { text: "Magkano ang biyahe, bawat linya", review: "needs review" },
+    rideTitle: { text: "Planuhin ang sakay", review: "needs review" },
+    rideSubtitle: { text: "Planuhin ang sakay mo sa Metro Manila", review: "needs review" },
+    nearestTitle: { text: "Pinakamalapit na istasyon", review: "needs review" },
+    nearestSubtitle: { text: "Ang mga istasyong pinakamalapit sa iyo", review: "needs review" },
+    learnTitle: { text: "Matuto", review: "needs review" },
+    learnSubtitle: { text: "Ang mga linya, at mga tip sa unang sakay", review: "needs review" },
+  },
   unverified: {
     label: { text: "Hindi pa beripikado", review: "needs review" },
     a11y: { text: "Datos na hindi pa beripikado", review: "needs review" },
@@ -176,5 +191,9 @@ export const fil: FilipinoStrings = {
     unverifiedTitle: { text: "Ano ang ibig sabihin ng “Hindi pa beripikado”", review: "needs review" },
     unverified: { text: "Galing ang impormasyong ito sa sariling talaan ng LearnRT at hindi pa nasusuri laban sa opisyal na pinagmulan. Maaaring luma na ang pamasahe, Transfer, palatandaan at detalye ng istasyon.", review: "needs review" },
     language: { text: "Wika", review: "needs review" },
+    fontTitle: { text: "Mga font", review: "needs review" },
+    fontCredit: { text: "Fraunces ang gamit sa mga pamagat, © The Fraunces Project Authors, sa ilalim ng SIL Open Font License 1.1.", review: "needs review" },
+    showLicense: { text: "Ipakita ang lisensya ng font", review: "needs review" },
+    hideLicense: { text: "Itago ang lisensya ng font", review: "needs review" },
   },
 };

@@ -1,13 +1,16 @@
 import { Stack } from "expo-router";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Linking, Pressable, ScrollView, Text } from "react-native";
 import { LanguageSwitch } from "@/components/LanguageSwitch";
 import { Section } from "@/components/Section";
+import { FRAUNCES_LICENSE } from "@/legal/frauncesLicense";
 
 const OSM_COPYRIGHT = "https://www.openstreetmap.org/copyright";
 
 export default function AboutScreen() {
   const { t } = useTranslation();
+  const [license, setLicense] = useState(false);
   return (
     <ScrollView className="flex-1 bg-page" contentContainerClassName="gap-3 p-4">
       <Stack.Screen options={{ title: t("about.title") }} />
@@ -25,6 +28,14 @@ export default function AboutScreen() {
       </Section>
       <Section title={t("about.language")}>
         <LanguageSwitch />
+      </Section>
+      {/* SIL OFL 1.1: the bundled font ships with its copyright notice and licence. */}
+      <Section title={t("about.fontTitle")}>
+        <Text className="text-ink">{t("about.fontCredit")}</Text>
+        <Pressable onPress={() => setLicense(!license)} accessibilityRole="button" accessibilityState={{ expanded: license }}>
+          <Text className="text-accentInk">{t(license ? "about.hideLicense" : "about.showLicense")}</Text>
+        </Pressable>
+        {license && <Text className="text-xs text-muted">{FRAUNCES_LICENSE}</Text>}
       </Section>
     </ScrollView>
   );
