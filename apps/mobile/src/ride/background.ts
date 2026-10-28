@@ -1,4 +1,4 @@
-import { arrivedAt, geofenceRegions, rideStatus, type RideState } from "@learnrt/core";
+import { arrivedAt, distanceKm, geofenceRegions, rideStatus, type RideState } from "@learnrt/core";
 import * as Location from "expo-location";
 import * as Notifications from "expo-notifications";
 import * as TaskManager from "expo-task-manager";
@@ -81,7 +81,14 @@ export async function enableAlerts(state: RideState | null): Promise<boolean> {
 
 async function syncGeofences(state: RideState) {
   const running = await Location.hasStartedGeofencingAsync(GEOFENCE_TASK).catch(() => false);
-  const regions = geofenceRegions(state);
+  // Android reports "entered" at once for a region the phone is already inside, which would jump the
+  // ride ahead (say, planning at home near a later Station). Those regions are left out.
+  const here = await Location.getLastKnownPositionAsync({ maxAge: 5 * 60_000 }).catch(() => null);
+  const regions = geofenceRegions(state).filter(
+    (r) =>
+      !here ||
+      distanceKm({ lat: here.coords.latitude, lng: here.coords.longitude }, { lat: r.latitude, lng: r.longitude }) * 1000 > r.radius,
+  );
   if (state.ended || rideStatus(state).completed || regions.length === 0) {
     if (running) await Location.stopGeofencingAsync(GEOFENCE_TASK);
     return;

@@ -1,12 +1,12 @@
-import { fareData, type TicketType } from "@learnrt/core";
-import { useLocalSearchParams } from "expo-router";
+import { fareData, getStation, rideStations, rideStatus, type TicketType } from "@learnrt/core";
+import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, ScrollView, Switch, Text, View } from "react-native";
 import { Segmented } from "@/components/Segmented";
 import { StationPicker } from "@/components/StationPicker";
 import { UnverifiedBadge } from "@/components/UnverifiedBadge";
-import { beginRide } from "@/ride/activeRide";
+import { beginRide, useActiveRide } from "@/ride/activeRide";
 import { initialPlanState, planReducer, planTrip } from "@/ride/planState";
 import { RouteSummary } from "@/ride/RouteSummary";
 import colors from "@/theme/colors";
@@ -24,9 +24,20 @@ export default function RideScreen() {
   }, [params.from, params.to, params.at]);
 
   const result = planTrip(state);
+  const active = useActiveRide();
+  const activeTo = active && !rideStatus(active).completed ? rideStations(active.route).at(-1) : undefined;
 
   return (
     <ScrollView className="flex-1 bg-base" contentContainerClassName="gap-4 p-4">
+      {activeTo && (
+        <Pressable
+          onPress={() => router.push("/guided-ride")}
+          accessibilityRole="button"
+          className="items-center rounded-xl border border-accent bg-panel p-4"
+        >
+          <Text className="font-semibold text-accent">{t("plan.continue", { station: getStation(activeTo)!.name })}</Text>
+        </Pressable>
+      )}
       <StationPicker label={t("plan.from")} value={state.from} onChange={(stationId) => dispatch({ type: "from", stationId })} />
       <Pressable
         onPress={() => dispatch({ type: "swap" })}

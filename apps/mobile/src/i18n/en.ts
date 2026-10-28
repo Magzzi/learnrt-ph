@@ -74,6 +74,7 @@ export const en = {
     fareUnknown: "Fare not known",
     walkOnly: "No train needed",
     start: "Start Guided Ride",
+    continue: "Continue your Guided Ride to {{station}}",
   },
   ride: {
     title: "Guided Ride",

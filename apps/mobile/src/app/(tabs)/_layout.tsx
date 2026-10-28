@@ -1,8 +1,11 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Tabs } from "expo-router";
+import { rideStatus } from "@learnrt/core";
+import { router, Tabs } from "expo-router";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import type { ComponentProps } from "react";
 import type { ColorValue } from "react-native";
+import { loadRide } from "@/ride/activeRide";
 import colors from "@/theme/colors";
 
 type IconProps = ComponentProps<typeof Ionicons>;
@@ -16,6 +19,12 @@ const icon =
 
 export default function TabsLayout() {
   const { t } = useTranslation();
+
+  // A ride in progress comes back on launch. This runs inside the navigator, so navigating is safe.
+  useEffect(() => {
+    void loadRide().then((ride) => ride && !rideStatus(ride).completed && router.push("/guided-ride"));
+  }, []);
+
   return (
     <Tabs
       screenOptions={{

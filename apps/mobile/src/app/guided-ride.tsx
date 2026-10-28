@@ -48,6 +48,8 @@ export default function GuidedRideScreen() {
   const status = rideStatus(ride);
   const stations = rideStations(ride.route);
   const current = stepText(steps[ride.stepIndex]!);
+  // On the train, the current ride step counts the stops still to go, not the whole leg.
+  if (steps[ride.stepIndex]!.kind === "ride" && status.stopsLeftOnLeg > 0) current.params.count = status.stopsLeftOnLeg;
   const canAdvance = advanceStep(ride) !== ride;
   const getOffAt = stations.slice(stations.indexOf(status.stationId) + status.stopsLeftOnLeg)[0]!;
   const ahead = stations.slice(stations.indexOf(status.stationId) + 1, stations.indexOf(status.stationId) + 1 + status.stopsLeftOnLeg);

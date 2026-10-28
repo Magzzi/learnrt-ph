@@ -78,6 +78,7 @@ export const fil: FilipinoStrings = {
     fareUnknown: { text: "Hindi alam ang pamasahe", review: "needs review" },
     walkOnly: { text: "Hindi na kailangang sumakay ng tren", review: "needs review" },
     start: { text: "Simulan ang Guided Ride", review: "needs review" },
+    continue: { text: "Ituloy ang Guided Ride papuntang {{station}}", review: "needs review" },
   },
   ride: {
     title: { text: "Guided Ride", review: "needs review" },
