@@ -19,3 +19,17 @@ export { uncoveredLines, learnData, lineAreas, type UncoveredLine } from "./lear
 export { planRoute, type RideSegment, type Route, type RouteBasis, type RoutePlan, type RouteSegment, type WalkSegment } from "./route";
 export { routeFare, type LegFare, type RouteFare } from "./routeFare";
 export { rideSteps, type RideStep } from "./rideSteps";
+export {
+  advanceStep,
+  arrivedAt,
+  endRide,
+  geofenceRegions,
+  imAt,
+  rideStatus,
+  startRide,
+  type GeofenceRegion,
+  type RideAlert,
+  type RideState,
+  type RideStatus,
+  type RideUpdate,
+} from "./rideProgress";
