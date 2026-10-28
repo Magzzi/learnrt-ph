@@ -16,3 +16,4 @@ export { fareData, getFare, type FareQuery, type FareTable, type TicketType } fr
 export { neighbours, transferData, transfers, transfersFrom, type Transfer } from "./graph";
 export { landmarkData, landmarksAt } from "./landmarks";
 export { uncoveredLines, learnData, lineAreas, type UncoveredLine } from "./learn";
+export { planRoute, type RideSegment, type Route, type RouteBasis, type RoutePlan, type RouteSegment, type WalkSegment } from "./route";
