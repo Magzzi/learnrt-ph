@@ -36,17 +36,6 @@ export default function MapScreen() {
     ]);
   };
 
-  const control = (icon: "add" | "remove" | "locate", label: string, onPress: () => void) => (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="button"
-      accessibilityLabel={label}
-      className="h-12 w-12 items-center justify-center rounded-full border border-edge bg-card"
-    >
-      <Ionicons name={icon} size={24} color={theme.ink} />
-    </Pressable>
-  );
-
   return (
     <View className="flex-1 gap-3 bg-page px-4 pb-3">
       <View className="flex-row overflow-hidden rounded-2xl bg-accentSoft">
@@ -73,9 +62,9 @@ export default function MapScreen() {
         <View className="flex-1">
           <LineMap ref={map} onSelectStation={openStation} />
           <View className="absolute right-3 top-3 gap-2">
-            {control("locate", t("map.showMe"), () => void locate())}
-            {control("add", t("map.zoomIn"), () => map.current?.zoomIn())}
-            {control("remove", t("map.zoomOut"), () => map.current?.zoomOut())}
+            <MapControl icon="locate" label={t("map.showMe")} onPress={() => void locate()} />
+            <MapControl icon="add" label={t("map.zoomIn")} onPress={() => map.current?.zoomIn()} />
+            <MapControl icon="remove" label={t("map.zoomOut")} onPress={() => map.current?.zoomOut()} />
           </View>
           <MapLegend />
         </View>
@@ -86,5 +75,19 @@ export default function MapScreen() {
         <Text className="flex-1 text-sm text-ink">{t("map.tip")}</Text>
       </View>
     </View>
+  );
+}
+
+function MapControl({ icon, label, onPress }: { icon: "add" | "remove" | "locate"; label: string; onPress: () => void }) {
+  const theme = useTheme();
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      className="h-12 w-12 items-center justify-center rounded-full border border-edge bg-card"
+    >
+      <Ionicons name={icon} size={24} color={theme.ink} />
+    </Pressable>
   );
 }
