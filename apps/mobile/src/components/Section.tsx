@@ -7,7 +7,7 @@ export function Section({ title, unverified, children }: { title: string; unveri
   return (
     <View className="gap-2 rounded-2xl border border-edge bg-card p-4">
       <View className="flex-row items-center justify-between gap-2">
-        <Text className="flex-1 font-serif text-xl text-ink" accessibilityRole="header">
+        <Text className="flex-1 font-display text-xl text-ink" accessibilityRole="header">
           {title}
         </Text>
         {unverified && <UnverifiedBadge />}

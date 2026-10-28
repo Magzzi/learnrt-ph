@@ -36,7 +36,7 @@ The mockups were drafted quickly and contain mistakes; the app keeps its real da
 - One set of named colour roles (page, card, card border, text, secondary text, accent, accent text, warning, success and so on), defined once for light and once for dark, used by every screen. No screen uses a raw colour or a light-only or dark-only class.
 - Light is the main design. Dark follows the phone's setting automatically: same layout, warm dark surfaces, same orange accent. `app.json` follows the system (`userInterfaceStyle: "automatic"`).
 - Line colours keep their hues (LRT-1 green, LRT-2 purple, MRT-3 blue), with a deeper shade on light backgrounds and the current shade on dark, so lines and dots stay legible on both. MRT-7 moves from orange to a colour that cannot be mistaken for the accent (proposed: warm brown or grey-violet). Still not the operators' brand colours (PRD §11).
-- The serif heading font is bundled with the app (works offline), under the SIL Open Font License. Proposed: Fraunces (`@expo-google-fonts/fraunces`), bold.
+- The heading font is bundled with the app (works offline), under the SIL Open Font License. Fraunces (a serif) was built first; on 2026-10-28 the owner asked for a cleaner, smoother sans similar to Montserrat, so it is now Plus Jakarta Sans Bold (`@expo-google-fonts/plus-jakarta-sans`, SIL OFL 1.1, full Filipino and ₱ coverage). Poppins was ruled out: it has no ₱. Montserrat has every glyph but is 3.5 times larger.
 
 ### Components
 - `ScreenHeader`, `Card`, `PrimaryButton`, `SecondaryButton`, `Chip` (Unverified, Coming Soon), `Toggle row`, and the Line leg icon, shared by all screens.
@@ -70,7 +70,7 @@ The mockups were drafted quickly and contain mistakes; the app keeps its real da
 - App icon and splash artwork (M6, with store listings).
 
 ## Decisions for the owner
-- **UI1-D1 Heading font:** Fraunces, bold (proposed), or another open-licence serif.
+- **UI1-D1 Heading font:** Plus Jakarta Sans, bold (changed from Fraunces by the owner).
 - **UI1-D2 Accent orange:** a deep orange close to the mockup that passes AA for large text with white on it (proposed `#E4572E`); exact value checked by the contrast test.
 - **UI1-D3 MRT-7 colour:** warm brown (proposed) instead of orange.
 

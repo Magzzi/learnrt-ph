@@ -5,7 +5,7 @@ import { Linking, Pressable, ScrollView, Text } from "react-native";
 import { LanguageSwitch } from "@/components/LanguageSwitch";
 import { Section } from "@/components/Section";
 import { ThemeSwitch } from "@/components/ThemeSwitch";
-import { FRAUNCES_LICENSE } from "@/legal/frauncesLicense";
+import { PLUS_JAKARTA_LICENSE } from "@/legal/plusJakartaLicense";
 
 const OSM_COPYRIGHT = "https://www.openstreetmap.org/copyright";
 
@@ -39,7 +39,7 @@ export default function AboutScreen() {
         <Pressable onPress={() => setLicense(!license)} accessibilityRole="button" accessibilityState={{ expanded: license }}>
           <Text className="text-accentInk">{t(license ? "about.hideLicense" : "about.showLicense")}</Text>
         </Pressable>
-        {license && <Text className="text-xs text-muted">{FRAUNCES_LICENSE}</Text>}
+        {license && <Text className="text-xs text-muted">{PLUS_JAKARTA_LICENSE}</Text>}
       </Section>
     </ScrollView>
   );

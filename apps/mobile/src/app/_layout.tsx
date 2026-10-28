@@ -1,7 +1,7 @@
 import "../../global.css";
 import "@/i18n";
 
-import { Fraunces_700Bold, useFonts } from "@expo-google-fonts/fraunces";
+import { PlusJakartaSans_700Bold, useFonts } from "@expo-google-fonts/plus-jakarta-sans";
 import { Stack } from "expo-router";
 import { useEffect } from "react";
 import { AppState, View } from "react-native";
@@ -29,7 +29,7 @@ export default function RootLayout() {
   // The heading font is bundled; until it is ready the screen stays the page colour, so no other
   // font flashes up first.
   // If the font fails to load, carry on with the system serif rather than a blank screen.
-  const [fontsLoaded, fontError] = useFonts({ Fraunces_700Bold });
+  const [fontsLoaded, fontError] = useFonts({ PlusJakartaSans_700Bold });
   if (!fontsLoaded && !fontError) return <View style={{ flex: 1, backgroundColor: theme.page }} />;
 
   return (
@@ -42,7 +42,7 @@ export default function RootLayout() {
         screenOptions={{
           headerStyle: { backgroundColor: theme.page },
           headerTintColor: theme.ink,
-          headerTitleStyle: { fontFamily: "Fraunces_700Bold" },
+          headerTitleStyle: { fontFamily: "PlusJakartaSans_700Bold" },
           headerShadowVisible: false,
           contentStyle: { backgroundColor: theme.page },
         }}

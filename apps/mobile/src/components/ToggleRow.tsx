@@ -24,7 +24,7 @@ export function ToggleRow({
       className="flex-row items-center justify-between gap-4 rounded-2xl border border-edge bg-card p-4"
     >
       <View className="flex-1">
-        <Text className="font-serif text-xl text-ink">{label}</Text>
+        <Text className="font-display text-xl text-ink">{label}</Text>
         {hint && <Text className="text-sm text-muted">{hint}</Text>}
       </View>
       <Switch

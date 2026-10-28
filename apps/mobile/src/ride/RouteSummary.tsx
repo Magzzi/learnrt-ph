@@ -50,7 +50,7 @@ export function RouteSummary({ option }: { option: RouteOption }) {
       })}
       <View className="flex-row justify-between border-t border-edge pt-2">
         <Text className="text-muted">{t("plan.total")}</Text>
-        <Text className="font-serif text-2xl text-ink">
+        <Text className="font-display text-2xl text-ink">
           {fare.legs.length === 0 ? t("plan.walkOnly") : fare.total === null ? t("plan.fareUnknown") : formatPesos(fare.total)}
         </Text>
       </View>

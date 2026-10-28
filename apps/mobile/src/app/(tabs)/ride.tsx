@@ -79,7 +79,7 @@ export default function RideScreen() {
           <Card key={option.route.basis}>
             <View className="flex-row items-start justify-between gap-2">
               <View className="flex-1">
-                <Text className="font-serif text-xl text-ink" accessibilityRole="header">
+                <Text className="font-display text-xl text-ink" accessibilityRole="header">
                   {t(option.route.basis === "fewest-transfers" ? "plan.fewestTransfers" : "plan.fewerStops")}
                 </Text>
                 <Text className="text-sm text-muted">{t("plan.estimated")}</Text>

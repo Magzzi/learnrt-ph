@@ -84,7 +84,7 @@ export default function NearestScreen() {
       {status.kind === "found" && (
         <View className="gap-2" accessibilityLiveRegion="polite">
           <View className="flex-row items-center justify-between">
-            <Text className="font-serif text-2xl text-ink" accessibilityRole="header">
+            <Text className="font-display text-2xl text-ink" accessibilityRole="header">
               {t("nearest.closest")}
             </Text>
             {networkData.lastVerified === null && <UnverifiedBadge />}

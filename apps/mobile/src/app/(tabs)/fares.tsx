@@ -63,7 +63,7 @@ export default function FaresScreen() {
         </View>
         {result.kind === "fare" ? (
           <>
-            <Text className="font-serif text-5xl text-ink">
+            <Text className="font-display text-5xl text-ink">
               {result.total === null ? t("plan.fareUnknown") : formatPesos(result.total)}
             </Text>
             {result.legs.length > 1 &&

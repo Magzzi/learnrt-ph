@@ -44,7 +44,7 @@ export default function MapScreen() {
       <View className="flex-row overflow-hidden rounded-2xl bg-accentSoft">
         <View className="flex-1 gap-1 p-4">
           <Text className="text-xs font-bold uppercase tracking-widest text-accentInk">{t("map.eyebrow")}</Text>
-          <Text className="font-serif text-2xl text-ink">{t("map.welcomeTitle")}</Text>
+          <Text className="font-display text-2xl text-ink">{t("map.welcomeTitle")}</Text>
           {!compact && <Text className="text-sm text-muted">{t("map.welcomeBody")}</Text>}
         </View>
         {!compact && (
@@ -57,7 +57,7 @@ export default function MapScreen() {
       <View className="flex-1 overflow-hidden rounded-2xl border border-edge bg-card">
         <View className={compact ? "gap-2 p-3" : "flex-row items-center gap-3 p-3"}>
           <View className={compact ? undefined : "flex-1"}>
-            <Text className="font-serif text-xl text-ink" accessibilityRole="header">
+            <Text className="font-display text-xl text-ink" accessibilityRole="header">
               {t("map.cardTitle")}
             </Text>
             <Text className="text-sm text-muted">{t("map.cardSubtitle")}</Text>

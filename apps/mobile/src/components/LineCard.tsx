@@ -24,7 +24,7 @@ export function LineCard({
     <View className="gap-2 rounded-2xl border border-edge bg-card p-4">
       <View className="flex-row items-center gap-2">
         <View className="h-3 w-3 rounded-full" style={{ backgroundColor: color }} />
-        <Text className="flex-1 font-serif text-xl text-ink" accessibilityRole="header">
+        <Text className="flex-1 font-display text-xl text-ink" accessibilityRole="header">
           {title}
         </Text>
         {unverified && <UnverifiedBadge />}

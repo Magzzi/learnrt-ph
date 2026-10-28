@@ -38,7 +38,7 @@ export default function StationScreen() {
       <Stack.Screen options={{ title: detail.title }} />
 
       <View className="gap-2">
-        <Text className="font-serif text-4xl text-ink" accessibilityRole="header">
+        <Text className="font-display text-4xl text-ink" accessibilityRole="header">
           {detail.name}
         </Text>
         <View className="flex-row items-center gap-2">

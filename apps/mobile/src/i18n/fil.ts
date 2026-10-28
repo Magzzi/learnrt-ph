@@ -225,7 +225,7 @@ export const fil: FilipinoStrings = {
     themeDark: { text: "Madilim", review: "needs review" },
     language: { text: "Wika", review: "needs review" },
     fontTitle: { text: "Mga font", review: "needs review" },
-    fontCredit: { text: "Fraunces ang gamit sa mga pamagat, © The Fraunces Project Authors, sa ilalim ng SIL Open Font License 1.1.", review: "needs review" },
+    fontCredit: { text: "Plus Jakarta Sans ang gamit sa mga pamagat, © The Plus Jakarta Sans Project Authors, sa ilalim ng SIL Open Font License 1.1.", review: "needs review" },
     showLicense: { text: "Ipakita ang lisensya ng font", review: "needs review" },
     hideLicense: { text: "Itago ang lisensya ng font", review: "needs review" },
   },

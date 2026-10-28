@@ -11,7 +11,7 @@ module.exports = {
     extend: {
       colors,
       // Headings only; body text stays in the system font (owner, 2026-10-28).
-      fontFamily: { serif: ["Fraunces_700Bold"] },
+      fontFamily: { display: ["PlusJakartaSans_700Bold"] },
     },
   },
   plugins: [],

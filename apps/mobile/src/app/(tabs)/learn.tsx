@@ -16,7 +16,7 @@ export default function LearnScreen() {
 
   return (
     <ScrollView className="flex-1 bg-page" contentContainerClassName="gap-4 p-4">
-      <Text className="font-serif text-2xl text-ink" accessibilityRole="header">
+      <Text className="font-display text-2xl text-ink" accessibilityRole="header">
         {t("learn.lines")}
       </Text>
       {lines
@@ -37,7 +37,7 @@ export default function LearnScreen() {
           </LineCard>
         ))}
 
-      <Text className="font-serif text-2xl text-ink" accessibilityRole="header">
+      <Text className="font-display text-2xl text-ink" accessibilityRole="header">
         {t("learn.notCovered")}
       </Text>
       <Text className="text-muted">{t("learn.notCoveredIntro")}</Text>

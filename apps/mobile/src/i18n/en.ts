@@ -221,7 +221,7 @@ export const en = {
     themeDark: "Dark",
     language: "Language",
     fontTitle: "Fonts",
-    fontCredit: "Headings use Fraunces, © The Fraunces Project Authors, under the SIL Open Font License 1.1.",
+    fontCredit: "Headings use Plus Jakarta Sans, © The Plus Jakarta Sans Project Authors, under the SIL Open Font License 1.1.",
     showLicense: "Show the font licence",
     hideLicense: "Hide the font licence",
   },

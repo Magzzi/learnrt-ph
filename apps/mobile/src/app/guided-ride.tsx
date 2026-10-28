@@ -41,7 +41,7 @@ export default function GuidedRideScreen() {
     return (
       <View className="flex-1 gap-4 bg-page p-4">
         <Stack.Screen options={{ title: t("ride.title") }} />
-        <Text className="font-serif text-2xl text-ink">{t("ride.complete")}</Text>
+        <Text className="font-display text-2xl text-ink">{t("ride.complete")}</Text>
         <PrimaryButton label={t("ride.backToPlanner")} onPress={() => router.replace("/ride")} />
       </View>
     );
@@ -56,7 +56,7 @@ export default function GuidedRideScreen() {
       <View className="gap-1" accessibilityLiveRegion="polite">
         <Text className="text-muted">{t("ride.nowAt", { station: getStation(status.stationId)!.name })}</Text>
         {status.stopsLeftOnLeg > 0 && (
-          <Text className="font-serif text-2xl text-ink">
+          <Text className="font-display text-2xl text-ink">
             {t("ride.stopsLeft", { count: status.stopsLeftOnLeg, station: getStation(getOffAt)!.name })}
           </Text>
         )}
@@ -64,7 +64,7 @@ export default function GuidedRideScreen() {
 
       <Card className="border-accent bg-accentSoft" accessibilityLiveRegion="polite">
         {unverified && <UnverifiedBadge />}
-        <Text className="font-serif text-2xl text-ink">{t(current.key as never, current.params)}</Text>
+        <Text className="font-display text-2xl text-ink">{t(current.key as never, current.params)}</Text>
         {current.note && <Text className="text-muted">{t(current.note as never)}</Text>}
         {canAdvance && (
           <PrimaryButton label={t("ride.done")} icon="checkmark-circle" onPress={() => updateRide(advanceStep)} />
@@ -92,14 +92,14 @@ export default function GuidedRideScreen() {
       {!status.completed && alerts === "on" && <Text className="text-sm font-semibold text-accentInk">{t("alerts.on")}</Text>}
       {!status.completed && alerts === "accuracy" && (
         <Card className="gap-2 border-warn bg-warnSoft">
-          <Text className="font-serif text-xl text-ink">{t("alerts.explainTitle")}</Text>
+          <Text className="font-display text-xl text-ink">{t("alerts.explainTitle")}</Text>
           <Text className="text-muted">{t("alerts.accuracyOff")}</Text>
           <PrimaryButton label={t("alerts.turnOnAccuracy")} onPress={async () => setAlerts((await turnOnLocationAccuracy(ride)) ? "on" : "accuracy")} />
         </Card>
       )}
       {!status.completed && (alerts === "ask" || alerts === "off") && (
         <Card className="gap-2">
-          <Text className="font-serif text-xl text-ink">{t("alerts.explainTitle")}</Text>
+          <Text className="font-display text-xl text-ink">{t("alerts.explainTitle")}</Text>
           <Text className="text-muted">{t(alerts === "ask" ? "alerts.explain" : "alerts.off")}</Text>
           <PrimaryButton
             label={t(alerts === "ask" ? "alerts.enable" : "alerts.openSettings")}

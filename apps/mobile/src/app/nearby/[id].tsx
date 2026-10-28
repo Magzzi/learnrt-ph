@@ -97,7 +97,7 @@ export default function NearbyScreen() {
       <View className="gap-3 border-t border-edge bg-card p-4" style={{ paddingBottom: 16 + insets.bottom }}>
         <View className="flex-row items-center gap-2">
           <View className="h-3 w-3 rounded-full" style={{ backgroundColor: theme.lines[lineId] }} />
-          <Text className="flex-1 font-serif text-xl text-ink">
+          <Text className="flex-1 font-display text-xl text-ink">
             {map.station.name} · {getLine(lineId)!.name}
           </Text>
         </View>

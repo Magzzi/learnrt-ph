@@ -15,7 +15,7 @@ export function PrimaryButton({ label, onPress, icon }: { label: string; onPress
       className="flex-row items-center justify-center gap-2 rounded-2xl bg-accent px-4 py-4 active:opacity-80"
     >
       {icon && <Ionicons name={icon} size={20} color={theme.onAccent} />}
-      <Text className="text-lg font-bold text-onAccent">{label}</Text>
+      <Text className="font-display text-lg text-onAccent">{label}</Text>
     </Pressable>
   );
 }

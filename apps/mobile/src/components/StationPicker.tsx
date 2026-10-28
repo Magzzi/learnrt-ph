@@ -60,7 +60,7 @@ export function StationPicker({
       <Modal visible={open} animationType="slide" onRequestClose={() => setOpen(false)}>
         <View className="flex-1 bg-page pt-12">
           <View className="flex-row items-center justify-between px-4 pb-2">
-            <Text className="font-serif text-2xl text-ink">{label}</Text>
+            <Text className="font-display text-2xl text-ink">{label}</Text>
             <Pressable onPress={() => setOpen(false)} accessibilityRole="button" className="p-2">
               <Text className="text-accentInk">{t("fares.close")}</Text>
             </Pressable>
