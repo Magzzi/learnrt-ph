@@ -172,4 +172,5 @@ Suggested starting points, to be confirmed by the owner:
 - **Data accuracy:** wrong fares or platform directions erode trust quickly; every dataset needs a visible "last verified" date.
 - **Operator relations:** an unofficial app using operator names could draw objections; keep the disclaimer and avoid logos.
 - **Moderation load:** one admin cannot review unlimited reports; confirmation and reputation must do most of the filtering.
+- **Street map tiles:** the street-level map uses OpenFreeMap, a free public tile service with no availability guarantee. The tile URL is a single config value so the app can switch providers or self-host.
 - **Passive timing privacy:** must stay opt-in, anonymous and without full trips, and be described plainly in the privacy policy.
