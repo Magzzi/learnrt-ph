@@ -4,8 +4,8 @@ import { streetMap } from "./streetMap";
 describe("streetMap", () => {
   it("centres on the Station and lists its OSM entrances, Unverified", () => {
     const map = streetMap("lrt1-edsa")!;
-    expect(map.station).toMatchObject({ name: "EDSA", line: "LRT-1" });
-    expect(map.center).toEqual([map.station.location.lng, map.station.location.lat]);
+    expect(map.station).toEqual({ id: "lrt1-edsa", name: "EDSA" });
+    expect(map.center).toEqual([121.0006192, 14.5388434]); // EDSA's OSM position, longitude first
     expect(map.entrances).toHaveLength(5);
     expect(map.unverified).toBe(true);
   });

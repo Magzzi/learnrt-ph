@@ -1,12 +1,13 @@
-import { advanceStep, getStation, imAt, rideStations, rideStatus, rideSteps } from "@learnrt/core";
+import { advanceStep, getStation, imAt, rideStations } from "@learnrt/core";
 import { router, Stack } from "expo-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppState, Linking, Pressable, ScrollView, Text, View } from "react-native";
 import { StationPicker } from "@/components/StationPicker";
+import { UnverifiedBadge } from "@/components/UnverifiedBadge";
 import { finishRide, updateRide, useActiveRide } from "@/ride/activeRide";
 import { alertsEnabled, enableAlerts, geofencingAvailable, turnOnLocationAccuracy } from "@/ride/background";
-import { stepText } from "@/ride/stepText";
+import { rideView } from "@/ride/rideView";
 
 export default function GuidedRideScreen() {
   const { t } = useTranslation();
@@ -19,7 +20,9 @@ export default function GuidedRideScreen() {
     const check = async () => {
       const on = await alertsEnabled();
       const accurate = await geofencingAvailable();
-      setAlerts((prev) => (on ? (accurate ? "on" : "accuracy") : prev === "off" ? "off" : "ask"));
+      // Once alerts were on or refused, losing a permission means "off" (with a link to Settings),
+      // not asking again.
+      setAlerts((prev) => (on ? (accurate ? "on" : "accuracy") : prev === null || prev === "ask" ? "ask" : "off"));
     };
     void check();
     const sub = AppState.addEventListener("change", (s) => s === "active" && void check());
@@ -44,15 +47,7 @@ export default function GuidedRideScreen() {
     );
   }
 
-  const steps = rideSteps(ride.route, ride.ticket, ride.discounted);
-  const status = rideStatus(ride);
-  const stations = rideStations(ride.route);
-  const current = stepText(steps[ride.stepIndex]!);
-  // On the train, the current ride step counts the stops still to go, not the whole leg.
-  if (steps[ride.stepIndex]!.kind === "ride" && status.stopsLeftOnLeg > 0) current.params.count = status.stopsLeftOnLeg;
-  const canAdvance = advanceStep(ride) !== ride;
-  const getOffAt = stations.slice(stations.indexOf(status.stationId) + status.stopsLeftOnLeg)[0]!;
-  const ahead = stations.slice(stations.indexOf(status.stationId) + 1, stations.indexOf(status.stationId) + 1 + status.stopsLeftOnLeg);
+  const { status, current, canAdvance, getOffAt, ahead, upcoming, unverified } = rideView(ride);
 
   return (
     <ScrollView className="flex-1 bg-base" contentContainerClassName="gap-4 p-4">
@@ -68,6 +63,7 @@ export default function GuidedRideScreen() {
       </View>
 
       <View className="gap-3 rounded-xl border border-accent bg-panel p-4" accessibilityLiveRegion="polite">
+        {unverified && <UnverifiedBadge />}
         <Text className="text-xl font-bold text-white">{t(current.key as never, current.params)}</Text>
         {current.note && <Text className="text-muted">{t(current.note as never)}</Text>}
         {canAdvance && (
@@ -97,14 +93,11 @@ export default function GuidedRideScreen() {
         </View>
       )}
 
-      {steps.slice(ride.stepIndex + 1).map((step, i) => {
-        const text = stepText(step);
-        return (
-          <Text key={i} className="text-muted">
-            {ride.stepIndex + i + 2}. {t(text.key as never, text.params)}
-          </Text>
-        );
-      })}
+      {upcoming.map((text, i) => (
+        <Text key={i} className="text-muted">
+          {ride.stepIndex + i + 2}. {t(text.key as never, text.params)}
+        </Text>
+      ))}
 
       {!status.completed && alerts === "on" && <Text className="text-sm text-accent">{t("alerts.on")}</Text>}
       {!status.completed && alerts === "accuracy" && (
@@ -143,7 +136,7 @@ export default function GuidedRideScreen() {
           <View className="gap-1">
             <StationPicker
               label={t("ride.imAt")}
-              stationIds={stations}
+              stationIds={rideStations(ride.route)}
               value={status.stationId}
               onChange={(stationId) => updateRide((state) => imAt(state, stationId))}
             />

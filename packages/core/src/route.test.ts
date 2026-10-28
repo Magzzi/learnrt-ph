@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { planRoute, type Route } from "./route";
 
 /** A compact picture of a route: "LRT1 a→b (n)" for each ride, "walk a→b" for each Transfer. */
@@ -100,5 +100,31 @@ describe("planRoute edge cases", () => {
     expect(planRoute("mrt7-quezon-memorial-circle", "lrt1-carriedo")).toBeNull();
     expect(planRoute("mrt7-quezon-memorial-circle", "mrt7-university-avenue")).toBeNull();
     expect(planRoute("lrt1-carriedo", "nowhere")).toBeNull();
+  });
+});
+
+describe("planRoute never rides a Line that is not operational", () => {
+  it("does not route through a Transfer to a Line that is not operational", async () => {
+    vi.resetModules();
+    vi.doMock("./graph", async (importOriginal) => {
+      const graph = await importOriginal<typeof import("./graph")>();
+      // Made-up Transfers through MRT-7, the only Line that is not operational, offering a shortcut
+      // Tayuman → Quezon Memorial Circle → (MRT-7, 1 stop) → University Avenue → Legarda.
+      const walk = { minutes: null, metres: null, directions: null };
+      const extra = [
+        { from: "lrt1-tayuman", to: "mrt7-quezon-memorial-circle", walk },
+        { from: "mrt7-university-avenue", to: "lrt2-legarda", walk },
+      ];
+      return {
+        ...graph,
+        transfersFrom: (id: string) => [...graph.transfersFrom(id), ...extra.filter((t) => t.from === id)],
+      };
+    });
+    const { planRoute: plan } = await import("./route");
+    const result = plan("lrt1-tayuman", "lrt2-legarda")!;
+    for (const r of [result.route, result.alternative].filter(Boolean)) {
+      expect(r!.segments.every((s) => s.kind === "walk" || s.lineId !== "MRT7")).toBe(true);
+    }
+    vi.doUnmock("./graph");
   });
 });

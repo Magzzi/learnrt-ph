@@ -1,4 +1,5 @@
-import { getLine, getStation, planRoute, routeFare, type Route, type RouteFare, type TicketType } from "@learnrt/core";
+import { planRoute, routeFare, type Route, type RouteFare, type TicketType } from "@learnrt/core";
+import { rideable } from "../station/rideable";
 
 export interface PlanState {
   from: string | null;
@@ -25,11 +26,6 @@ export type PlanResult =
   | { kind: "no-route" }
   | { kind: "planned"; options: RouteOption[] };
 
-const rideable = (id: string | undefined) => {
-  const station = id ? getStation(id) : undefined;
-  return station && getLine(station.lineId)?.status === "operational" ? station.id : null;
-};
-
 /** Starting state, optionally from Station detail ("Ride from here" / "Ride to here"). */
 export function initialPlanState(params: { from?: string; to?: string } = {}): PlanState {
   return { from: rideable(params.from), to: rideable(params.to), ticket: "single-journey", discounted: false };
@@ -51,7 +47,7 @@ export function planReducer(state: PlanState, action: PlanAction): PlanState {
 }
 
 /** The default route (fewest Transfers) and, when there is one, the fewer-stops alternative, each with its Fare. */
-export function planTrip({ from, to, ticket, discounted }: PlanState): PlanResult {
+export function planRides({ from, to, ticket, discounted }: PlanState): PlanResult {
   if (!from || !to) return { kind: "incomplete" };
   if (from === to) return { kind: "same-station" };
   const plan = planRoute(from, to);

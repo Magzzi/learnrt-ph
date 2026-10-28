@@ -11,7 +11,7 @@ export interface RideState {
   discounted: boolean;
   /** Index into `rideSteps(route, ticket, discounted)`. */
   stepIndex: number;
-  /** Index into the route's Stations in riding order (see `routeStations`). */
+  /** Index into the route's Stations in riding order (see `rideStations`). */
   position: number;
   /** Alerts already given, as "kind:stationId", so none fires twice. */
   alerted: string[];
@@ -34,20 +34,20 @@ export interface RideStatus {
   completed: boolean;
 }
 
-interface Stop {
+interface RoutePoint {
   stationId: string;
-  /** Riding on from here to the next Stop takes one stop; walking a Transfer takes none. */
+  /** Riding on from here to the next point takes one stop; walking a Transfer takes none. */
   rideToNext: boolean;
   /** The rider gets off a train here. */
   getOff: boolean;
 }
 
 /** The route's Stations in the order the rider passes them, including both ends of each Transfer. */
-function routeStops(route: Route): Stop[] {
-  const stops: Stop[] = [];
+function routePoints(route: Route): RoutePoint[] {
+  const points: RoutePoint[] = [];
   const add = (stationId: string) => {
-    if (stops.at(-1)?.stationId !== stationId) stops.push({ stationId, rideToNext: false, getOff: false });
-    return stops.at(-1)!;
+    if (points.at(-1)?.stationId !== stationId) points.push({ stationId, rideToNext: false, getOff: false });
+    return points.at(-1)!;
   };
   for (const s of route.segments) {
     if (s.kind === "walk") {
@@ -56,22 +56,22 @@ function routeStops(route: Route): Stop[] {
       continue;
     }
     s.stationIds.forEach((id, i) => {
-      const stop = add(id);
-      if (i < s.stationIds.length - 1) stop.rideToNext = true;
-      else stop.getOff = true;
+      const point = add(id);
+      if (i < s.stationIds.length - 1) point.rideToNext = true;
+      else point.getOff = true;
     });
   }
-  return stops;
+  return points;
 }
 
 /** The route's Stations in riding order, including both ends of each Transfer. */
 export function rideStations(route: Route): string[] {
-  return routeStops(route).map((s) => s.stationId);
+  return routePoints(route).map((s) => s.stationId);
 }
 
-/** The position in `routeStops` each step belongs to: where the rider is when doing it. */
+/** The position in `routePoints` each step belongs to: where the rider is when doing it. */
 function stepPositions(state: Pick<RideState, "route" | "ticket" | "discounted">): number[] {
-  const stops = routeStops(state.route);
+  const stops = routePoints(state.route);
   const at = (id: string) => stops.findIndex((s) => s.stationId === id);
   return rideSteps(state.route, state.ticket, state.discounted).map((step) => {
     switch (step.kind) {
@@ -108,7 +108,7 @@ export function advanceStep(state: RideState): RideState {
 }
 
 function moveTo(state: RideState, position: number): RideUpdate {
-  const stops = routeStops(state.route);
+  const stops = routePoints(state.route);
   const due: RideAlert[] = [];
   const here = stops[position]!;
   if (here.getOff) due.push({ kind: "get-off", stationId: here.stationId });
@@ -121,13 +121,13 @@ function moveTo(state: RideState, position: number): RideUpdate {
 
 /** A geofence says the rider reached a Station. Only Stations ahead on the route move the ride. */
 export function arrivedAt(state: RideState, stationId: string): RideUpdate {
-  const position = routeStops(state.route).findIndex((s, i) => i > state.position && s.stationId === stationId);
+  const position = routePoints(state.route).findIndex((s, i) => i > state.position && s.stationId === stationId);
   return position < 0 ? { state, alerts: [] } : moveTo(state, position);
 }
 
 /** The rider says where they are ("I'm at ___"): any Station on the route, forward or back. */
 export function imAt(state: RideState, stationId: string): RideUpdate {
-  const position = routeStops(state.route).findIndex((s) => s.stationId === stationId);
+  const position = routePoints(state.route).findIndex((s) => s.stationId === stationId);
   return position < 0 ? { state, alerts: [] } : moveTo(state, position);
 }
 
@@ -136,7 +136,7 @@ export function endRide(state: RideState): RideState {
 }
 
 export function rideStatus(state: RideState): RideStatus {
-  const stops = routeStops(state.route);
+  const stops = routePoints(state.route);
   const ahead = stops.slice(state.position);
   const legEnd = ahead.findIndex((s) => s.getOff);
   const onTrain = ahead[0]!.rideToNext;
@@ -171,7 +171,7 @@ function radiusFor(stationId: string): number {
 /** The regions to watch: the Stations ahead on the route, nearest first. */
 export function geofenceRegions(state: RideState): GeofenceRegion[] {
   if (state.ended) return [];
-  return routeStops(state.route)
+  return routePoints(state.route)
     .slice(state.position + 1, state.position + 1 + MAX_REGIONS)
     .map(({ stationId }) => {
       const { lat, lng } = getStation(stationId)!.location;

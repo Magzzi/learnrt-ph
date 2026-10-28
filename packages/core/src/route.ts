@@ -65,7 +65,10 @@ function allRoutes(at: string, destination: string, used: LineId[], sofar: Route
 
   return stationsOnLine(lineId).flatMap((s) =>
     transfersFrom(s.id)
-      .filter((t) => !used.includes(getStation(t.to)!.lineId))
+      .filter((t) => {
+        const next = getStation(t.to)!.lineId;
+        return !used.includes(next) && getLine(next)?.status === "operational";
+      })
       .flatMap((t) =>
         allRoutes(t.to, destination, [...used, getStation(t.to)!.lineId], [
           ...sofar,

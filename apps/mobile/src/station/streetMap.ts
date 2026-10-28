@@ -1,7 +1,7 @@
-import { entranceData, entrancesAt, getLine, getStation, type LatLng } from "@learnrt/core";
+import { entranceData, entrancesAt, getStation } from "@learnrt/core";
 
 export interface StreetMapData {
-  station: { id: string; name: string; line: string; location: LatLng };
+  station: { id: string; name: string };
   /** [longitude, latitude], as MapLibre expects. */
   center: [number, number];
   /** `label` is the entrance's OSM ref or name; null when OSM has neither (no number is made up). */
@@ -14,7 +14,7 @@ export function streetMap(stationId: string): StreetMapData | null {
   const station = getStation(stationId);
   if (!station) return null;
   return {
-    station: { id: station.id, name: station.name, line: getLine(station.lineId)!.name, location: station.location },
+    station: { id: station.id, name: station.name },
     center: [station.location.lng, station.location.lat],
     entrances: entrancesAt(stationId).map((e) => ({
       osmId: e.osmId,

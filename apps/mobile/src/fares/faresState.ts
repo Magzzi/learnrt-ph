@@ -1,4 +1,5 @@
-import { getFare, getLine, getStation, planRoute, routeFare, type LegFare, type TicketType } from "@learnrt/core";
+import { getFare, getStation, planRoute, routeFare, type LegFare, type TicketType } from "@learnrt/core";
+import { rideable } from "../station/rideable";
 
 export interface FaresState {
   from: string | null;
@@ -19,11 +20,6 @@ export type Quote =
   | { kind: "walk-only" }
   | { kind: "no-fare" }
   | { kind: "incomplete" };
-
-const rideable = (id: string | undefined) => {
-  const station = id ? getStation(id) : undefined;
-  return station && getLine(station.lineId)?.status === "operational" ? station.id : null;
-};
 
 /** Starting state, optionally from Station detail's "Fares from here" (`from` route param). */
 export function initialFaresState(params: { from?: string } = {}): FaresState {

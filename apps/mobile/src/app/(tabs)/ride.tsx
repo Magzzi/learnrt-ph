@@ -7,7 +7,7 @@ import { Segmented } from "@/components/Segmented";
 import { StationPicker } from "@/components/StationPicker";
 import { UnverifiedBadge } from "@/components/UnverifiedBadge";
 import { beginRide, useActiveRide } from "@/ride/activeRide";
-import { initialPlanState, planReducer, planTrip } from "@/ride/planState";
+import { initialPlanState, planReducer, planRides } from "@/ride/planState";
 import { RouteSummary } from "@/ride/RouteSummary";
 import colors from "@/theme/colors";
 
@@ -24,7 +24,7 @@ export default function RideScreen() {
     if (next.to) dispatch({ type: "to", stationId: next.to });
   }, [from, to, at]);
 
-  const result = planTrip(state);
+  const result = planRides(state);
   const active = useActiveRide();
   const activeTo = active && !rideStatus(active).completed ? rideStations(active.route).at(-1) : undefined;
 
