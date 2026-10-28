@@ -18,3 +18,4 @@ export { landmarkData, landmarksAt } from "./landmarks";
 export { uncoveredLines, learnData, lineAreas, type UncoveredLine } from "./learn";
 export { planRoute, type RideSegment, type Route, type RouteBasis, type RoutePlan, type RouteSegment, type WalkSegment } from "./route";
 export { routeFare, type LegFare, type RouteFare } from "./routeFare";
+export { rideSteps, type RideStep } from "./rideSteps";
