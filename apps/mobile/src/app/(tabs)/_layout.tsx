@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import type { ComponentProps } from "react";
 import type { ColorValue } from "react-native";
 import { loadRide } from "@/ride/activeRide";
-import colors from "@/theme/colors";
+import { useTheme } from "@/theme";
 
 type IconProps = ComponentProps<typeof Ionicons>;
 
@@ -18,6 +18,7 @@ const icon = (name: IconProps["name"]) =>
 
 export default function TabsLayout() {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   // A ride in progress comes back on launch, once the root navigator is ready to navigate.
   const navigationReady = Boolean(useRootNavigationState()?.key);
@@ -29,12 +30,12 @@ export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerStyle: { backgroundColor: colors.panel },
-        headerTintColor: colors.text,
-        tabBarStyle: { backgroundColor: colors.panel, borderTopColor: colors.raised },
-        tabBarActiveTintColor: colors.accent,
-        tabBarInactiveTintColor: colors.muted,
-        sceneStyle: { backgroundColor: colors.base },
+        headerStyle: { backgroundColor: theme.page },
+        headerTintColor: theme.ink,
+        tabBarStyle: { backgroundColor: theme.card, borderTopColor: theme.edge },
+        tabBarActiveTintColor: theme.accent,
+        tabBarInactiveTintColor: theme.muted,
+        sceneStyle: { backgroundColor: theme.page },
       }}
     >
       <Tabs.Screen name="index" options={{ title: t("tabs.map"), tabBarAccessibilityLabel: t("tabs.map"), tabBarIcon: icon("map-outline") }} />

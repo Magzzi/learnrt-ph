@@ -5,14 +5,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "dev.learnrt.app"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#0a1a1a",
+        "backgroundColor": "#FBF7F3",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -45,7 +45,7 @@
       "@maplibre/maplibre-react-native"
     ],
     "scheme": "learnrt",
-    "backgroundColor": "#0a1a1a",
+    "backgroundColor": "#FBF7F3",
     "experiments": {
       "typedRoutes": true
     }

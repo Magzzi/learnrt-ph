@@ -7,10 +7,11 @@ import { Segmented } from "@/components/Segmented";
 import { StationPicker } from "@/components/StationPicker";
 import { UnverifiedBadge } from "@/components/UnverifiedBadge";
 import { faresReducer, formatPesos, initialFaresState, quote } from "@/fares/faresState";
-import colors from "@/theme/colors";
+import { useTheme } from "@/theme";
 
 export default function FaresScreen() {
   const { t } = useTranslation();
+  const theme = useTheme();
   const params = useLocalSearchParams<{ from?: string; at?: string }>();
   const [state, dispatch] = useReducer(faresReducer, params, initialFaresState);
 
@@ -24,7 +25,7 @@ export default function FaresScreen() {
   const result = quote(state);
 
   return (
-    <ScrollView className="flex-1 bg-base" contentContainerClassName="gap-4 p-4">
+    <ScrollView className="flex-1 bg-page" contentContainerClassName="gap-4 p-4">
       <StationPicker
         label={t("fares.from")}
         value={state.from}
@@ -58,25 +59,25 @@ export default function FaresScreen() {
         className="flex-row items-center justify-between gap-4"
       >
         <View className="flex-1">
-          <Text className="text-white">{t("fares.discounted")}</Text>
+          <Text className="text-ink">{t("fares.discounted")}</Text>
           <Text className="text-sm text-muted">{t("fares.discountedHint")}</Text>
         </View>
         <Switch
           value={state.discounted}
           onValueChange={(value) => dispatch({ type: "discounted", value })}
           importantForAccessibility="no-hide-descendants"
-          trackColor={{ true: colors.accentStrong, false: colors.raised }}
+          trackColor={{ true: theme.accent, false: theme.sunken }}
         />
       </Pressable>
 
-      <View className="gap-2 rounded-xl border border-raised bg-panel p-4" accessibilityLiveRegion="polite">
+      <View className="gap-2 rounded-xl border border-edge bg-card p-4" accessibilityLiveRegion="polite">
         <View className="flex-row items-center justify-between">
           <Text className="text-muted">{t("fares.fare")}</Text>
           {fareData.lastVerified === null && <UnverifiedBadge />}
         </View>
         {result.kind === "fare" ? (
           <>
-            <Text className="text-4xl font-bold text-white">
+            <Text className="text-4xl font-bold text-ink">
               {result.total === null ? t("plan.fareUnknown") : formatPesos(result.total)}
             </Text>
             {result.legs.length > 1 &&
@@ -85,12 +86,12 @@ export default function FaresScreen() {
                   <Text className="text-muted">
                     {getLine(leg.lineId)!.name}: {getStation(leg.from)!.name} → {getStation(leg.to)!.name}
                   </Text>
-                  <Text className="text-white">{leg.fare === null ? "–" : formatPesos(leg.fare)}</Text>
+                  <Text className="text-ink">{leg.fare === null ? "–" : formatPesos(leg.fare)}</Text>
                 </View>
               ))}
           </>
         ) : (
-          <Text className="text-lg text-white">
+          <Text className="text-lg text-ink">
             {t(result.kind === "no-fare" ? "fares.noFare" : result.kind === "walk-only" ? "plan.walkOnly" : "fares.incomplete")}
           </Text>
         )}

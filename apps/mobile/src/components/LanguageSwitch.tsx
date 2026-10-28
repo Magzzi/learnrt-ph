@@ -18,9 +18,9 @@ export function LanguageSwitch() {
             onPress={() => void setLanguage(language)}
             accessibilityRole="radio"
             accessibilityState={{ selected }}
-            className={`rounded-full border px-4 py-2 ${selected ? "border-accent bg-raised" : "border-border"}`}
+            className={`rounded-full border px-4 py-2 ${selected ? "border-accent bg-sunken" : "border-edge"}`}
           >
-            <Text className={selected ? "font-semibold text-accent" : "text-muted"}>{NAMES[language]}</Text>
+            <Text className={selected ? "font-semibold text-accentInk" : "text-muted"}>{NAMES[language]}</Text>
           </Pressable>
         );
       })}

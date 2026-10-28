@@ -37,16 +37,16 @@ export function StationPicker({
         onPress={() => setOpen(true)}
         accessibilityRole="button"
         accessibilityLabel={`${label}: ${name ?? t("fares.choose")}`}
-        className="rounded-lg border border-border bg-base px-3 py-3"
+        className="rounded-lg border border-edge bg-page px-3 py-3"
       >
-        <Text className={name ? "text-white" : "text-muted"}>{name ?? t("fares.choose")}</Text>
+        <Text className={name ? "text-ink" : "text-muted"}>{name ?? t("fares.choose")}</Text>
       </Pressable>
       <Modal visible={open} animationType="slide" onRequestClose={() => setOpen(false)}>
-        <View className="flex-1 bg-base pt-12">
+        <View className="flex-1 bg-page pt-12">
           <View className="flex-row items-center justify-between px-4 pb-2">
-            <Text className="text-xl font-bold text-white">{label}</Text>
+            <Text className="text-xl font-bold text-ink">{label}</Text>
             <Pressable onPress={() => setOpen(false)} accessibilityRole="button" className="p-2">
-              <Text className="text-accent">{t("fares.close")}</Text>
+              <Text className="text-accentInk">{t("fares.close")}</Text>
             </Pressable>
           </View>
           <FlatList
@@ -60,9 +60,9 @@ export function StationPicker({
                 }}
                 accessibilityRole="button"
                 accessibilityState={{ selected: item.id === value }}
-                className="border-b border-raised px-4 py-4"
+                className="border-b border-edge px-4 py-4"
               >
-                <Text className={item.id === value ? "font-semibold text-accent" : "text-white"}>{withLine(item.id)}</Text>
+                <Text className={item.id === value ? "font-semibold text-accentInk" : "text-ink"}>{withLine(item.id)}</Text>
               </Pressable>
             )}
           />

@@ -25,5 +25,6 @@ Data the app uses that has not been verified against a source the owner has appr
 | D19 | First-timer tip: the exit gate keeps a Single Journey Ticket | removed from the app (owner, 2026-10-28) | Not checked against an operator source | Confirm per Line with LRMC, LRTA and MRT-3, then restore the sentence in the gates tip |
 | D20 | First-timer tip: some Stations have a separate entrance for each direction | removed from the app (owner, 2026-10-28) | Not checked against an operator source; which Stations is unknown (see D15) | Confirm with the operators, then restore as a tip |
 | D21 | Direction names | Guided Ride says "towards <last Station>" from core's Line order (M2) | The operators' own platform and direction wording (e.g. "Northbound", "To Baclaran") is unknown | Operator signage wording per Line |
+| D22 | Line colours | `apps/mobile/src/theme/tokens.js` | LearnRT's own colours, chosen for contrast and colour-blind riders (UI1); they are not the operators' official Line colours, and the app never claims they are (PRD §11: no operator branding) | None needed; revisit only if an operator asks |
 
 D9–D13: not blocking M1 (owner, 2026-10-28).

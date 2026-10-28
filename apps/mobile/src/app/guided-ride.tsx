@@ -37,11 +37,11 @@ export default function GuidedRideScreen() {
 
   if (!ride) {
     return (
-      <View className="flex-1 gap-4 bg-base p-4">
+      <View className="flex-1 gap-4 bg-page p-4">
         <Stack.Screen options={{ title: t("ride.title") }} />
-        <Text className="text-lg text-white">{t("ride.complete")}</Text>
-        <Pressable onPress={() => router.replace("/ride")} accessibilityRole="button" className="items-center rounded-xl bg-primary p-4">
-          <Text className="font-semibold text-black">{t("ride.backToPlanner")}</Text>
+        <Text className="text-lg text-ink">{t("ride.complete")}</Text>
+        <Pressable onPress={() => router.replace("/ride")} accessibilityRole="button" className="items-center rounded-xl bg-accent p-4">
+          <Text className="font-semibold text-onAccent">{t("ride.backToPlanner")}</Text>
         </Pressable>
       </View>
     );
@@ -50,34 +50,34 @@ export default function GuidedRideScreen() {
   const { status, current, canAdvance, getOffAt, ahead, upcoming, unverified } = rideView(ride);
 
   return (
-    <ScrollView className="flex-1 bg-base" contentContainerClassName="gap-4 p-4">
+    <ScrollView className="flex-1 bg-page" contentContainerClassName="gap-4 p-4">
       <Stack.Screen options={{ title: t("ride.title") }} />
 
       <View className="gap-1" accessibilityLiveRegion="polite">
         <Text className="text-muted">{t("ride.nowAt", { station: getStation(status.stationId)!.name })}</Text>
         {status.stopsLeftOnLeg > 0 && (
-          <Text className="text-lg font-semibold text-white">
+          <Text className="text-lg font-semibold text-ink">
             {t("ride.stopsLeft", { count: status.stopsLeftOnLeg, station: getStation(getOffAt)!.name })}
           </Text>
         )}
       </View>
 
-      <View className="gap-3 rounded-xl border border-accent bg-panel p-4" accessibilityLiveRegion="polite">
+      <View className="gap-3 rounded-xl border border-accent bg-card p-4" accessibilityLiveRegion="polite">
         {unverified && <UnverifiedBadge />}
-        <Text className="text-xl font-bold text-white">{t(current.key as never, current.params)}</Text>
+        <Text className="text-xl font-bold text-ink">{t(current.key as never, current.params)}</Text>
         {current.note && <Text className="text-muted">{t(current.note as never)}</Text>}
         {canAdvance && (
           <Pressable
             onPress={() => updateRide(advanceStep)}
             accessibilityRole="button"
-            className="items-center rounded-xl bg-primary p-3"
+            className="items-center rounded-xl bg-accent p-3"
           >
-            <Text className="font-semibold text-black">{t("ride.done")}</Text>
+            <Text className="font-semibold text-onAccent">{t("ride.done")}</Text>
           </Pressable>
         )}
         {status.completed && (
-          <Pressable onPress={end} accessibilityRole="button" className="items-center rounded-xl bg-primary p-3">
-            <Text className="font-semibold text-black">{t("ride.backToPlanner")}</Text>
+          <Pressable onPress={end} accessibilityRole="button" className="items-center rounded-xl bg-accent p-3">
+            <Text className="font-semibold text-onAccent">{t("ride.backToPlanner")}</Text>
           </Pressable>
         )}
       </View>
@@ -86,7 +86,7 @@ export default function GuidedRideScreen() {
         <View className="gap-1">
           <Text className="text-sm text-muted">{t("ride.ahead")}</Text>
           {ahead.map((id) => (
-            <Text key={id} className={id === getOffAt ? "font-semibold text-accent" : "text-white"}>
+            <Text key={id} className={id === getOffAt ? "font-semibold text-accentInk" : "text-ink"}>
               • {getStation(id)!.name}
             </Text>
           ))}
@@ -99,23 +99,23 @@ export default function GuidedRideScreen() {
         </Text>
       ))}
 
-      {!status.completed && alerts === "on" && <Text className="text-sm text-accent">{t("alerts.on")}</Text>}
+      {!status.completed && alerts === "on" && <Text className="text-sm text-accentInk">{t("alerts.on")}</Text>}
       {!status.completed && alerts === "accuracy" && (
-        <View className="gap-2 rounded-xl border border-warning bg-panel p-4">
-          <Text className="text-base font-semibold text-white">{t("alerts.explainTitle")}</Text>
+        <View className="gap-2 rounded-xl border border-warn bg-card p-4">
+          <Text className="text-base font-semibold text-ink">{t("alerts.explainTitle")}</Text>
           <Text className="text-muted">{t("alerts.accuracyOff")}</Text>
           <Pressable
             onPress={async () => setAlerts((await turnOnLocationAccuracy(ride)) ? "on" : "accuracy")}
             accessibilityRole="button"
             className="items-center rounded-xl border border-accent p-3"
           >
-            <Text className="font-semibold text-accent">{t("alerts.turnOnAccuracy")}</Text>
+            <Text className="font-semibold text-accentInk">{t("alerts.turnOnAccuracy")}</Text>
           </Pressable>
         </View>
       )}
       {!status.completed && (alerts === "ask" || alerts === "off") && (
-        <View className="gap-2 rounded-xl border border-raised bg-panel p-4">
-          <Text className="text-base font-semibold text-white">{t("alerts.explainTitle")}</Text>
+        <View className="gap-2 rounded-xl border border-edge bg-card p-4">
+          <Text className="text-base font-semibold text-ink">{t("alerts.explainTitle")}</Text>
           <Text className="text-muted">{t(alerts === "ask" ? "alerts.explain" : "alerts.off")}</Text>
           <Pressable
             onPress={async () => {
@@ -126,7 +126,7 @@ export default function GuidedRideScreen() {
             accessibilityRole="button"
             className="items-center rounded-xl border border-accent p-3"
           >
-            <Text className="font-semibold text-accent">{t(alerts === "ask" ? "alerts.enable" : "alerts.openSettings")}</Text>
+            <Text className="font-semibold text-accentInk">{t(alerts === "ask" ? "alerts.enable" : "alerts.openSettings")}</Text>
           </Pressable>
         </View>
       )}
@@ -143,8 +143,8 @@ export default function GuidedRideScreen() {
             <Text className="text-sm text-muted">{t("ride.imAtHint")}</Text>
           </View>
           <Text className="text-sm text-muted">{t("ride.keepOpen")}</Text>
-          <Pressable onPress={end} accessibilityRole="button" className="items-center rounded-xl border border-border p-4">
-            <Text className="text-white">{t("ride.end")}</Text>
+          <Pressable onPress={end} accessibilityRole="button" className="items-center rounded-xl border border-edge p-4">
+            <Text className="text-ink">{t("ride.end")}</Text>
           </Pressable>
         </>
       )}

@@ -11,9 +11,8 @@ import {
 } from "react-native-gesture-handler";
 import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import Svg, { Circle, G, Line as SvgLine, Polyline, Text as SvgText } from "react-native-svg";
-import colors from "@/theme/colors";
 import { layoutNetwork, stationAt } from "./layout";
-import { LINE_COLORS } from "./lineColors";
+import { useTheme } from "@/theme";
 
 const LAYOUT = layoutNetwork({ width: 1000, padding: 60 });
 const MIN_SCALE = 1;
@@ -36,6 +35,7 @@ const clamp = (value: number, min: number, max: number) => {
 /** The Line map: every Line drawn from core data, with pinch-zoom, pan and tap-to-open. */
 export function LineMap({ onSelectStation }: { onSelectStation: (stationId: string) => void }) {
   const { t } = useTranslation();
+  const theme = useTheme();
   const [width, setWidth] = useState(0);
   const pointsPerUnit = width / LAYOUT.width;
 
@@ -112,7 +112,7 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
 
   return (
     <View
-      className="flex-1 overflow-hidden bg-base"
+      className="flex-1 overflow-hidden bg-mapBg"
       onLayout={(e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width)}
     >
       {width > 0 && (
@@ -132,7 +132,7 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
                     y1={tr.from.y}
                     x2={tr.to.x}
                     y2={tr.to.y}
-                    stroke={colors.text}
+                    stroke={theme.ink}
                     strokeWidth={10}
                     strokeLinecap="round"
                   />
@@ -142,7 +142,7 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
                     key={line.lineId}
                     points={line.points.map((p) => `${p.x},${p.y}`).join(" ")}
                     fill="none"
-                    stroke={LINE_COLORS[line.lineId]}
+                    stroke={theme.lines[line.lineId]}
                     strokeWidth={6}
                     strokeDasharray={line.dashed ? "14 10" : undefined}
                     strokeLinejoin="round"
@@ -154,8 +154,8 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
                       cx={s.x}
                       cy={s.y}
                       r={LAYOUT.stationRadius}
-                      fill={colors.base}
-                      stroke={LINE_COLORS[s.lineId]}
+                      fill={theme.mapBg}
+                      stroke={theme.lines[s.lineId]}
                       strokeWidth={2.5}
                     />
                     <SvgText
@@ -163,7 +163,7 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
                       textAnchor={s.left ? "end" : "start"}
                       y={s.angled ? s.y - 10 : s.y + LABEL_SIZE / 3}
                       fontSize={LABEL_SIZE}
-                      fill={s.operational ? colors.label : colors.muted}
+                      fill={s.operational ? theme.mapLabel : theme.muted}
                       transform={s.angled ? `rotate(-40 ${s.x + 4} ${s.y - 10})` : undefined}
                     >
                       {s.name}

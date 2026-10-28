@@ -7,7 +7,7 @@ import { openStation } from "@/navigation";
 export default function MapScreen() {
   const { t } = useTranslation();
   return (
-    <View className="flex-1 bg-base">
+    <View className="flex-1 bg-page">
       <LineMap onSelectStation={openStation} />
       <MapLegend />
       <Text className="absolute bottom-36 right-3 text-xs text-muted">{t("map.hint")}</Text>

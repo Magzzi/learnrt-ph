@@ -3,9 +3,9 @@ import { router, Stack, useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { Section } from "@/components/Section";
-import { LINE_COLORS } from "@/map/lineColors";
 import { openStation } from "@/navigation";
 import { stationDetail } from "@/station/detail";
+import { useTheme } from "@/theme";
 
 const STATUS_KEYS = {
   operational: "lineStatus.operational",
@@ -16,14 +16,15 @@ const STATUS_KEYS = {
 
 export default function StationScreen() {
   const { t } = useTranslation();
+  const theme = useTheme();
   const { id } = useLocalSearchParams<{ id: string }>();
   const detail = stationDetail(id);
 
   if (!detail) {
     return (
-      <View className="flex-1 bg-base p-4">
+      <View className="flex-1 bg-page p-4">
         <Stack.Screen options={{ title: t("station.notFound") }} />
-        <Text className="text-lg text-white">{t("station.notFound")}</Text>
+        <Text className="text-lg text-ink">{t("station.notFound")}</Text>
       </View>
     );
   }
@@ -31,16 +32,16 @@ export default function StationScreen() {
   const facilities = ["station.entrances", "station.platforms", "station.elevators"] as const;
 
   return (
-    <ScrollView className="flex-1 bg-base" contentContainerClassName="gap-3 p-4">
+    <ScrollView className="flex-1 bg-page" contentContainerClassName="gap-3 p-4">
       <Stack.Screen options={{ title: detail.title }} />
 
       <View className="gap-2">
-        <Text className="text-3xl font-bold text-white" accessibilityRole="header">
+        <Text className="text-3xl font-bold text-ink" accessibilityRole="header">
           {detail.name}
         </Text>
         <View className="flex-row items-center gap-2">
-          <View className="h-3 w-3 rounded-full" style={{ backgroundColor: LINE_COLORS[detail.line.id] }} />
-          <Text className="text-white">{detail.line.name}</Text>
+          <View className="h-3 w-3 rounded-full" style={{ backgroundColor: theme.lines[detail.line.id] }} />
+          <Text className="text-ink">{detail.line.name}</Text>
           <Text className="text-muted">· {t(STATUS_KEYS[detail.line.status])}</Text>
         </View>
       </View>
@@ -52,9 +53,9 @@ export default function StationScreen() {
               key={n.id}
               onPress={() => openStation(n.id)}
               accessibilityRole="link"
-              className="rounded-full border border-border px-3 py-2"
+              className="rounded-full border border-edge px-3 py-2"
             >
-              <Text className="text-accent">{n.name}</Text>
+              <Text className="text-accentInk">{n.name}</Text>
             </Pressable>
           ))}
         </View>
@@ -64,7 +65,7 @@ export default function StationScreen() {
         <Section title={t("station.transfer")} unverified={detail.unverified.transfers}>
           {detail.transfers.map((tr) => (
             <Pressable key={tr.stationId} onPress={() => openStation(tr.stationId)} accessibilityRole="link">
-              <Text className="text-accent">{t("station.transferTo", { station: tr.stationName, line: tr.lineName })}</Text>
+              <Text className="text-accentInk">{t("station.transferTo", { station: tr.stationName, line: tr.lineName })}</Text>
               <Text className="text-sm text-muted">{tr.directions ?? t("station.walkingNotAvailable")}</Text>
             </Pressable>
           ))}
@@ -74,7 +75,7 @@ export default function StationScreen() {
       <Section title={t("station.nearby")} unverified={detail.unverified.landmarks && detail.landmarks.length > 0}>
         {detail.landmarks.length > 0 ? (
           detail.landmarks.map((l) => (
-            <Text key={l} className="text-white">
+            <Text key={l} className="text-ink">
               • {l}
             </Text>
           ))
@@ -86,15 +87,15 @@ export default function StationScreen() {
       <Pressable
         onPress={() => router.push({ pathname: "/street-map/[id]", params: { id: detail.id } })}
         accessibilityRole="button"
-        className="items-center rounded-xl border border-border p-4"
+        className="items-center rounded-xl border border-edge p-4"
       >
-        <Text className="text-accent">{t("station.streetMap")}</Text>
+        <Text className="text-accentInk">{t("station.streetMap")}</Text>
       </Pressable>
 
       <Section title={t("station.facilities")}>
         {facilities.map((key) => (
           <View key={key} className="flex-row justify-between">
-            <Text className="text-white">{t(key)}</Text>
+            <Text className="text-ink">{t(key)}</Text>
             <Text className="text-muted">{t("station.notAvailable")}</Text>
           </View>
         ))}
@@ -104,9 +105,9 @@ export default function StationScreen() {
         <Pressable
           onPress={() => router.navigate({ pathname: "/fares", params: { from: detail.id, at: String(Date.now()) } })}
           accessibilityRole="button"
-          className="items-center rounded-xl bg-primary p-4"
+          className="items-center rounded-xl bg-accent p-4"
         >
-          <Text className="font-semibold text-black">{t("station.faresFromHere")}</Text>
+          <Text className="font-semibold text-onAccent">{t("station.faresFromHere")}</Text>
         </Pressable>
       )}
       {detail.line.status === "operational" && (
@@ -118,7 +119,7 @@ export default function StationScreen() {
               accessibilityRole="button"
               className="flex-1 items-center rounded-xl border border-accent p-4"
             >
-              <Text className="font-semibold text-accent">{t(end === "from" ? "station.rideFromHere" : "station.rideToHere")}</Text>
+              <Text className="font-semibold text-accentInk">{t(end === "from" ? "station.rideFromHere" : "station.rideToHere")}</Text>
             </Pressable>
           ))}
         </View>

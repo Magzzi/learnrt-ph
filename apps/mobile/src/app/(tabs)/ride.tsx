@@ -9,10 +9,11 @@ import { UnverifiedBadge } from "@/components/UnverifiedBadge";
 import { beginRide, useActiveRide } from "@/ride/activeRide";
 import { initialPlanState, planReducer, planRides } from "@/ride/planState";
 import { RouteSummary } from "@/ride/RouteSummary";
-import colors from "@/theme/colors";
+import { useTheme } from "@/theme";
 
 export default function RideScreen() {
   const { t } = useTranslation();
+  const theme = useTheme();
   const params = useLocalSearchParams<{ from?: string; to?: string; at?: string }>();
   const [state, dispatch] = useReducer(planReducer, params, initialPlanState);
 
@@ -29,14 +30,14 @@ export default function RideScreen() {
   const activeTo = active && !rideStatus(active).completed ? rideStations(active.route).at(-1) : undefined;
 
   return (
-    <ScrollView className="flex-1 bg-base" contentContainerClassName="gap-4 p-4">
+    <ScrollView className="flex-1 bg-page" contentContainerClassName="gap-4 p-4">
       {activeTo && (
         <Pressable
           onPress={() => router.push("/guided-ride")}
           accessibilityRole="button"
-          className="items-center rounded-xl border border-accent bg-panel p-4"
+          className="items-center rounded-xl border border-accent bg-card p-4"
         >
-          <Text className="font-semibold text-accent">{t("plan.continue", { station: getStation(activeTo)!.name })}</Text>
+          <Text className="font-semibold text-accentInk">{t("plan.continue", { station: getStation(activeTo)!.name })}</Text>
         </Pressable>
       )}
       <StationPicker label={t("plan.from")} value={state.from} onChange={(stationId) => dispatch({ type: "from", stationId })} />
@@ -44,9 +45,9 @@ export default function RideScreen() {
         onPress={() => dispatch({ type: "swap" })}
         accessibilityRole="button"
         accessibilityLabel={t("plan.swap")}
-        className="self-end rounded-full border border-border px-3 py-1"
+        className="self-end rounded-full border border-edge px-3 py-1"
       >
-        <Text className="text-accent">⇅</Text>
+        <Text className="text-accentInk">⇅</Text>
       </Pressable>
       <StationPicker label={t("plan.to")} value={state.to} onChange={(stationId) => dispatch({ type: "to", stationId })} />
 
@@ -69,21 +70,21 @@ export default function RideScreen() {
         accessibilityLabel={t("fares.discounted")}
         className="flex-row items-center justify-between gap-4"
       >
-        <Text className="flex-1 text-white">{t("fares.discounted")}</Text>
+        <Text className="flex-1 text-ink">{t("fares.discounted")}</Text>
         <Switch
           value={state.discounted}
           onValueChange={(value) => dispatch({ type: "discounted", value })}
           importantForAccessibility="no-hide-descendants"
-          trackColor={{ true: colors.accentStrong, false: colors.raised }}
+          trackColor={{ true: theme.accent, false: theme.sunken }}
         />
       </Pressable>
 
       {result.kind === "planned" ? (
         result.options.map((option) => (
-          <View key={option.route.basis} className="gap-3 rounded-xl border border-raised bg-panel p-4">
+          <View key={option.route.basis} className="gap-3 rounded-xl border border-edge bg-card p-4">
             <View className="flex-row items-start justify-between gap-2">
               <View className="flex-1">
-                <Text className="text-base font-semibold text-white" accessibilityRole="header">
+                <Text className="text-base font-semibold text-ink" accessibilityRole="header">
                   {t(option.route.basis === "fewest-transfers" ? "plan.fewestTransfers" : "plan.fewerStops")}
                 </Text>
                 <Text className="text-xs text-muted">{t("plan.estimated")}</Text>
@@ -94,9 +95,9 @@ export default function RideScreen() {
             <Pressable
               onPress={() => beginRide(option.route, state.ticket, state.discounted)}
               accessibilityRole="button"
-              className="items-center rounded-xl bg-primary p-4"
+              className="items-center rounded-xl bg-accent p-4"
             >
-              <Text className="font-semibold text-black">{t("plan.start")}</Text>
+              <Text className="font-semibold text-onAccent">{t("plan.start")}</Text>
             </Pressable>
           </View>
         ))
