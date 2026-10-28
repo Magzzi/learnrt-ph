@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Linking, Pressable, ScrollView, Text } from "react-native";
 import { LanguageSwitch } from "@/components/LanguageSwitch";
 import { Section } from "@/components/Section";
+import { ThemeSwitch } from "@/components/ThemeSwitch";
 import { FRAUNCES_LICENSE } from "@/legal/frauncesLicense";
 
 const OSM_COPYRIGHT = "https://www.openstreetmap.org/copyright";
@@ -14,6 +15,12 @@ export default function AboutScreen() {
   return (
     <ScrollView className="flex-1 bg-page" contentContainerClassName="gap-3 p-4">
       <Stack.Screen options={{ title: t("about.title") }} />
+      <Section title={t("about.appearance")}>
+        <ThemeSwitch />
+      </Section>
+      <Section title={t("about.language")}>
+        <LanguageSwitch />
+      </Section>
       <Section title={t("about.unofficialTitle")}>
         <Text className="text-ink">{t("about.unofficial")}</Text>
       </Section>
@@ -25,9 +32,6 @@ export default function AboutScreen() {
       </Section>
       <Section title={t("about.unverifiedTitle")}>
         <Text className="text-ink">{t("about.unverified")}</Text>
-      </Section>
-      <Section title={t("about.language")}>
-        <LanguageSwitch />
       </Section>
       {/* SIL OFL 1.1: the bundled font ships with its copyright notice and licence. */}
       <Section title={t("about.fontTitle")}>

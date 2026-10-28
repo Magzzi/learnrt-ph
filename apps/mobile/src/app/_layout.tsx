@@ -8,6 +8,7 @@ import { AppState, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { loadRide } from "@/ride/activeRide";
+import { loadThemePreference } from "@/theme/themeStore";
 import { useTheme, useThemeName, useThemeVariables } from "@/theme";
 
 export default function RootLayout() {
@@ -16,6 +17,10 @@ export default function RootLayout() {
   const themeVariables = useThemeVariables();
 
   // Coming back from the background re-reads the ride, since the geofence task may have moved it on.
+  useEffect(() => {
+    void loadThemePreference();
+  }, []);
+
   useEffect(() => {
     const sub = AppState.addEventListener("change", (s) => s === "active" && void loadRide());
     return () => sub.remove();

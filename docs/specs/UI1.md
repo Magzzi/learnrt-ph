@@ -87,3 +87,8 @@ The mockups were drafted quickly and contain mistakes; the app keeps its real da
 - `WelcomeArt` colours are artwork and exempt from colour roles.
 - At enlarged text (font scale above 1.15) the Map tab's welcome card shrinks to its title and the tip bar is hidden, so the map keeps room; tab labels keep a fixed size because the bar has a fixed height.
 - Two small changes beyond the spec: a "you are here" dot for "show me", and the Nearest tab icon.
+
+## Owner requests after the first phone test (2026-10-28)
+- **Theme toggle:** About has an "Appearance" choice: same as phone (default), light or dark; saved on the device. This replaces "follows the phone only" above.
+- **Station picker:** Ride and Fares pick the Line first (LRT-1, LRT-2, MRT-3 or All Lines), then a Station, with a search box that ignores accents and case.
+- **Nearby Station route:** tapping a Station on the Nearest tab opens a street map with the rider, the Station and its entrances joined by a dotted straight line and the distance, plus "Open in Google Maps" (walking directions; only the Station's position is sent to Google, the rider's stays on the phone) and "Station details". LearnRT draws no walking path: there is no routing data and none is invented.

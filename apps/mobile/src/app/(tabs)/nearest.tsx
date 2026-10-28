@@ -8,7 +8,6 @@ import { PrimaryButton, SecondaryButton } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { currentPosition } from "@/nearest/currentPosition";
 import { formatDistance } from "@/nearest/formatDistance";
-import { openStation } from "@/navigation";
 import { UnverifiedBadge } from "@/components/UnverifiedBadge";
 import { useTheme } from "@/theme";
 
@@ -17,7 +16,7 @@ type SearchState =
   | { kind: "finding" }
   | { kind: "denied"; canAskAgain: boolean }
   | { kind: "unavailable" }
-  | { kind: "found"; results: NearestStation[] };
+  | { kind: "found"; from: { lat: number; lng: number }; results: NearestStation[] };
 
 export default function NearestScreen() {
   const { t } = useTranslation();
@@ -34,7 +33,11 @@ export default function NearestScreen() {
     const coords = await currentPosition();
     setStatus(
       coords
-        ? { kind: "found", results: findNearestStations({ lat: coords.latitude, lng: coords.longitude }) }
+        ? {
+            kind: "found",
+            from: { lat: coords.latitude, lng: coords.longitude },
+            results: findNearestStations({ lat: coords.latitude, lng: coords.longitude }),
+          }
         : { kind: "unavailable" },
     );
   };
@@ -91,7 +94,12 @@ export default function NearestScreen() {
             return (
               <Pressable
                 key={station.id}
-                onPress={() => openStation(station.id)}
+                onPress={() =>
+                  router.push({
+                    pathname: "/nearby/[id]",
+                    params: { id: station.id, lat: String(status.from.lat), lng: String(status.from.lng), km: String(distanceKm) },
+                  })
+                }
                 accessibilityRole="link"
                 className="flex-row items-center justify-between rounded-2xl border border-edge bg-card p-4"
               >
