@@ -141,6 +141,7 @@ Riders arrive as learners and stay as commuters.
 - Apple Developer ($99/year) and Google Play ($25 one-time) accounts.
 - OSM attribution in the app and on the site.
 - Filipino strings reviewed by the owner and a native speaker (every string is marked "needs review" until then).
+- Final app identifier chosen by the owner (Android package and iOS bundle identifier; `dev.learnrt.app` is a placeholder and cannot change once published). Claude presents the options when M6 starts.
 
 ## 12. Milestones
 
