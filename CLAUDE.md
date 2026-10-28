@@ -19,13 +19,14 @@ Platform-free shared logic, tested with Vitest (`pnpm test`). No React, Next, No
 - `graph.ts`: Line neighbours and bidirectional Transfers
 - `route.ts`, `routeFare.ts`, `rideSteps.ts`, `rideProgress.ts`: Guided Ride. `planRoute` returns the fewest-Transfers route plus a fewer-stops alternative (no travel times exist); steps leave unknown entrances, platforms and walks as `null`; ride progress is a pure, JSON-serialisable state machine that also picks the geofence regions
 - `landmarks.ts`, `learn.ts`: Landmarks and Learn content moved from the website
+- `entrances.ts`: Station Entrances from OpenStreetMap, linked only through OSM stop areas (never by distance); `pnpm --filter @learnrt/core fetch-osm-entrances` refreshes the extract and regenerates `src/data/entrances.ts`
 - Station positions come from OpenStreetMap: `pnpm --filter @learnrt/core fetch-osm-stations` refreshes `data-sources/osm-stations.json`, then `apply-osm-coordinates` writes them into `src/data/stations.ts`
 - Every dataset exposes `lastVerified`; while it is `null` the app shows an Unverified label
 - `src/test-support/` re-reads the website's `.xlsx` files and pages to prove the migrated data is unchanged; when M4b deletes those pages, those tests and their sources must move together
 
 ### `apps/mobile`
 
-Expo SDK 58, Expo Router (`src/app`), NativeWind, i18next. Read `apps/mobile/AGENTS.md` first: always add packages with `npx expo install`. Logic lives outside `src/app` as pure, Vitest-tested functions (`src/map`, `src/fares`, `src/nearest`, `src/station`, `src/i18n`). Every rider-facing string goes through i18n; Filipino strings carry `review: "needs review"` until reviewed (launch gate, PRD §11). Station and Line names are never translated. Since M2 the app runs in a **development build**, not Expo Go (Expo Go has no background tasks on Android). Build and install it with `JAVA_HOME=~/.local/jdk/jdk-21.0.13+9 npx expo run:android` (Temurin 21; the system Java 25 has no compiler), then `npx expo start --dev-client`. `android/` and `ios/` are generated (CNG) and git-ignored; configure native settings in `app.json`. `index.ts` is the entry so the geofence task (`src/ride/background.ts`) is defined before any screen. Local Android emulator: AVD `learnrt_api36` in `~/Android/Sdk`; it only runs headless with `-gpu swangle_indirect`, and location must be injected through the GPS test provider (the emulator's `geo fix` does not reach apps): `node scripts/gps-playback.ts <stationId> ...` plays a route.
+Expo SDK 58, Expo Router (`src/app`), NativeWind, i18next. Read `apps/mobile/AGENTS.md` first: always add packages with `npx expo install`. Logic lives outside `src/app` as pure, Vitest-tested functions (`src/map`, `src/fares`, `src/nearest`, `src/station`, `src/i18n`). Every rider-facing string goes through i18n; Filipino strings carry `review: "needs review"` until reviewed (launch gate, PRD §11). Station and Line names are never translated. Since M2 the app runs in a **development build**, not Expo Go (Expo Go has no background tasks on Android). Build and install it with `JAVA_HOME=~/.local/jdk/jdk-21.0.13+9 npx expo run:android` (Temurin 21; the system Java 25 has no compiler), then `npx expo start --dev-client`. Do not start Metro with `CI=1`: that turns off file watching and Metro keeps serving stale code. `android/` and `ios/` are generated (CNG) and git-ignored; configure native settings in `app.json`. `index.ts` is the entry so the geofence task (`src/ride/background.ts`) is defined before any screen. Local Android emulator: AVD `learnrt_api36` in `~/Android/Sdk`; it only runs headless with `-gpu swangle_indirect`, and location must be injected through the GPS test provider (the emulator's `geo fix` does not reach apps): `node scripts/gps-playback.ts <stationId> ...` plays a route. Geofences need the emulator's Location Accuracy setting on (ADR 0006). The street map's tile URL is the single value in `src/config.ts` (OpenFreeMap; never OpenStreetMap's own tile servers).
 
 - Product spec: `docs/PRD.md`
 - Domain vocabulary: `GLOSSARY.md` (use these terms in code, docs and tickets)
@@ -43,6 +44,7 @@ pnpm --filter mobile android # Build and install the Android development build
 pnpm build:web        # Production build of the website
 pnpm test             # Run every package's tests
 pnpm typecheck        # Type-check every package
+pnpm --filter mobile lint    # ESLint for apps/mobile (expo lint)
 ```
 
 `pnpm --filter web lint` runs `next lint`, which Next 16 removed; it fails and there is no ESLint config yet.

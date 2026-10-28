@@ -6,7 +6,7 @@ A mobile app that teaches first-time riders, and keeps daily commuters informed,
 
 **Line**:
 A named rail service with its own stations and direction of travel, such as LRT-1, LRT-2 or MRT-3.
-_Avoid_: Railway, route, train line
+_Avoid_: Railway, route (that is a Route), train line
 
 **Station**:
 A stop on a Line where riders board or alight.
@@ -15,6 +15,10 @@ _Avoid_: Stop, terminal (unless it is a Line's end)
 **Transfer**:
 A walk between two Stations that lets a rider change from one Line to another, such as Doroteo Jose to Recto.
 _Avoid_: Interchange, connection
+
+**Entrance**:
+A way into a Station from the street, as mapped in OpenStreetMap.
+_Avoid_: Gate (where riders tap in), access point
 
 **Landmark**:
 A well-known place near a Station that helps riders find their way, such as a church, mall or university.
@@ -52,9 +56,17 @@ _Avoid_: Promo fare, concession
 The Station on an operational Line closest in straight-line distance to a rider's location.
 _Avoid_: Closest stop, nearby station
 
+**Route**:
+The Lines a rider takes, and the Transfers between them, to get from an origin Station to a destination Station.
+_Avoid_: Path, itinerary, trip; "route" for a Line
+
 **Guided Ride**:
 An active, step-by-step trip a rider follows from an origin Station to a destination Station, including any Transfers.
 _Avoid_: Trip, journey, navigation
+
+**Ride Alert**:
+A notification during a Guided Ride telling the rider to get off at the next Station, or to get off now.
+_Avoid_: Advisory (an official notice), reminder
 
 **Saved Commute**:
 A Guided Ride a rider has stored to repeat and be alerted about.
@@ -68,7 +80,7 @@ _Avoid_: Post, tip, comment
 
 **Advisory**:
 An official operator notice that an admin has curated into the app.
-_Avoid_: Announcement, alert, news
+_Avoid_: Announcement, alert (that is a Ride Alert), news
 
 **Headway Estimate**:
 An approximate wait for the next train, derived from the published schedule rather than from tracking trains.

@@ -62,7 +62,7 @@ Riders arrive as learners and stay as commuters.
 
 ### F5. Guided Ride
 - Pick origin and destination, including across Lines. The app shows the fare and the steps: which entrance, how to pay, which platform and direction, how many stops, where and how to Transfer, when to alight.
-- Background geofences on each Station along the route advance the steps and fire notifications with the screen locked. An ongoing notification (Live Activity on iOS) shows stops remaining.
+- Background geofences on each Station along the route advance the steps and fire notifications with the screen locked (ADR 0006). An ongoing notification on Android shows stops remaining; the iOS Live Activity comes in M6.
 - Manual "I'm at ___" fallback when GPS drifts, for example underground.
 - Works fully offline.
 
@@ -155,7 +155,7 @@ Each is a vertical slice that can be demoed.
 | M4 | Admin and Advisories | In-app admin, Advisory publishing with push to followers, moderation, data editor, OSM import |
 | M4b | Marketing site | `apps/web` reduced to the pages in section 10 |
 | M5 | Delay Signals | Opt-in Segment Timing upload, baselines, "slower than usual" signals |
-| M6 | Plus and launch | RevenueCat, Saved Commutes, widgets, Sentry, listings, store submission |
+| M6 | Plus and launch | RevenueCat, Saved Commutes, widgets, iOS Live Activity for Guided Ride, Sentry, listings, store submission |
 
 ## 13. Success measures (to be set)
 
@@ -172,5 +172,6 @@ Suggested starting points, to be confirmed by the owner:
 - **Data accuracy:** wrong fares or platform directions erode trust quickly; every dataset needs a visible "last verified" date.
 - **Operator relations:** an unofficial app using operator names could draw objections; keep the disclaimer and avoid logos.
 - **Moderation load:** one admin cannot review unlimited reports; confirmation and reputation must do most of the filtering.
+- **Guided Ride alert timing:** alerts depend on Android geofences through Google Play services, which need Location Accuracy on and may arrive late in the background (ADR 0006). Not yet tested on a real train; "I'm at ___" is the fallback.
 - **Street map tiles:** the street-level map uses OpenFreeMap, a free public tile service with no availability guarantee. The tile URL is a single config value so the app can switch providers or self-host.
 - **Passive timing privacy:** must stay opt-in, anonymous and without full trips, and be described plainly in the privacy policy.

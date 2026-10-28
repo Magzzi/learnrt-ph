@@ -1,0 +1,5 @@
+# Guided Ride alerts use geofences, not continuous background location
+
+To tell a rider to get off with the phone locked, the app registers a geofence around each Station still ahead on the Route (at most 20, re-registered as the ride moves), and advances the ride when the system reports entering one. The alternative was continuous background location updates, which needs Android's location foreground service: a permanent "using location" notification, more battery, and a separate Google Play review for that permission. Geofencing needs none of that, and the location it uses never leaves the phone.
+
+The cost is that on Android, geofences run through Google Play services, which silently refuses them while the phone's Location Accuracy setting is off (expo-location does not report the refusal), and may deliver events late in the background. The ride screen therefore checks the network location provider and offers to turn Location Accuracy on, and "I'm at ___" always works as a fallback. Alerts fire on arriving at a Station, so their timing depends on how quickly the phone notices; that has only been tested on the emulator, not on a real train.
