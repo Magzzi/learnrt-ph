@@ -41,7 +41,8 @@
           "color": "#34d399"
         }
       ],
-      "expo-dev-client"
+      "expo-dev-client",
+      "@maplibre/maplibre-react-native"
     ],
     "scheme": "learnrt",
     "backgroundColor": "#0a1a1a",

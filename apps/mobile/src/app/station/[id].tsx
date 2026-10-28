@@ -83,6 +83,14 @@ export default function StationScreen() {
         )}
       </Section>
 
+      <Pressable
+        onPress={() => router.push({ pathname: "/street-map/[id]", params: { id: detail.id } })}
+        accessibilityRole="button"
+        className="items-center rounded-xl border border-border p-4"
+      >
+        <Text className="text-accent">{t("station.streetMap")}</Text>
+      </Pressable>
+
       <Section title={t("station.facilities")}>
         {facilities.map((key) => (
           <View key={key} className="flex-row justify-between">

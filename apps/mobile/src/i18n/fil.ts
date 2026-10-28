@@ -36,6 +36,7 @@ export const fil: FilipinoStrings = {
     faresFromHere: { text: "Pamasahe mula rito", review: "needs review" },
     rideFromHere: { text: "Sumakay mula rito", review: "needs review" },
     rideToHere: { text: "Sumakay papunta rito", review: "needs review" },
+    streetMap: { text: "Mapa ng kalye at mga pasukan", review: "needs review" },
   },
   lineStatus: {
     operational: { text: "Tumatakbo", review: "needs review" },
@@ -56,6 +57,15 @@ export const fil: FilipinoStrings = {
     incomplete: { text: "Piliin kung saan ka sasakay at bababa", review: "needs review" },
     oneLine: { text: "May sariling pamasahe ang bawat linya. Kapag lilipat ng linya, sinusunod ng pamasahe ang rutang may pinakakaunting lipat.", review: "needs review" },
     close: { text: "Isara", review: "needs review" },
+  },
+  streetMap: {
+    title: { text: "Paligid ng {{station}}", review: "needs review" },
+    offline: { text: "Kailangan ng internet ang mapa ng kalye. Gumagana nang offline ang lahat ng iba pa sa LearnRT.", review: "needs review" },
+    entrances_one: { text: "{{count}} pasukan mula sa OpenStreetMap", review: "needs review" },
+    entrances_other: { text: "{{count}} pasukan mula sa OpenStreetMap", review: "needs review" },
+    noEntrances: { text: "Wala pang nakamapang pasukan para sa istasyong ito", review: "needs review" },
+    entranceA11y: { text: "Pasukan {{label}}", review: "needs review" },
+    entrance: { text: "Pasukan", review: "needs review" },
   },
   plan: {
     from: { text: "Mula sa", review: "needs review" },

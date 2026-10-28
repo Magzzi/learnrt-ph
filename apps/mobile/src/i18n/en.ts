@@ -32,6 +32,7 @@ export const en = {
     faresFromHere: "Fares from here",
     rideFromHere: "Ride from here",
     rideToHere: "Ride to here",
+    streetMap: "Street map and entrances",
   },
   lineStatus: {
     operational: "Operational",
@@ -52,6 +53,15 @@ export const en = {
     incomplete: "Choose where you board and where you get off",
     oneLine: "Each Line charges its own Fare. Across Lines, the Fares follow the route with the fewest Transfers.",
     close: "Close",
+  },
+  streetMap: {
+    title: "Around {{station}}",
+    offline: "The street map needs an internet connection. Everything else in LearnRT works offline.",
+    entrances_one: "{{count}} entrance from OpenStreetMap",
+    entrances_other: "{{count}} entrances from OpenStreetMap",
+    noEntrances: "No entrances mapped for this Station yet",
+    entranceA11y: "Entrance {{label}}",
+    entrance: "Entrance",
   },
   plan: {
     from: "From",
