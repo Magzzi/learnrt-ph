@@ -20,7 +20,7 @@ export function Segmented<T extends string>({
             onPress={() => onChange(o.value)}
             accessibilityRole="radio"
             accessibilityState={{ selected }}
-            className={`rounded-full border px-4 py-2 ${selected ? "border-accent bg-sunken" : "border-edge"}`}
+            className={`rounded-full border px-4 py-2 ${selected ? "border-accent bg-accentSoft" : "border-edge bg-card"}`}
           >
             <Text className={selected ? "font-semibold text-accentInk" : "text-muted"}>{o.label}</Text>
           </Pressable>

@@ -1,7 +1,9 @@
 import { getLine, getStation, stations, stationsOnLine, type LineId } from "@learnrt/core";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { FlatList, Modal, Pressable, Text, View } from "react-native";
+import { useTheme } from "@/theme";
 
 /** Stations on operational Lines, Line by Line. */
 const rideableStations = () => stations.filter((s) => getLine(s.lineId)?.status === "operational");
@@ -22,6 +24,7 @@ export function StationPicker({
   onChange: (stationId: string) => void;
 }) {
   const { t } = useTranslation();
+  const theme = useTheme();
   const [open, setOpen] = useState(false);
   // Without a Line, the Line is part of the name: there are two Santolan and two Cubao Stations.
   const withLine = (id: string) => {
@@ -37,14 +40,15 @@ export function StationPicker({
         onPress={() => setOpen(true)}
         accessibilityRole="button"
         accessibilityLabel={`${label}: ${name ?? t("fares.choose")}`}
-        className="rounded-lg border border-edge bg-page px-3 py-3"
+        className="flex-row items-center justify-between gap-2 rounded-2xl border border-edge bg-card px-4 py-4"
       >
-        <Text className={name ? "text-ink" : "text-muted"}>{name ?? t("fares.choose")}</Text>
+        <Text className={`flex-1 text-base ${name ? "text-ink" : "text-muted"}`}>{name ?? t("fares.choose")}</Text>
+        <Ionicons name="chevron-down" size={18} color={theme.muted} />
       </Pressable>
       <Modal visible={open} animationType="slide" onRequestClose={() => setOpen(false)}>
         <View className="flex-1 bg-page pt-12">
           <View className="flex-row items-center justify-between px-4 pb-2">
-            <Text className="text-xl font-bold text-ink">{label}</Text>
+            <Text className="font-serif text-2xl text-ink">{label}</Text>
             <Pressable onPress={() => setOpen(false)} accessibilityRole="button" className="p-2">
               <Text className="text-accentInk">{t("fares.close")}</Text>
             </Pressable>

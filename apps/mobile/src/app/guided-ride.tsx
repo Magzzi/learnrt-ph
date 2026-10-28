@@ -3,6 +3,8 @@ import { router, Stack } from "expo-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppState, Linking, Pressable, ScrollView, Text, View } from "react-native";
+import { PrimaryButton, SecondaryButton } from "@/components/Button";
+import { Card } from "@/components/Card";
 import { StationPicker } from "@/components/StationPicker";
 import { UnverifiedBadge } from "@/components/UnverifiedBadge";
 import { finishRide, updateRide, useActiveRide } from "@/ride/activeRide";
@@ -39,10 +41,8 @@ export default function GuidedRideScreen() {
     return (
       <View className="flex-1 gap-4 bg-page p-4">
         <Stack.Screen options={{ title: t("ride.title") }} />
-        <Text className="text-lg text-ink">{t("ride.complete")}</Text>
-        <Pressable onPress={() => router.replace("/ride")} accessibilityRole="button" className="items-center rounded-xl bg-accent p-4">
-          <Text className="font-semibold text-onAccent">{t("ride.backToPlanner")}</Text>
-        </Pressable>
+        <Text className="font-serif text-2xl text-ink">{t("ride.complete")}</Text>
+        <PrimaryButton label={t("ride.backToPlanner")} onPress={() => router.replace("/ride")} />
       </View>
     );
   }
@@ -56,41 +56,31 @@ export default function GuidedRideScreen() {
       <View className="gap-1" accessibilityLiveRegion="polite">
         <Text className="text-muted">{t("ride.nowAt", { station: getStation(status.stationId)!.name })}</Text>
         {status.stopsLeftOnLeg > 0 && (
-          <Text className="text-lg font-semibold text-ink">
+          <Text className="font-serif text-2xl text-ink">
             {t("ride.stopsLeft", { count: status.stopsLeftOnLeg, station: getStation(getOffAt)!.name })}
           </Text>
         )}
       </View>
 
-      <View className="gap-3 rounded-xl border border-accent bg-card p-4" accessibilityLiveRegion="polite">
+      <Card className="border-accent bg-accentSoft" accessibilityLiveRegion="polite">
         {unverified && <UnverifiedBadge />}
-        <Text className="text-xl font-bold text-ink">{t(current.key as never, current.params)}</Text>
+        <Text className="font-serif text-2xl text-ink">{t(current.key as never, current.params)}</Text>
         {current.note && <Text className="text-muted">{t(current.note as never)}</Text>}
         {canAdvance && (
-          <Pressable
-            onPress={() => updateRide(advanceStep)}
-            accessibilityRole="button"
-            className="items-center rounded-xl bg-accent p-3"
-          >
-            <Text className="font-semibold text-onAccent">{t("ride.done")}</Text>
-          </Pressable>
+          <PrimaryButton label={t("ride.done")} icon="checkmark-circle" onPress={() => updateRide(advanceStep)} />
         )}
-        {status.completed && (
-          <Pressable onPress={end} accessibilityRole="button" className="items-center rounded-xl bg-accent p-3">
-            <Text className="font-semibold text-onAccent">{t("ride.backToPlanner")}</Text>
-          </Pressable>
-        )}
-      </View>
+        {status.completed && <PrimaryButton label={t("ride.backToPlanner")} onPress={end} />}
+      </Card>
 
       {ahead.length > 0 && (
-        <View className="gap-1">
+        <Card className="gap-2">
           <Text className="text-sm text-muted">{t("ride.ahead")}</Text>
           {ahead.map((id) => (
             <Text key={id} className={id === getOffAt ? "font-semibold text-accentInk" : "text-ink"}>
               • {getStation(id)!.name}
             </Text>
           ))}
-        </View>
+        </Card>
       )}
 
       {upcoming.map((text, i) => (
@@ -99,36 +89,28 @@ export default function GuidedRideScreen() {
         </Text>
       ))}
 
-      {!status.completed && alerts === "on" && <Text className="text-sm text-accentInk">{t("alerts.on")}</Text>}
+      {!status.completed && alerts === "on" && <Text className="text-sm font-semibold text-accentInk">{t("alerts.on")}</Text>}
       {!status.completed && alerts === "accuracy" && (
-        <View className="gap-2 rounded-xl border border-warn bg-card p-4">
-          <Text className="text-base font-semibold text-ink">{t("alerts.explainTitle")}</Text>
+        <Card className="gap-2 border-warn bg-warnSoft">
+          <Text className="font-serif text-xl text-ink">{t("alerts.explainTitle")}</Text>
           <Text className="text-muted">{t("alerts.accuracyOff")}</Text>
-          <Pressable
-            onPress={async () => setAlerts((await turnOnLocationAccuracy(ride)) ? "on" : "accuracy")}
-            accessibilityRole="button"
-            className="items-center rounded-xl border border-accent p-3"
-          >
-            <Text className="font-semibold text-accentInk">{t("alerts.turnOnAccuracy")}</Text>
-          </Pressable>
-        </View>
+          <PrimaryButton label={t("alerts.turnOnAccuracy")} onPress={async () => setAlerts((await turnOnLocationAccuracy(ride)) ? "on" : "accuracy")} />
+        </Card>
       )}
       {!status.completed && (alerts === "ask" || alerts === "off") && (
-        <View className="gap-2 rounded-xl border border-edge bg-card p-4">
-          <Text className="text-base font-semibold text-ink">{t("alerts.explainTitle")}</Text>
+        <Card className="gap-2">
+          <Text className="font-serif text-xl text-ink">{t("alerts.explainTitle")}</Text>
           <Text className="text-muted">{t(alerts === "ask" ? "alerts.explain" : "alerts.off")}</Text>
-          <Pressable
+          <PrimaryButton
+            label={t(alerts === "ask" ? "alerts.enable" : "alerts.openSettings")}
+            icon="notifications"
             onPress={async () => {
               if (alerts === "off") return void Linking.openSettings();
               if (!(await enableAlerts(ride))) return setAlerts("off");
               setAlerts((await geofencingAvailable()) ? "on" : "accuracy");
             }}
-            accessibilityRole="button"
-            className="items-center rounded-xl border border-accent p-3"
-          >
-            <Text className="font-semibold text-accentInk">{t(alerts === "ask" ? "alerts.enable" : "alerts.openSettings")}</Text>
-          </Pressable>
-        </View>
+          />
+        </Card>
       )}
 
       {!status.completed && (
@@ -143,9 +125,9 @@ export default function GuidedRideScreen() {
             <Text className="text-sm text-muted">{t("ride.imAtHint")}</Text>
           </View>
           <Text className="text-sm text-muted">{t("ride.keepOpen")}</Text>
-          <Pressable onPress={end} accessibilityRole="button" className="items-center rounded-xl border border-edge p-4">
-            <Text className="text-ink">{t("ride.end")}</Text>
-          </Pressable>
+          <View className="flex-row">
+            <SecondaryButton label={t("ride.end")} onPress={end} />
+          </View>
         </>
       )}
     </ScrollView>
