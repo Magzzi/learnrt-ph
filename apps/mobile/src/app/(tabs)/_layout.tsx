@@ -29,6 +29,7 @@ export default function TabsLayout() {
     >
       <Tabs.Screen name="index" options={{ title: t("tabs.map"), tabBarAccessibilityLabel: t("tabs.map"), tabBarIcon: icon("map-outline") }} />
       <Tabs.Screen name="fares" options={{ title: t("tabs.fares"), tabBarAccessibilityLabel: t("tabs.fares"), tabBarIcon: icon("cash-outline") }} />
+      <Tabs.Screen name="ride" options={{ title: t("tabs.ride"), tabBarAccessibilityLabel: t("tabs.ride"), tabBarIcon: icon("train-outline") }} />
       <Tabs.Screen name="nearest" options={{ title: t("tabs.nearest"), tabBarAccessibilityLabel: t("tabs.nearest"), tabBarIcon: icon("locate-outline") }} />
       <Tabs.Screen name="learn" options={{ title: t("tabs.learn"), tabBarAccessibilityLabel: t("tabs.learn"), tabBarIcon: icon("book-outline") }} />
     </Tabs>

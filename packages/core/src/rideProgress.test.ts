@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { planRoute } from "./route";
 import { rideSteps } from "./rideSteps";
-import { advanceStep, arrivedAt, endRide, geofenceRegions, imAt, rideStatus, startRide, type RideState } from "./rideProgress";
+import { advanceStep, arrivedAt, endRide, geofenceRegions, imAt, rideStations, rideStatus, startRide, type RideState } from "./rideProgress";
 
 const route = (from: string, to: string) => planRoute(from, to)!.route;
 // LRT-1 Carriedo → EDSA (8 stops), walk to Taft Avenue, MRT-3 → Ayala (2 stops).
@@ -124,5 +124,16 @@ describe("geofenceRegions", () => {
   it("watches nothing once the ride is over", () => {
     expect(geofenceRegions(arrivedAt(imAt(start(), "mrt3-magallanes").state, "mrt3-ayala").state)).toEqual([]);
     expect(geofenceRegions(endRide(start()))).toEqual([]);
+  });
+});
+
+describe("rideStations", () => {
+  it("lists the route's Stations in riding order, both ends of each Transfer included", () => {
+    expect(rideStations(route("lrt1-libertad", "mrt3-magallanes"))).toEqual([
+      "lrt1-libertad",
+      "lrt1-edsa",
+      "mrt3-taft-ave",
+      "mrt3-magallanes",
+    ]);
   });
 });

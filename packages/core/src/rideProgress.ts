@@ -64,6 +64,11 @@ function routeStops(route: Route): Stop[] {
   return stops;
 }
 
+/** The route's Stations in riding order, including both ends of each Transfer. */
+export function rideStations(route: Route): string[] {
+  return routeStops(route).map((s) => s.stationId);
+}
+
 /** The position in `routeStops` each step belongs to: where the rider is when doing it. */
 function stepPositions(state: Pick<RideState, "route" | "ticket" | "discounted">): number[] {
   const stops = routeStops(state.route);

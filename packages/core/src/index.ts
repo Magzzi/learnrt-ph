@@ -25,6 +25,7 @@ export {
   endRide,
   geofenceRegions,
   imAt,
+  rideStations,
   rideStatus,
   startRide,
   type GeofenceRegion,

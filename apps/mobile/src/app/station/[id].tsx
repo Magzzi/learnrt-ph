@@ -101,6 +101,20 @@ export default function StationScreen() {
           <Text className="font-semibold text-black">{t("station.faresFromHere")}</Text>
         </Pressable>
       )}
+      {detail.line.status === "operational" && (
+        <View className="flex-row gap-3">
+          {(["from", "to"] as const).map((end) => (
+            <Pressable
+              key={end}
+              onPress={() => router.navigate({ pathname: "/ride", params: { [end]: detail.id, at: String(Date.now()) } })}
+              accessibilityRole="button"
+              className="flex-1 items-center rounded-xl border border-accent p-4"
+            >
+              <Text className="font-semibold text-accent">{t(end === "from" ? "station.rideFromHere" : "station.rideToHere")}</Text>
+            </Pressable>
+          ))}
+        </View>
+      )}
     </ScrollView>
   );
 }
