@@ -1,6 +1,7 @@
 import { arrivedAt, distanceKm, geofenceRegions, rideStatus, type RideState } from "@learnrt/core";
 import * as Location from "expo-location";
 import * as Notifications from "expo-notifications";
+import { AndroidImportance } from "expo-notifications";
 import * as TaskManager from "expo-task-manager";
 import { Platform } from "react-native";
 import { i18n } from "@/i18n";
@@ -34,11 +35,11 @@ async function ensureChannels() {
   if (Platform.OS !== "android") return;
   await Notifications.setNotificationChannelAsync(ALERTS_CHANNEL, {
     name: i18n.t("alerts.alertsChannel"),
-    importance: Notifications.AndroidImportance.HIGH,
+    importance: AndroidImportance.HIGH,
   });
   await Notifications.setNotificationChannelAsync(PROGRESS_CHANNEL, {
     name: i18n.t("alerts.progressChannel"),
-    importance: Notifications.AndroidImportance.LOW,
+    importance: AndroidImportance.LOW,
   });
 }
 

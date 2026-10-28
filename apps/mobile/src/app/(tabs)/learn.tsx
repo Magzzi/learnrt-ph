@@ -2,7 +2,7 @@ import { uncoveredLines, learnData, lineAreas, lines, stationsOnLine } from "@le
 import { router } from "expo-router";
 import { openStation } from "@/navigation";
 import { useTranslation } from "react-i18next";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text } from "react-native";
 import { LineCard } from "@/components/LineCard";
 import { Section } from "@/components/Section";
 import { LINE_COLORS } from "@/map/lineColors";

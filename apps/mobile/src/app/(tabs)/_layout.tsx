@@ -10,12 +10,11 @@ import colors from "@/theme/colors";
 
 type IconProps = ComponentProps<typeof Ionicons>;
 
-const icon =
-  (name: IconProps["name"]) =>
-  ({ color, size }: { color: ColorValue; size: number }) => (
+const icon = (name: IconProps["name"]) =>
+  function TabIcon({ color, size }: { color: ColorValue; size: number }) {
     // Tab tints are plain colour strings; anything else falls back to the icon's default.
-    <Ionicons name={name} color={typeof color === "string" ? color : undefined} size={size} />
-  );
+    return <Ionicons name={name} color={typeof color === "string" ? color : undefined} size={size} />;
+  };
 
 export default function TabsLayout() {
   const { t } = useTranslation();

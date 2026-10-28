@@ -4,6 +4,8 @@ packages:
 allowBuilds:
   '@tailwindcss/oxide': true
   sharp: true
+  # Not needed: its prebuilt binary comes as an optional dependency (eslint-config-expo, M2).
+  unrs-resolver: false
 # pnpm normally refuses package versions published less than 24 hours ago
 # (minimumReleaseAge, default 1440 minutes). `npx expo install` (M1, and
 # expo-dev-client in M2) needed these Expo SDK 58 releases, published by the

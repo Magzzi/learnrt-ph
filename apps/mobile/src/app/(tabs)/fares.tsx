@@ -15,10 +15,11 @@ export default function FaresScreen() {
   const [state, dispatch] = useReducer(faresReducer, params, initialFaresState);
 
   // "Fares from here" re-opens this tab; `at` changes on every tap, so the origin is applied each time.
+  const { from, at } = params;
   useEffect(() => {
-    const next = initialFaresState(params);
+    const next = initialFaresState({ from });
     if (next.from) dispatch({ type: "from", stationId: next.from });
-  }, [params.from, params.at]);
+  }, [from, at]);
 
   const result = quote(state);
 

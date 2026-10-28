@@ -17,11 +17,12 @@ export default function RideScreen() {
   const [state, dispatch] = useReducer(planReducer, params, initialPlanState);
 
   // "Ride from here" / "Ride to here" re-open this tab; `at` changes on every tap.
+  const { from, to, at } = params;
   useEffect(() => {
-    const next = initialPlanState(params);
+    const next = initialPlanState({ from, to });
     if (next.from) dispatch({ type: "from", stationId: next.from });
     if (next.to) dispatch({ type: "to", stationId: next.to });
-  }, [params.from, params.to, params.at]);
+  }, [from, to, at]);
 
   const result = planTrip(state);
   const active = useActiveRide();

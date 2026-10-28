@@ -45,13 +45,13 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
   const start = useSharedValue({ scale: 1, x: 0, y: 0 });
 
   useEffect(() => {
-    if (width > 0) translateY.value = -(OPERATIONAL_TOP - 40) * pointsPerUnit;
+    if (width > 0) translateY.set(-(OPERATIONAL_TOP - 40) * pointsPerUnit);
   }, [width, pointsPerUnit, translateY]);
 
   // Both gestures continue from wherever the map was when they began.
   const rememberStart = () => {
     "worklet";
-    start.value = { scale: scale.value, x: translateX.value, y: translateY.value };
+    start.set({ scale: scale.value, x: translateX.value, y: translateY.value });
   };
 
   const pinch = usePinchGesture({
@@ -61,9 +61,9 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
       const next = clamp(start.value.scale * e.scale, MIN_SCALE, MAX_SCALE);
       const ratio = next / start.value.scale;
       // Keep the point between the fingers still while zooming.
-      translateX.value = e.focalX - (e.focalX - start.value.x) * ratio;
-      translateY.value = e.focalY - (e.focalY - start.value.y) * ratio;
-      scale.value = next;
+      translateX.set(e.focalX - (e.focalX - start.value.x) * ratio);
+      translateY.set(e.focalY - (e.focalY - start.value.y) * ratio);
+      scale.set(next);
     },
   });
 
@@ -72,8 +72,8 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
     onBegin: rememberStart,
     onUpdate: (e) => {
       "worklet";
-      translateX.value = start.value.x + e.translationX;
-      translateY.value = start.value.y + e.translationY;
+      translateX.set(start.value.x + e.translationX);
+      translateY.set(start.value.y + e.translationY);
     },
   });
 
