@@ -1,5 +1,5 @@
-import { getLine, getStation } from "@learnrt/core";
-import { useEffect, useMemo, useState } from "react";
+import { getLine, getStation, type LatLng } from "@learnrt/core";
+import { useEffect, useImperativeHandle, useMemo, useState, type Ref } from "react";
 import { useTranslation } from "react-i18next";
 import { View, type LayoutChangeEvent } from "react-native";
 import {
@@ -11,7 +11,8 @@ import {
 } from "react-native-gesture-handler";
 import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import Svg, { Circle, G, Line as SvgLine, Polyline, Text as SvgText } from "react-native-svg";
-import { layoutNetwork, stationAt } from "./layout";
+import { layoutNetwork, projectPoint, stationAt } from "./layout";
+import { centerOn, zoomAbout, type MapView } from "./view";
 import { useTheme } from "@/theme";
 
 const LAYOUT = layoutNetwork({ width: 1000, padding: 60 });
@@ -27,16 +28,23 @@ const OPERATIONAL_TOP = Math.min(
 // Labels that would otherwise sit on top of a neighbour's label at the default zoom.
 const LABELS_LEFT = new Set(["lrt2-recto"]);
 
-const clamp = (value: number, min: number, max: number) => {
-  "worklet";
-  return Math.min(max, Math.max(min, value));
-};
+/** Controls for the map card's buttons. */
+export interface LineMapHandle {
+  zoomIn(): void;
+  zoomOut(): void;
+  /** Centres the map on a real position and marks it (the rider's). */
+  showPosition(position: LatLng): void;
+}
+
+const LIMITS = { min: MIN_SCALE, max: MAX_SCALE };
 
 /** The Line map: every Line drawn from core data, with pinch-zoom, pan and tap-to-open. */
-export function LineMap({ onSelectStation }: { onSelectStation: (stationId: string) => void }) {
+export function LineMap({ onSelectStation, ref }: { onSelectStation: (stationId: string) => void; ref?: Ref<LineMapHandle> }) {
   const { t } = useTranslation();
   const theme = useTheme();
   const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [rider, setRider] = useState<{ x: number; y: number } | null>(null);
   const pointsPerUnit = width / LAYOUT.width;
 
   const scale = useSharedValue(1);
@@ -58,12 +66,11 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
     onBegin: rememberStart,
     onUpdate: (e) => {
       "worklet";
-      const next = clamp(start.value.scale * e.scale, MIN_SCALE, MAX_SCALE);
-      const ratio = next / start.value.scale;
       // Keep the point between the fingers still while zooming.
-      translateX.set(e.focalX - (e.focalX - start.value.x) * ratio);
-      translateY.set(e.focalY - (e.focalY - start.value.y) * ratio);
-      scale.set(next);
+      const next = zoomAbout(start.value, e.scale, { x: e.focalX, y: e.focalY }, LIMITS);
+      translateX.set(next.x);
+      translateY.set(next.y);
+      scale.set(next.scale);
     },
   });
 
@@ -94,6 +101,25 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
 
   const gestures = useSimultaneousGestures(pinch, pan, tap);
 
+  const apply = (view: MapView) => {
+    translateX.set(view.x);
+    translateY.set(view.y);
+    scale.set(view.scale);
+  };
+  const current = (): MapView => ({ scale: scale.get(), x: translateX.get(), y: translateY.get() });
+  const middle = () => ({ x: width / 2, y: height / 2 });
+
+  useImperativeHandle(ref, () => ({
+    zoomIn: () => apply(zoomAbout(current(), 1.6, middle(), LIMITS)),
+    zoomOut: () => apply(zoomAbout(current(), 1 / 1.6, middle(), LIMITS)),
+    showPosition: (position) => {
+      const p = projectPoint(LAYOUT, position);
+      setRider(p);
+      const zoomed = { ...current(), scale: Math.max(current().scale, 3) };
+      apply(centerOn(zoomed, { x: p.x * pointsPerUnit, y: p.y * pointsPerUnit }, { width, height }));
+    },
+  }));
+
   const contentStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }, { translateY: translateY.value }, { scale: scale.value }],
   }));
@@ -113,7 +139,10 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
   return (
     <View
       className="flex-1 overflow-hidden bg-mapBg"
-      onLayout={(e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width)}
+      onLayout={(e: LayoutChangeEvent) => {
+        setWidth(e.nativeEvent.layout.width);
+        setHeight(e.nativeEvent.layout.height);
+      }}
     >
       {width > 0 && (
         <GestureDetector gesture={gestures}>
@@ -170,6 +199,12 @@ export function LineMap({ onSelectStation }: { onSelectStation: (stationId: stri
                     </SvgText>
                   </G>
                 ))}
+                {rider && (
+                  <G accessibilityLabel={t("map.youAreHere")}>
+                    <Circle cx={rider.x} cy={rider.y} r={LAYOUT.stationRadius * 3} fill={theme.accent} opacity={0.2} />
+                    <Circle cx={rider.x} cy={rider.y} r={LAYOUT.stationRadius * 1.4} fill={theme.accent} stroke={theme.card} strokeWidth={2} />
+                  </G>
+                )}
               </Svg>
               {/* Screen-reader targets: one per Station, labelled "<Station>, <Line>". */}
               {labels.map((s) => (

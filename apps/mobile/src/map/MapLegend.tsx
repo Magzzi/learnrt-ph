@@ -8,14 +8,14 @@ export function MapLegend() {
   const { t } = useTranslation();
   const theme = useTheme();
   return (
-    <View className="absolute bottom-3 right-3 gap-1 rounded-lg border border-edge bg-card/90 p-2">
+    <View className="absolute bottom-3 right-3 gap-1.5 rounded-2xl border border-edge bg-card p-3">
       {lines.map((line) => (
         <View key={line.id} className="flex-row items-center gap-2">
           <View
-            className="h-1 w-6 rounded-full"
+            className="h-1.5 w-8 rounded-full"
             style={{ backgroundColor: theme.lines[line.id], opacity: line.status === "operational" ? 1 : 0.6 }}
           />
-          <Text className="text-xs text-ink">
+          <Text className="text-sm text-ink">
             {line.name}
             {line.status === "coming-soon" ? ` · ${t("map.comingSoon")}` : ""}
           </Text>

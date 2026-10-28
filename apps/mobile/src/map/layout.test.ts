@@ -1,6 +1,6 @@
-import { lines, stations, stationsOnLine, transfers } from "@learnrt/core";
+import { getStation, lines, stations, stationsOnLine, transfers } from "@learnrt/core";
 import { describe, expect, it } from "vitest";
-import { layoutNetwork, stationAt } from "./layout";
+import { layoutNetwork, projectPoint, stationAt } from "./layout";
 
 const WIDTH = 1000;
 const PADDING = 40;
@@ -65,5 +65,15 @@ describe("stationAt", () => {
 
   it("picks nothing when no Station is within reach", () => {
     expect(stationAt(layout, { x: 0, y: 0 }, 20)).toBeUndefined();
+  });
+});
+
+describe("projectPoint", () => {
+  it("puts a Station's own position exactly on its dot", () => {
+    const layout = layoutNetwork({ width: 1000, padding: 60 });
+    const edsa = layout.stations.find((s) => s.id === "lrt1-edsa")!;
+    const p = projectPoint(layout, getStation("lrt1-edsa")!.location);
+    expect(p.x).toBeCloseTo(edsa.x, 6);
+    expect(p.y).toBeCloseTo(edsa.y, 6);
   });
 });

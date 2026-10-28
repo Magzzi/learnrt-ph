@@ -1,4 +1,4 @@
-import { lines, stations, stationsOnLine, transfers, type LineId } from "@learnrt/core";
+import { lines, stations, stationsOnLine, transfers, type LatLng, type LineId } from "@learnrt/core";
 
 export interface Point {
   x: number;
@@ -13,6 +13,8 @@ export interface NetworkLayout {
   stations: ({ id: string; lineId: LineId } & Point)[];
   lines: { lineId: LineId; points: Point[]; dashed: boolean }[];
   transfers: { from: Point; to: Point }[];
+  /** How positions map to layout units (see `projectPoint`). */
+  projection: { minLng: number; maxLat: number; lngScale: number; unitsPerDegree: number; padding: number };
 }
 
 /**
@@ -28,12 +30,8 @@ export function layoutNetwork({ width, padding }: { width: number; padding: numb
   const lngScale = Math.cos((((minLat + maxLat) / 2) * Math.PI) / 180);
   const unitsPerDegree = (width - 2 * padding) / ((maxLng - minLng) * lngScale);
 
-  const placed = stations.map((s) => ({
-    id: s.id,
-    lineId: s.lineId,
-    x: padding + (s.location.lng - minLng) * lngScale * unitsPerDegree,
-    y: padding + (maxLat - s.location.lat) * unitsPerDegree,
-  }));
+  const projection = { minLng, maxLat, lngScale, unitsPerDegree, padding };
+  const placed = stations.map((s) => ({ id: s.id, lineId: s.lineId, ...project(projection, s.location) }));
   const point = (id: string): Point => {
     const { x, y } = placed.find((s) => s.id === id)!;
     return { x, y };
@@ -50,7 +48,17 @@ export function layoutNetwork({ width, padding }: { width: number; padding: numb
       dashed: l.status !== "operational",
     })),
     transfers: transfers.map((t) => ({ from: point(t.from), to: point(t.to) })),
+    projection,
   };
+}
+
+function project(p: NetworkLayout["projection"], { lat, lng }: LatLng): Point {
+  return { x: p.padding + (lng - p.minLng) * p.lngScale * p.unitsPerDegree, y: p.padding + (p.maxLat - lat) * p.unitsPerDegree };
+}
+
+/** Where a real position (say, the rider's) falls on the Line map, in layout units. */
+export function projectPoint(layout: NetworkLayout, position: LatLng): Point {
+  return project(layout.projection, position);
 }
 
 /** The id of the Station nearest to `point`, if one is within `reach` layout units. */
