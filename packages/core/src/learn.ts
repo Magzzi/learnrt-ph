@@ -6,8 +6,8 @@ export const learnData = {
   lastVerified: null as string | null,
 };
 
-/** A Line LearnRT does not cover yet, shown as a Coming Soon card (PRD §6). */
-export interface ComingSoonLine {
+/** A Line LearnRT does not cover yet, shown in the Learn tab under "Not in LearnRT yet" (PRD §6). */
+export interface UncoveredLine {
   name: string;
   /** Set when core models the Line (MRT-7), so it is never matched by name. */
   lineId?: LineId;
@@ -15,7 +15,7 @@ export interface ComingSoonLine {
   stationNames: readonly string[];
 }
 
-export const comingSoonLines: readonly ComingSoonLine[] = [
+export const uncoveredLines: readonly UncoveredLine[] = [
   { name: "MRT-7", lineId: "MRT7", stationNames: stationsOnLine("MRT7").map((s) => s.name) },
   { name: "Metro Manila Subway", stationNames: [] },
   { name: "NSCR", stationNames: NSCR_STATIONS },

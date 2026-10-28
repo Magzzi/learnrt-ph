@@ -25,7 +25,7 @@ Data that has not yet been checked against an official source, and is labelled s
 _Avoid_: Unconfirmed (that describes a Rider Report), estimated
 
 **Line Status**:
-Whether a Line is operational, coming soon, or suspended.
+Whether a Line is operational, coming soon (not open yet), or suspended. A running Line that LearnRT does not cover, such as PNR, is not coming soon; it is "not in LearnRT yet".
 _Avoid_: Availability, open/closed
 
 ## Fares

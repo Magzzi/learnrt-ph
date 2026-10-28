@@ -1,4 +1,4 @@
-import { comingSoonLines, learnData, lineAreas, lines, stationsOnLine } from "@learnrt/core";
+import { uncoveredLines, learnData, lineAreas, lines, stationsOnLine } from "@learnrt/core";
 import { router } from "expo-router";
 import { openStation } from "@/navigation";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,7 @@ import { Section } from "@/components/Section";
 import { LINE_COLORS } from "@/map/lineColors";
 import colors from "@/theme/colors";
 
-const TIPS = ["tips.buy", "tips.security", "tips.gates", "tips.direction", "tips.platform", "tips.transfer"] as const;
+const TIPS = ["tips.buy", "tips.security", "tips.gates", "tips.platform"] as const;
 
 export default function LearnScreen() {
   const { t } = useTranslation();
@@ -38,10 +38,10 @@ export default function LearnScreen() {
         ))}
 
       <Text className="text-xl font-bold text-white" accessibilityRole="header">
-        {t("learn.comingSoon")}
+        {t("learn.notCovered")}
       </Text>
-      <Text className="text-muted">{t("learn.comingSoonIntro")}</Text>
-      {comingSoonLines.map((line) => (
+      <Text className="text-muted">{t("learn.notCoveredIntro")}</Text>
+      {uncoveredLines.map((line) => (
         <LineCard
           key={line.name}
           title={line.name}

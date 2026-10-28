@@ -21,6 +21,8 @@ Data the app uses that has not been verified against a source the owner has appr
 | D15 | Entrances, exits, platform per direction, elevators | none | No data at all | Curated data (PRD §9); app shows "Not available yet" |
 | D16 | Sponsor Station names | Yamaha Monumento, Araneta Center-Cubao (LRT-2), GMA Kamuning | Taken from OSM; naming-rights names change over time | Check against LRMC, LRTA and MRT-3 official pages |
 | D17 | Areas each Line serves | website `explore` page | LRT-1 lists "Cavite" though its southern end is Dr. Santos; MRT-3 lists "North Avenue" as an area; LRT-2 lists only Manila, San Juan, Quezon City although it reaches Antipolo | Correct lists; shown as Unverified |
-| D18 | Status of Lines LearnRT does not cover | website `explore` page: PNR "Limited Operations", NSCR "Under Construction"; Metro Manila Subway absent | Repo status conflicts with PRD §6 calling all four "Coming Soon"; the app states no status for them | Official status per Line before showing one |
+| D18 | Status of Lines LearnRT does not cover | website `explore` page: PNR "Limited Operations", NSCR "Under Construction"; Metro Manila Subway absent | The app states no status for them. The Learn tab lists them under "Not in LearnRT yet" (owner, 2026-10-28): PNR runs today, so "coming soon" would be wrong for it | Official status per Line before showing one |
+| D19 | First-timer tip: the exit gate keeps a Single Journey Ticket | removed from the app (owner, 2026-10-28) | Not checked against an operator source | Confirm per Line with LRMC, LRTA and MRT-3, then restore the sentence in the gates tip |
+| D20 | First-timer tip: some Stations have a separate entrance for each direction | removed from the app (owner, 2026-10-28) | Not checked against an operator source; which Stations is unknown (see D15) | Confirm with the operators, then restore as a tip |
 
 D9–D13: not blocking M1 (owner, 2026-10-28).

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { comingSoonLines, learnData, lineAreas } from "./learn";
+import { uncoveredLines, learnData, lineAreas } from "./learn";
 import { readWebsiteLines } from "./test-support/websiteLines";
 
 describe("learn content", () => {
@@ -14,12 +14,12 @@ describe("learn content", () => {
     expect(lineAreas(lineId)).toEqual(fromWebsite(name).areas);
   });
 
-  it("lists the Coming Soon Lines named in PRD §6, in order", () => {
-    expect(comingSoonLines.map((l) => l.name)).toEqual(["MRT-7", "Metro Manila Subway", "NSCR", "PNR"]);
+  it("lists the Lines LearnRT does not cover, named in PRD §6, in order", () => {
+    expect(uncoveredLines.map((l) => l.name)).toEqual(["MRT-7", "Metro Manila Subway", "NSCR", "PNR"]);
   });
 
   it("uses core's MRT-7 Stations, and the website's lists for NSCR and PNR", () => {
-    const byName = Object.fromEntries(comingSoonLines.map((l) => [l.name, l]));
+    const byName = Object.fromEntries(uncoveredLines.map((l) => [l.name, l]));
     expect(byName["MRT-7"]!.stationNames).toHaveLength(14);
     expect(byName["MRT-7"]!.lineId).toBe("MRT7");
     expect(byName["NSCR"]!.stationNames).toEqual(fromWebsite("NSCR").stations);
@@ -27,7 +27,7 @@ describe("learn content", () => {
   });
 
   it("shows no Station list where the repo has none", () => {
-    expect(comingSoonLines.find((l) => l.name === "Metro Manila Subway")!.stationNames).toEqual([]);
+    expect(uncoveredLines.find((l) => l.name === "Metro Manila Subway")!.stationNames).toEqual([]);
   });
 
   it("marks the content as not yet verified", () => {

@@ -42,7 +42,7 @@ Riders arrive as learners and stay as commuters.
 ## 6. Scope
 
 **Fully supported:** LRT-1 (including the open Cavite extension Stations), LRT-2 (including the east extension), MRT-3, with Transfers between them.
-**Learn-only "Coming Soon" cards:** MRT-7, Metro Manila Subway, NSCR, PNR. Line Status is data, so promoting a Line needs no app release.
+**Learn-only "Not in LearnRT yet" cards:** MRT-7, Metro Manila Subway, NSCR, PNR (Lines LearnRT does not cover; "Coming Soon" is reserved for the Line Status of a Line that has not opened, and PNR is running). Line Status is data, so promoting a Line needs no app release.
 
 ## 7. Features
 
@@ -84,7 +84,7 @@ Riders arrive as learners and stay as commuters.
 - Approximate next-train wait from the published schedule, labelled as an estimate.
 
 ### F10. Learn content
-- Line and Station background, "Coming Soon" cards, tips for first-timers.
+- Line and Station background, "Not in LearnRT yet" cards, tips for first-timers.
 
 ### F11. Station edits
 - Signed-in riders can suggest corrections to Station data; the admin moderates them.

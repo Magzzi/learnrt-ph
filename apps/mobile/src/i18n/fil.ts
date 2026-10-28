@@ -72,8 +72,8 @@ export const fil: FilipinoStrings = {
     areas: { text: "Mga lugar: {{areas}}", review: "needs review" },
     showStations: { text: "Ipakita ang {{count}} istasyon", review: "needs review" },
     hideStations: { text: "Itago ang mga istasyon", review: "needs review" },
-    comingSoon: { text: "Paparating", review: "needs review" },
-    comingSoonIntro: { text: "Mga linyang hindi pa saklaw ng LearnRT.", review: "needs review" },
+    notCovered: { text: "Wala pa sa LearnRT", review: "needs review" },
+    notCoveredIntro: { text: "Mga linyang hindi pa saklaw ng LearnRT.", review: "needs review" },
     noStationList: { text: "Wala pang listahan ng istasyon", review: "needs review" },
     tipsTitle: { text: "Unang beses sumakay?", review: "needs review" },
     about: { text: "Tungkol sa LearnRT", review: "needs review" },
@@ -81,10 +81,8 @@ export const fil: FilipinoStrings = {
   tips: {
     buy: { text: "Bumili ng Single Journey Ticket sa istasyon, o gumamit ng Stored Value Ticket kung madalas kang sumakay.", review: "needs review" },
     security: { text: "Asahan ang pag-inspeksyon ng bag sa pasukan ng istasyon.", review: "needs review" },
-    gates: { text: "I-tap ang tiket sa gate para makapasok, at muli para makalabas. Kinukuha ng exit gate ang Single Journey Ticket.", review: "needs review" },
-    direction: { text: "Bago umakyat sa plataporma, alamin kung aling direksyon ang kailangan mo: may mga istasyong may hiwalay na pasukan sa bawat direksyon.", review: "needs review" },
+    gates: { text: "I-tap ang tiket sa gate para makapasok, at muli para makalabas.", review: "needs review" },
     platform: { text: "Maghintay sa likod ng linya sa gilid ng plataporma, at paunahin ang mga bababa bago sumakay.", review: "needs review" },
-    transfer: { text: "Para lumipat ng linya, bumaba sa Transfer na istasyon at lumakad papunta sa istasyon ng kabilang linya. Makikita sa Mapa kung saan nagtatagpo ang mga linya.", review: "needs review" },
   },
   about: {
     title: { text: "Tungkol sa LearnRT", review: "needs review" },
