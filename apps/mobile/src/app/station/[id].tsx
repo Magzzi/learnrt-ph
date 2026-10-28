@@ -94,7 +94,7 @@ export default function StationScreen() {
 
       {detail.line.status === "operational" && (
         <Pressable
-          onPress={() => router.navigate({ pathname: "/fares", params: { line: detail.line.id, from: detail.id, at: String(Date.now()) } })}
+          onPress={() => router.navigate({ pathname: "/fares", params: { from: detail.id, at: String(Date.now()) } })}
           accessibilityRole="button"
           className="items-center rounded-xl bg-primary p-4"
         >

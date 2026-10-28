@@ -39,7 +39,6 @@ export const en = {
     suspended: "Suspended",
   },
   fares: {
-    line: "Line",
     from: "From",
     to: "To",
     choose: "Choose a Station",
@@ -51,7 +50,7 @@ export const en = {
     fare: "Fare",
     noFare: "No Fare for this ride",
     incomplete: "Choose where you board and where you get off",
-    oneLine: "Fares are for a ride on one Line. Rides across Lines come with Guided Ride.",
+    oneLine: "Each Line charges its own Fare. Across Lines, the Fares follow the route with the fewest Transfers.",
     close: "Close",
   },
   plan: {

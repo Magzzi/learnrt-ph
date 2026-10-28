@@ -43,7 +43,6 @@ export const fil: FilipinoStrings = {
     suspended: { text: "Suspendido", review: "needs review" },
   },
   fares: {
-    line: { text: "Linya", review: "needs review" },
     from: { text: "Mula sa", review: "needs review" },
     to: { text: "Papunta sa", review: "needs review" },
     choose: { text: "Pumili ng istasyon", review: "needs review" },
@@ -55,7 +54,7 @@ export const fil: FilipinoStrings = {
     fare: { text: "Pamasahe", review: "needs review" },
     noFare: { text: "Walang pamasahe para sa biyaheng ito", review: "needs review" },
     incomplete: { text: "Piliin kung saan ka sasakay at bababa", review: "needs review" },
-    oneLine: { text: "Ang pamasahe ay para sa isang linya lang. Ang biyaheng tatawid ng linya ay kasama sa Guided Ride.", review: "needs review" },
+    oneLine: { text: "May sariling pamasahe ang bawat linya. Kapag lilipat ng linya, sinusunod ng pamasahe ang rutang may pinakakaunting lipat.", review: "needs review" },
     close: { text: "Isara", review: "needs review" },
   },
   plan: {
