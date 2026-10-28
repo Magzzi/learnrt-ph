@@ -5,7 +5,7 @@ import { Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/theme";
 
-/** A tab's header: large serif title, a one-line subtitle, and the settings button (About). */
+/** A tab's header: large bold title, a one-line subtitle, and the settings button (About). */
 export function ScreenHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -13,7 +13,7 @@ export function ScreenHeader({ title, subtitle }: { title: string; subtitle?: st
   return (
     <View className="flex-row items-start gap-3 bg-page px-4 pb-3" style={{ paddingTop: insets.top + 12 }}>
       <View className="flex-1">
-        <Text className="font-display text-3xl text-ink" accessibilityRole="header">
+        <Text className="font-title text-4xl text-ink" accessibilityRole="header">
           {title}
         </Text>
         {subtitle && <Text className="mt-1 text-base text-muted">{subtitle}</Text>}
