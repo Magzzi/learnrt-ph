@@ -21,10 +21,10 @@ export function LineCard({
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   return (
-    <View className="gap-2 rounded-xl border border-edge bg-card p-4">
+    <View className="gap-2 rounded-2xl border border-edge bg-card p-4">
       <View className="flex-row items-center gap-2">
         <View className="h-3 w-3 rounded-full" style={{ backgroundColor: color }} />
-        <Text className="flex-1 text-lg font-semibold text-ink" accessibilityRole="header">
+        <Text className="flex-1 font-serif text-xl text-ink" accessibilityRole="header">
           {title}
         </Text>
         {unverified && <UnverifiedBadge />}
@@ -35,7 +35,7 @@ export function LineCard({
       ) : (
         <>
           <Pressable onPress={() => setOpen(!open)} accessibilityRole="button" accessibilityState={{ expanded: open }}>
-            <Text className="text-accentInk">
+            <Text className="font-semibold text-accentInk">
               {open ? t("learn.hideStations") : t("learn.showStations", { count: stations.length })}
             </Text>
           </Pressable>

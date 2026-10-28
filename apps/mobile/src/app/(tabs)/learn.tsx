@@ -16,7 +16,7 @@ export default function LearnScreen() {
 
   return (
     <ScrollView className="flex-1 bg-page" contentContainerClassName="gap-4 p-4">
-      <Text className="text-xl font-bold text-ink" accessibilityRole="header">
+      <Text className="font-serif text-2xl text-ink" accessibilityRole="header">
         {t("learn.lines")}
       </Text>
       {lines
@@ -37,7 +37,7 @@ export default function LearnScreen() {
           </LineCard>
         ))}
 
-      <Text className="text-xl font-bold text-ink" accessibilityRole="header">
+      <Text className="font-serif text-2xl text-ink" accessibilityRole="header">
         {t("learn.notCovered")}
       </Text>
       <Text className="text-muted">{t("learn.notCoveredIntro")}</Text>
@@ -62,9 +62,9 @@ export default function LearnScreen() {
       <Pressable
         onPress={() => router.push("/about")}
         accessibilityRole="link"
-        className="items-center rounded-xl border border-edge p-4"
+        className="items-center rounded-2xl border border-edge bg-card p-4"
       >
-        <Text className="text-accentInk">{t("learn.about")}</Text>
+        <Text className="font-semibold text-accentInk">{t("learn.about")}</Text>
       </Pressable>
     </ScrollView>
   );

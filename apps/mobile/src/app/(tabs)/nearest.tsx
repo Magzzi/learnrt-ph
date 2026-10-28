@@ -4,6 +4,8 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, Linking, Pressable, ScrollView, Text, View } from "react-native";
+import { PrimaryButton, SecondaryButton } from "@/components/Button";
+import { Card } from "@/components/Card";
 import { currentPosition } from "@/nearest/currentPosition";
 import { formatDistance } from "@/nearest/formatDistance";
 import { openStation } from "@/navigation";
@@ -37,20 +39,19 @@ export default function NearestScreen() {
     );
   };
 
-  const button = (label: string, onPress: () => void, primary = false) => (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="button"
-      className={`items-center rounded-xl p-4 ${primary ? "bg-accent" : "border border-edge"}`}
-    >
-      <Text className={primary ? "font-semibold text-onAccent" : "text-accentInk"}>{label}</Text>
-    </Pressable>
-  );
+  const button = (label: string, onPress: () => void, primary = false) =>
+    primary ? (
+      <PrimaryButton label={label} icon="locate" onPress={onPress} />
+    ) : (
+      <View className="flex-row">
+        <SecondaryButton label={label} onPress={onPress} />
+      </View>
+    );
   const openMap = () => router.navigate("/");
 
   return (
     <ScrollView className="flex-1 bg-page" contentContainerClassName="gap-4 p-4">
-      <Text className="text-ink">{t("nearest.explain")}</Text>
+      <Card><Text className="text-ink">{t("nearest.explain")}</Text></Card>
 
       {status.kind === "finding" && (
         <View className="flex-row items-center gap-3" accessibilityLiveRegion="polite">
@@ -80,7 +81,7 @@ export default function NearestScreen() {
       {status.kind === "found" && (
         <View className="gap-2" accessibilityLiveRegion="polite">
           <View className="flex-row items-center justify-between">
-            <Text className="text-base font-semibold text-ink" accessibilityRole="header">
+            <Text className="font-serif text-2xl text-ink" accessibilityRole="header">
               {t("nearest.closest")}
             </Text>
             {networkData.lastVerified === null && <UnverifiedBadge />}
@@ -92,16 +93,16 @@ export default function NearestScreen() {
                 key={station.id}
                 onPress={() => openStation(station.id)}
                 accessibilityRole="link"
-                className="flex-row items-center justify-between rounded-xl border border-edge bg-card p-4"
+                className="flex-row items-center justify-between rounded-2xl border border-edge bg-card p-4"
               >
                 <View className="flex-row items-center gap-3">
                   <View className="h-3 w-3 rounded-full" style={{ backgroundColor: theme.lines[line.id] }} />
                   <View>
-                    <Text className="text-lg text-ink">{station.name}</Text>
+                    <Text className="text-lg font-semibold text-ink">{station.name}</Text>
                     <Text className="text-muted">{line.name}</Text>
                   </View>
                 </View>
-                <Text className="text-accentInk">{t("nearest.away", { distance: formatDistance(distanceKm) })}</Text>
+                <Text className="font-semibold text-accentInk">{t("nearest.away", { distance: formatDistance(distanceKm) })}</Text>
               </Pressable>
             );
           })}

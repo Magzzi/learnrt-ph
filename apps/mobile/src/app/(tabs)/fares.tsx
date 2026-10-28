@@ -2,16 +2,16 @@ import { fareData, getLine, getStation, type TicketType } from "@learnrt/core";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useReducer } from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, ScrollView, Switch, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
+import { Card } from "@/components/Card";
+import { ToggleRow } from "@/components/ToggleRow";
 import { Segmented } from "@/components/Segmented";
 import { StationPicker } from "@/components/StationPicker";
 import { UnverifiedBadge } from "@/components/UnverifiedBadge";
 import { faresReducer, formatPesos, initialFaresState, quote } from "@/fares/faresState";
-import { useTheme } from "@/theme";
 
 export default function FaresScreen() {
   const { t } = useTranslation();
-  const theme = useTheme();
   const params = useLocalSearchParams<{ from?: string; at?: string }>();
   const [state, dispatch] = useReducer(faresReducer, params, initialFaresState);
 
@@ -49,35 +49,21 @@ export default function FaresScreen() {
         />
       </View>
 
-      {/* The whole row toggles, so the label is as easy to hit as the switch. */}
-      <Pressable
-        onPress={() => dispatch({ type: "discounted", value: !state.discounted })}
-        accessibilityRole="switch"
-        accessibilityState={{ checked: state.discounted }}
-        accessibilityLabel={t("fares.discounted")}
-        accessibilityHint={t("fares.discountedHint")}
-        className="flex-row items-center justify-between gap-4"
-      >
-        <View className="flex-1">
-          <Text className="text-ink">{t("fares.discounted")}</Text>
-          <Text className="text-sm text-muted">{t("fares.discountedHint")}</Text>
-        </View>
-        <Switch
-          value={state.discounted}
-          onValueChange={(value) => dispatch({ type: "discounted", value })}
-          importantForAccessibility="no-hide-descendants"
-          trackColor={{ true: theme.accent, false: theme.sunken }}
-        />
-      </Pressable>
+      <ToggleRow
+        label={t("fares.discounted")}
+        hint={t("fares.discountedHint")}
+        value={state.discounted}
+        onChange={(value) => dispatch({ type: "discounted", value })}
+      />
 
-      <View className="gap-2 rounded-xl border border-edge bg-card p-4" accessibilityLiveRegion="polite">
+      <Card className="gap-2" accessibilityLiveRegion="polite">
         <View className="flex-row items-center justify-between">
           <Text className="text-muted">{t("fares.fare")}</Text>
           {fareData.lastVerified === null && <UnverifiedBadge />}
         </View>
         {result.kind === "fare" ? (
           <>
-            <Text className="text-4xl font-bold text-ink">
+            <Text className="font-serif text-5xl text-ink">
               {result.total === null ? t("plan.fareUnknown") : formatPesos(result.total)}
             </Text>
             {result.legs.length > 1 &&
@@ -95,7 +81,7 @@ export default function FaresScreen() {
             {t(result.kind === "no-fare" ? "fares.noFare" : result.kind === "walk-only" ? "plan.walkOnly" : "fares.incomplete")}
           </Text>
         )}
-      </View>
+      </Card>
 
       <Text className="text-sm text-muted">{t("fares.oneLine")}</Text>
     </ScrollView>

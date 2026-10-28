@@ -1,7 +1,9 @@
+import Ionicons from "@expo/vector-icons/Ionicons";
 import type { LineStatus } from "@learnrt/core";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { Pressable, ScrollView, Text, View } from "react-native";
+import { PrimaryButton, SecondaryButton } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { openStation } from "@/navigation";
 import { stationDetail } from "@/station/detail";
@@ -36,7 +38,7 @@ export default function StationScreen() {
       <Stack.Screen options={{ title: detail.title }} />
 
       <View className="gap-2">
-        <Text className="text-3xl font-bold text-ink" accessibilityRole="header">
+        <Text className="font-serif text-4xl text-ink" accessibilityRole="header">
           {detail.name}
         </Text>
         <View className="flex-row items-center gap-2">
@@ -53,7 +55,7 @@ export default function StationScreen() {
               key={n.id}
               onPress={() => openStation(n.id)}
               accessibilityRole="link"
-              className="rounded-full border border-edge px-3 py-2"
+              className="rounded-full border border-edge bg-card px-3 py-2"
             >
               <Text className="text-accentInk">{n.name}</Text>
             </Pressable>
@@ -87,9 +89,10 @@ export default function StationScreen() {
       <Pressable
         onPress={() => router.push({ pathname: "/street-map/[id]", params: { id: detail.id } })}
         accessibilityRole="button"
-        className="items-center rounded-xl border border-edge p-4"
+        className="flex-row items-center justify-center gap-2 rounded-2xl border border-edge bg-card p-4"
       >
-        <Text className="text-accentInk">{t("station.streetMap")}</Text>
+        <Ionicons name="map-outline" size={20} color={theme.accentInk} />
+        <Text className="font-semibold text-accentInk">{t("station.streetMap")}</Text>
       </Pressable>
 
       <Section title={t("station.facilities")}>
@@ -102,25 +105,20 @@ export default function StationScreen() {
       </Section>
 
       {detail.line.status === "operational" && (
-        <Pressable
+        <PrimaryButton
+          label={t("station.faresFromHere")}
+          icon="cash-outline"
           onPress={() => router.navigate({ pathname: "/fares", params: { from: detail.id, at: String(Date.now()) } })}
-          accessibilityRole="button"
-          className="items-center rounded-xl bg-accent p-4"
-        >
-          <Text className="font-semibold text-onAccent">{t("station.faresFromHere")}</Text>
-        </Pressable>
+        />
       )}
       {detail.line.status === "operational" && (
         <View className="flex-row gap-3">
           {(["from", "to"] as const).map((end) => (
-            <Pressable
+            <SecondaryButton
               key={end}
+              label={t(end === "from" ? "station.rideFromHere" : "station.rideToHere")}
               onPress={() => router.navigate({ pathname: "/ride", params: { [end]: detail.id, at: String(Date.now()) } })}
-              accessibilityRole="button"
-              className="flex-1 items-center rounded-xl border border-accent p-4"
-            >
-              <Text className="font-semibold text-accentInk">{t(end === "from" ? "station.rideFromHere" : "station.rideToHere")}</Text>
-            </Pressable>
+            />
           ))}
         </View>
       )}
