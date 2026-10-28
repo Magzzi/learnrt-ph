@@ -4,7 +4,8 @@ import { router, Tabs, useRootNavigationState } from "expo-router";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import type { ComponentProps } from "react";
-import { View, type ColorValue } from "react-native";
+import { Text, View, useWindowDimensions, type ColorValue } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ScreenHeader } from "@/components/ScreenHeader";
 import { loadRide } from "@/ride/activeRide";
 import { useTheme } from "@/theme";
@@ -24,9 +25,30 @@ const icon = (name: IconProps["name"]) =>
     );
   };
 
+// The bar grows with the phone's text size, but its labels scale only up to this, so five tabs
+// still fit at 360 dp in English and Filipino.
+const LABEL_SCALE = 1.3;
+
+const tabLabel = (title: string) =>
+  function TabLabel({ color }: { color: ColorValue }) {
+    return (
+      <Text
+        numberOfLines={1}
+        adjustsFontSizeToFit
+        minimumFontScale={0.8}
+        maxFontSizeMultiplier={LABEL_SCALE}
+        style={{ fontSize: 13, fontWeight: "500", color: typeof color === "string" ? color : undefined }}
+      >
+        {title}
+      </Text>
+    );
+  };
+
 export default function TabsLayout() {
   const { t } = useTranslation();
   const theme = useTheme();
+  const { fontScale } = useWindowDimensions();
+  const bottomInset = useSafeAreaInsets().bottom;
 
   // A ride in progress comes back on launch, once the root navigator is ready to navigate.
   const navigationReady = Boolean(useRootNavigationState()?.key);
@@ -40,10 +62,12 @@ export default function TabsLayout() {
       screenOptions={{
         headerStyle: { backgroundColor: theme.page },
         headerTintColor: theme.ink,
-        tabBarStyle: { backgroundColor: theme.card, borderTopColor: theme.edge, paddingTop: 6 },
-        tabBarLabelStyle: { fontSize: 13 },
-        // The bar has a fixed height, so its labels stay put when the phone's text is enlarged.
-        tabBarAllowFontScaling: false,
+        tabBarStyle: {
+          backgroundColor: theme.card,
+          borderTopColor: theme.edge,
+          paddingTop: 6,
+          height: bottomInset + 34 + 22 * Math.min(fontScale, LABEL_SCALE),
+        },
         tabBarActiveTintColor: theme.accent,
         tabBarInactiveTintColor: theme.muted,
         sceneStyle: { backgroundColor: theme.page },
@@ -54,6 +78,7 @@ export default function TabsLayout() {
         options={{
           title: t("tabs.map"),
           tabBarAccessibilityLabel: t("tabs.map"),
+          tabBarLabel: tabLabel(t("tabs.map")),
           tabBarIcon: icon("map-outline"),
           header: () => <ScreenHeader title={t("headers.mapTitle")} subtitle={t("headers.mapSubtitle")} />,
         }}
@@ -63,6 +88,7 @@ export default function TabsLayout() {
         options={{
           title: t("tabs.fares"),
           tabBarAccessibilityLabel: t("tabs.fares"),
+          tabBarLabel: tabLabel(t("tabs.fares")),
           tabBarIcon: icon("cash-outline"),
           header: () => <ScreenHeader title={t("headers.faresTitle")} subtitle={t("headers.faresSubtitle")} />,
         }}
@@ -72,6 +98,7 @@ export default function TabsLayout() {
         options={{
           title: t("tabs.ride"),
           tabBarAccessibilityLabel: t("tabs.ride"),
+          tabBarLabel: tabLabel(t("tabs.ride")),
           tabBarIcon: icon("train-outline"),
           header: () => <ScreenHeader title={t("headers.rideTitle")} subtitle={t("headers.rideSubtitle")} />,
         }}
@@ -81,6 +108,7 @@ export default function TabsLayout() {
         options={{
           title: t("tabs.nearest"),
           tabBarAccessibilityLabel: t("tabs.nearest"),
+          tabBarLabel: tabLabel(t("tabs.nearest")),
           tabBarIcon: icon("location-outline"),
           header: () => <ScreenHeader title={t("headers.nearestTitle")} subtitle={t("headers.nearestSubtitle")} />,
         }}
@@ -90,6 +118,7 @@ export default function TabsLayout() {
         options={{
           title: t("tabs.learn"),
           tabBarAccessibilityLabel: t("tabs.learn"),
+          tabBarLabel: tabLabel(t("tabs.learn")),
           tabBarIcon: icon("book-outline"),
           header: () => <ScreenHeader title={t("headers.learnTitle")} subtitle={t("headers.learnSubtitle")} />,
         }}
